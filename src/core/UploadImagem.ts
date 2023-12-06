@@ -1,4 +1,4 @@
-import firebase from '../firebase/config';
+import firebase from "../firebase/config";
 
 export const uploadImagem = async (imagem: File): Promise<string> => {
   const storageRef = firebase.storage().ref();
@@ -15,7 +15,7 @@ export const uploadImagem = async (imagem: File): Promise<string> => {
 
     return urlImagem;
   } catch (error) {
-    console.error('Erro ao fazer upload da imagem:', error);
+    console.error("Erro ao fazer upload da imagem:", error);
     throw error; // Trate o erro de acordo com suas necessidades
   }
 };

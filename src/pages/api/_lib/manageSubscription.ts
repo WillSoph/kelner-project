@@ -1,14 +1,16 @@
 import firebase from "../../../firebase/config";
-import { stripe } from '../../../services/stripe';
+import { stripe } from "../../../services/stripe";
 
 export async function saveSubscription(
   subscriptionId: string,
   customerId: string,
-  createAction = false
+  createAction = false,
 ) {
-  const usersCollection = firebase.firestore().collection('usuarios');
+  const usersCollection = firebase.firestore().collection("usuarios");
 
-  const userDoc = await usersCollection.where('stripe_customer_id', '==', customerId).get();
+  const userDoc = await usersCollection
+    .where("stripe_customer_id", "==", customerId)
+    .get();
 
   if (userDoc.empty) {
     console.error(`User not found with stripe_customer_id: ${customerId}`);
@@ -27,10 +29,16 @@ export async function saveSubscription(
   };
 
   if (createAction) {
-    await firebase.firestore().collection('subscriptions').add(subscriptionData);
+    await firebase
+      .firestore()
+      .collection("subscriptions")
+      .add(subscriptionData);
   } else {
-    const subscriptionDoc = await firebase.firestore().collection('subscriptions')
-      .where('id', '==', subscriptionId).get();
+    const subscriptionDoc = await firebase
+      .firestore()
+      .collection("subscriptions")
+      .where("id", "==", subscriptionId)
+      .get();
 
     if (!subscriptionDoc.empty) {
       await subscriptionDoc.docs[0].ref.update(subscriptionData);

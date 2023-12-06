@@ -12,33 +12,33 @@ export default class ColecaoEmpresa implements EmpresaRepositorio {
     },
     fromFirestore(
       snapshot: firebase.firestore.QueryDocumentSnapshot,
-      options: firebase.firestore.SnapshotOptions
+      options: firebase.firestore.SnapshotOptions,
     ): Empresa {
       const dados = snapshot.data(options);
       return new Empresa(dados.nome, dados.imagemUrl, snapshot.id);
     },
   };
 
-//   async salvar(empresa: Empresa): Promise<Empresa> {
-//     const idUsuario = firebase.auth().currentUser?.uid;
+  //   async salvar(empresa: Empresa): Promise<Empresa> {
+  //     const idUsuario = firebase.auth().currentUser?.uid;
 
-//     if (empresa?.id && idUsuario) {
-//       await this.colecao(idUsuario).doc(empresa.id).set(empresa);
-//       return empresa;
-//     } else {
-//       const docRef = await this.colecao(idUsuario).add(empresa);
-//       const doc = await docRef.get();
-//       return doc.data();
-//     }
-//   }
+  //     if (empresa?.id && idUsuario) {
+  //       await this.colecao(idUsuario).doc(empresa.id).set(empresa);
+  //       return empresa;
+  //     } else {
+  //       const docRef = await this.colecao(idUsuario).add(empresa);
+  //       const doc = await docRef.get();
+  //       return doc.data();
+  //     }
+  //   }
 
-async salvar(empresa: Empresa): Promise<Empresa> {
+  async salvar(empresa: Empresa): Promise<Empresa> {
     const idUsuario = firebase.auth().currentUser?.uid;
-  
+
     if (idUsuario) {
       // Obtém todas as empresas associadas ao usuário
       const querySnapshot = await this.colecao(idUsuario).get();
-  
+
       // Verifica se há alguma empresa associada ao usuário
       if (querySnapshot.size > 0) {
         // Se houver, atualiza a primeira empresa encontrada
@@ -69,12 +69,12 @@ async salvar(empresa: Empresa): Promise<Empresa> {
   async obterTodos(): Promise<Empresa[]> {
     try {
       const idUsuario = await this.obterIdUsuario();
-  
+
       if (idUsuario) {
         const query = await this.colecao(idUsuario).get();
         return query.docs.map((doc) => doc.data()) ?? [];
       }
-  
+
       return [];
     } catch (error) {
       console.error("Erro ao obter empresa:", error);
@@ -87,18 +87,18 @@ async salvar(empresa: Empresa): Promise<Empresa> {
       const query = await this.colecao(idUsuario).get();
       return query.docs.map((doc) => doc.data()) ?? [];
     } catch (error) {
-      console.error('Erro ao obter empresas do usuário:', error);
+      console.error("Erro ao obter empresas do usuário:", error);
       return [];
     }
   }
-  
+
   private async obterIdUsuario(): Promise<string | null> {
     return new Promise((resolve) => {
       const cancelar = firebase.auth().onIdTokenChanged((usuario) => {
         const novoIdUsuario = usuario?.uid || null;
         resolve(novoIdUsuario);
       });
-  
+
       return () => {
         if (cancelar) {
           cancelar();
@@ -108,6 +108,9 @@ async salvar(empresa: Empresa): Promise<Empresa> {
   }
 
   private colecao(idUsuario: string) {
-    return firebase.firestore().collection(`usuarios/${idUsuario}/empresa`).withConverter(this.#conversor);
+    return firebase
+      .firestore()
+      .collection(`usuarios/${idUsuario}/empresa`)
+      .withConverter(this.#conversor);
   }
 }

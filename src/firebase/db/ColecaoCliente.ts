@@ -15,10 +15,17 @@ export default class ColecaoCliente implements ClienteRepositorio {
     },
     fromFirestore(
       snapshot: firebase.firestore.QueryDocumentSnapshot,
-      options: firebase.firestore.SnapshotOptions
+      options: firebase.firestore.SnapshotOptions,
     ): Cliente {
       const dados = snapshot.data(options);
-      return new Cliente(dados.nome, dados.descricao, dados.categoria, dados.imagemUrl, dados.preco, snapshot.id);
+      return new Cliente(
+        dados.nome,
+        dados.descricao,
+        dados.categoria,
+        dados.imagemUrl,
+        dados.preco,
+        snapshot.id,
+      );
     },
   };
 
@@ -48,12 +55,12 @@ export default class ColecaoCliente implements ClienteRepositorio {
   async obterTodos(): Promise<Cliente[]> {
     try {
       const idUsuario = await this.obterIdUsuario();
-  
+
       if (idUsuario) {
         const query = await this.colecao(idUsuario).get();
         return query.docs.map((doc) => doc.data()) ?? [];
       }
-  
+
       return [];
     } catch (error) {
       console.error("Erro ao obter clientes:", error);
@@ -66,18 +73,18 @@ export default class ColecaoCliente implements ClienteRepositorio {
       const query = await this.colecao(idUsuario).get();
       return query.docs.map((doc) => doc.data()) ?? [];
     } catch (error) {
-      console.error('Erro ao obter clientes do usuário:', error);
+      console.error("Erro ao obter clientes do usuário:", error);
       return [];
     }
   }
-  
+
   private async obterIdUsuario(): Promise<string | null> {
     return new Promise((resolve) => {
       const cancelar = firebase.auth().onIdTokenChanged((usuario) => {
         const novoIdUsuario = usuario?.uid || null;
         resolve(novoIdUsuario);
       });
-  
+
       return () => {
         if (cancelar) {
           cancelar();
@@ -87,6 +94,9 @@ export default class ColecaoCliente implements ClienteRepositorio {
   }
 
   private colecao(idUsuario: string) {
-    return firebase.firestore().collection(`usuarios/${idUsuario}/clientes`).withConverter(this.#conversor);
+    return firebase
+      .firestore()
+      .collection(`usuarios/${idUsuario}/clientes`)
+      .withConverter(this.#conversor);
   }
 }

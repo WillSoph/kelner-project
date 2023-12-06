@@ -3,7 +3,7 @@ import useAuth from "../data/hook/useAuth";
 import Container from "./container";
 
 const Cta = () => {
-  const { usuario } = useAuth()
+  const { usuario } = useAuth();
   return (
     <Container>
       <div className="flex flex-wrap items-center justify-between w-full max-w-4xl gap-5 mx-auto text-white bg-indigo-600 px-7 py-7 lg:px-12 lg:py-12 lg:flex-nowrap rounded-xl">
@@ -16,19 +16,20 @@ const Cta = () => {
           </p>
         </div>
         <div className="flex-shrink-0 w-full text-center lg:w-auto">
-        {!usuario?.email && (
-          <a
-            href="https://github.com/web3templates"
-            target="_blank"
-            rel="noreferrer"
-            className="inline-block py-3 mx-auto text-lg font-medium text-center text-indigo-600 bg-white rounded-md px-7 lg:px-10 lg:py-5 ">
-            Assine Agora
-          </a>
-        )}  
+          {!usuario?.email && (
+            <a
+              href="https://github.com/web3templates"
+              target="_blank"
+              rel="noreferrer"
+              className="inline-block py-3 mx-auto text-lg font-medium text-center text-indigo-600 bg-white rounded-md px-7 lg:px-10 lg:py-5 "
+            >
+              Assine Agora
+            </a>
+          )}
         </div>
       </div>
     </Container>
   );
-}
+};
 
 export default Cta;

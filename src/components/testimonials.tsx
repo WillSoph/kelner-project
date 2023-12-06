@@ -6,14 +6,15 @@ import userOneImg from "../../public/images/user1.jpg";
 import userTwoImg from "../../public/images/user2.jpg";
 import userThreeImg from "../../public/images/user3.jpg";
 
-const Testimonials  = () => {
+const Testimonials = () => {
   return (
     <Container>
       <div className="grid gap-10 lg:grid-cols-2 xl:grid-cols-3">
         <div className="lg:col-span-2 xl:col-auto">
           <div className="flex flex-col justify-between w-full h-full bg-gray-100 px-14 rounded-2xl py-14 dark:bg-trueGray-800">
             <p className="text-2xl leading-normal ">
-            Kelner revolucionou nosso cardápio! <Mark>Fácil</Mark> e eficiente.
+              Kelner revolucionou nosso cardápio! <Mark>Fácil</Mark> e
+              eficiente.
             </p>
 
             <Avatar
@@ -26,7 +27,8 @@ const Testimonials  = () => {
         <div className="">
           <div className="flex flex-col justify-between w-full h-full bg-gray-100 px-14 rounded-2xl py-14 dark:bg-trueGray-800">
             <p className="text-2xl leading-normal ">
-             A geração de QRCode instantânea é <Mark>incrível</Mark>. Amamos o Kelner!
+              A geração de QRCode instantânea é <Mark>incrível</Mark>. Amamos o
+              Kelner!
             </p>
 
             <Avatar
@@ -39,7 +41,8 @@ const Testimonials  = () => {
         <div className="">
           <div className="flex flex-col justify-between w-full h-full bg-gray-100 px-14 rounded-2xl py-14 dark:bg-trueGray-800">
             <p className="text-2xl leading-normal ">
-            Com o Kelner, atualizar o cardápio é um piscar de olhos. <Mark>Top</Mark>!
+              Com o Kelner, atualizar o cardápio é um piscar de olhos.{" "}
+              <Mark>Top</Mark>!
             </p>
 
             <Avatar
@@ -52,7 +55,7 @@ const Testimonials  = () => {
       </div>
     </Container>
   );
-}
+};
 
 function Avatar(props) {
   return (
