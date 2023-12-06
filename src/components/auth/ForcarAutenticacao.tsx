@@ -33,7 +33,7 @@ export default function ForcarAutenticacao(props) {
                 flex justify-center items-center h-screen
             `}
       >
-        <img width={20} height={20} src={loading} alt="loading" />
+        <img width={20} height={20} src={loading.toString()} alt="loading" />
       </div>
     );
   }
