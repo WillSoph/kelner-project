@@ -12,7 +12,7 @@ export default class Cliente {
     categoria: string,
     imagemUrl: string | File,
     preco: number,
-    id: string = null,
+    id: string,
   ) {
     this.#nome = nome;
     this.#descricao = descricao;
@@ -23,7 +23,7 @@ export default class Cliente {
   }
 
   static vazio() {
-    return new Cliente("", "", "", "", 0);
+    return new Cliente("", "", "", "", 0, "");
   }
 
   get id() {
