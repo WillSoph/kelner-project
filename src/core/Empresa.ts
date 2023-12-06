@@ -3,14 +3,14 @@ export default class Empresa {
   #nome: string;
   #imagemUrl: string | File;
 
-  constructor(nome: string, imagemUrl: string | File, id: string = null) {
+  constructor(nome: string, imagemUrl: string | File, id: string) {
     this.#nome = nome;
     this.#imagemUrl = imagemUrl;
     this.#id = id;
   }
 
   static vazio() {
-    return new Empresa("", "");
+    return new Empresa("", "", "");
   }
 
   get id() {
