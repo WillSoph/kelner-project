@@ -1,10 +1,10 @@
-import Cookies from "js-cookie";
+import Cookies from 'js-cookie';
 import useAuth from "../data/hook/useAuth";
 import { api } from "../services/api";
 import { getStripeJs } from "../services/stripe-js";
 
 interface BotaoAssineProps {
-  cor?: "green" | "blue" | "gray";
+  cor?: 'green' | 'blue' | 'gray';
   className?: string;
   children: any;
   onClick?: () => void;
