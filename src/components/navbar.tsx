@@ -47,12 +47,20 @@ export default function Navbar() {
   async function submeter() {
     try {
       if (modo === "login") {
-        await login(email, senha);
+        if (login) {
+          await login(email, senha);
+        } else {
+          throw new Error("Função de login não definida");
+        }
       } else {
-        await cadastrar(email, senha);
+        if (cadastrar) {
+          await cadastrar(email, senha);
+        } else {
+          throw new Error("Função de cadastro não definida");
+        }
       }
-    } catch (e) {
-      exibirErro(e?.message ?? "Erro desconhecido!");
+    } catch (error) {
+      console.error("Erro ao realizar ação:", error);
     }
     setOpen(false);
   }
