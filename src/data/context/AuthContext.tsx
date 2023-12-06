@@ -27,16 +27,16 @@ async function usuarioNormalizado(
   });
   return {
     uid: usuarioFirebase.uid,
-    nome: usuarioFirebase.displayName,
-    email: usuarioFirebase.email,
+    nome: usuarioFirebase.displayName || '',
+    email: usuarioFirebase.email || '',
     stripe_customer_id: usuarioFirebase.stripe_customer_id,
     token,
     provedor: usuarioFirebase.providerData[0].providerId,
-    imagemUrl: usuarioFirebase.photoURL,
+    imagemUrl: usuarioFirebase.photoURL || '',
   };
 }
 
-async function gerenciarCookie(logado: boolean) {
+async function gerenciarCookie(logado: any) {
   if (logado) {
     Cookies.set("admin-template-cod3r-auth", logado, {
       expires: 7,
