@@ -165,7 +165,7 @@ const PopupWidget = () => {
                         />
                         {errors.name && (
                           <div className="mt-1 text-sm text-red-400 invalid-feedback">
-                            {errors.name.message}
+                            'Erro'
                           </div>
                         )}
                       </div>
@@ -197,7 +197,7 @@ const PopupWidget = () => {
 
                         {errors.email && (
                           <div className="mt-1 text-sm text-red-400 invalid-feedback">
-                            {errors.email.message}
+                            'Erro'
                           </div>
                         )}
                       </div>
@@ -211,7 +211,7 @@ const PopupWidget = () => {
                         </label>
 
                         <textarea
-                          rows="4"
+                          rows={4}
                           id="message"
                           {...register("message", {
                             required: "Enter your Message",
@@ -226,7 +226,7 @@ const PopupWidget = () => {
                         ></textarea>
                         {errors.message && (
                           <div className="mt-1 text-sm text-red-400 invalid-feedback">
-                            {errors.message.message}
+                            'Erro'
                           </div>
                         )}
                       </div>
