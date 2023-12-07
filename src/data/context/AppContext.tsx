@@ -26,7 +26,7 @@ export function AppProvider(props) {
     <AppContext.Provider
       value={{
         tema,
-        alternarTema
+        alternarTema,
       }}
     >
       {props.children}

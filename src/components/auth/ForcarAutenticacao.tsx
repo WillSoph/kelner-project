@@ -17,7 +17,7 @@ export default function ForcarAutenticacao(props) {
                                 if(!document.cookie?.includes("admin-template-cod3r-auth")) {
                                     window.location.href = "/autenticacao"
                                 }
-                            `
+                            `,
             }}
           />
         </Head>

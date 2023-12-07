@@ -14,7 +14,7 @@ const DeliveryProvider = ({ children }) => {
     input,
     disabled,
     setInput,
-    setDisabled
+    setDisabled,
   }
   return (
     <DeliveryContext.Provider value={value}>

@@ -36,7 +36,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
         mode: 'subscription',
         allow_promotion_codes: true,
         success_url: process.env.STRIPE_SUCCESS_URL,
-        cancel_url: process.env.STRIPE_CANCEL_URL
+        cancel_url: process.env.STRIPE_CANCEL_URL,
       })
 
       return res.status(200).json({ sessionId: stripeCheckoutSession.id })
@@ -69,12 +69,12 @@ async function criarStripeCustomerOuObterExiste(email, uidUser) {
   }
 
   const stripeCustomer = await stripe.customers.create({
-    email: email
+    email: email,
     // metadata
   })
 
   await usersCollection.doc(uidUser).update({
-    stripe_customer_id: stripeCustomer.id
+    stripe_customer_id: stripeCustomer.id,
   })
 
   console.log('Novo stripe_customer_id criado:', stripeCustomer.id)

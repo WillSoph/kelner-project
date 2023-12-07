@@ -7,7 +7,7 @@ export default class ColecaoEmpresa implements EmpresaRepositorio {
     toFirestore(empresa: Empresa) {
       return {
         nome: empresa.nome,
-        imagemUrl: empresa.imagemUrl
+        imagemUrl: empresa.imagemUrl,
       }
     },
     fromFirestore(
@@ -16,7 +16,7 @@ export default class ColecaoEmpresa implements EmpresaRepositorio {
     ): Empresa {
       const dados = snapshot.data(options)
       return new Empresa(dados.nome, dados.imagemUrl, snapshot.id)
-    }
+    },
   }
 
   async salvar(empresa: Empresa): Promise<Empresa> {

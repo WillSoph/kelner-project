@@ -51,6 +51,6 @@ export default function useEmpresas() {
     selecionarEmpresa,
     obterTodos,
     tabelaVisivel,
-    exibirTabela
+    exibirTabela,
   }
 }

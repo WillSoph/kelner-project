@@ -9,9 +9,9 @@ const PopupWidget = () => {
     handleSubmit,
     reset,
     control,
-    formState: { errors, isSubmitSuccessful, isSubmitting }
+    formState: { errors, isSubmitSuccessful, isSubmitting },
   } = useForm({
-    mode: 'onTouched'
+    mode: 'onTouched',
   })
   const [isSuccess, setIsSuccess] = useState(false)
   const [Message, setMessage] = useState('')
@@ -24,9 +24,9 @@ const PopupWidget = () => {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        Accept: 'application/json'
+        Accept: 'application/json',
       },
-      body: JSON.stringify(data, null, 2)
+      body: JSON.stringify(data, null, 2),
     })
       .then(async (response) => {
         const json = await response.json()
@@ -155,7 +155,7 @@ const PopupWidget = () => {
                           placeholder="John Doe"
                           {...register('name', {
                             required: 'Full name is required',
-                            maxLength: 80
+                            maxLength: 80,
                           })}
                           className={`w-full rounded-md border border-gray-300 bg-white px-3 py-2 text-gray-600 placeholder-gray-300 focus:outline-none focus:ring   ${
                             errors.name
@@ -184,8 +184,8 @@ const PopupWidget = () => {
                             required: 'Enter your email',
                             pattern: {
                               value: /^\S+@\S+$/i,
-                              message: 'Please enter a valid email'
-                            }
+                              message: 'Please enter a valid email',
+                            },
                           })}
                           placeholder="you@company.com"
                           className={`w-full rounded-md border border-gray-300 bg-white px-3 py-2 text-gray-600 placeholder-gray-300 focus:outline-none focus:ring   ${
@@ -214,7 +214,7 @@ const PopupWidget = () => {
                           rows={4}
                           id="message"
                           {...register('message', {
-                            required: 'Enter your Message'
+                            required: 'Enter your Message',
                           })}
                           placeholder="Your Message"
                           className={`h-28 w-full rounded-md border border-gray-300 bg-white px-3 py-2 text-gray-600 placeholder-gray-300 focus:outline-none focus:ring   ${

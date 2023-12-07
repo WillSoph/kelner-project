@@ -9,7 +9,7 @@ const firebaseConfig = {
   apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY,
   authDomain: process.env.NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN,
   projectId: process.env.NEXT_PUBLIC_FIREBASE_PROJECT_ID,
-  storageBucket: process.env.NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET
+  storageBucket: process.env.NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET,
 }
 
 if (!firebase.apps.length) {
@@ -22,8 +22,8 @@ export default NextAuth({
   providers: [
     Providers.Google({
       clientId: process.env.GOOGLE_ID,
-      clientSecret: process.env.GOOGLE_SECRET
-    })
+      clientSecret: process.env.GOOGLE_SECRET,
+    }),
   ],
   adapter: FirebaseAdapter(firestore),
   callbacks: {
@@ -41,6 +41,6 @@ export default NextAuth({
         console.error('Erro durante a autenticação:', error)
         return false // Retorna false para impedir o login em caso de erro.
       }
-    }
-  }
+    },
+  },
 })

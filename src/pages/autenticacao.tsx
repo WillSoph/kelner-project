@@ -165,14 +165,14 @@ export const getStaticProps: GetStaticProps = async () => {
     priceId: price.id,
     amount: new Intl.NumberFormat('pt-BR', {
       style: 'currency',
-      currency: 'BRL'
-    }).format(price.unit_amount / 100)
+      currency: 'BRL',
+    }).format(price.unit_amount / 100),
   }
 
   return {
     props: {
-      product
+      product,
     },
-    revalidate: 60 * 60 * 24 // 24 horas
+    revalidate: 60 * 60 * 24, // 24 horas
   }
 }

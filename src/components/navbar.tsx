@@ -29,7 +29,7 @@ export default function Navbar() {
 
   const product = {
     priceId: 'price_1O0UrrIYJ05oSoaZonPhWe4G',
-    amount: 'R$ 20,00'
+    amount: 'R$ 20,00',
   }
 
   async function submeter() {

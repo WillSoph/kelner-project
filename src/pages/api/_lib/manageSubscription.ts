@@ -23,7 +23,7 @@ export async function saveSubscription(
     id: subscription.id,
     userId: userDoc.docs[0].ref,
     status: subscription.status,
-    price_id: subscription.items.data[0].price.id
+    price_id: subscription.items.data[0].price.id,
   }
 
   if (createAction) {

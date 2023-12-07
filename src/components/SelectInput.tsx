@@ -16,28 +16,28 @@ const people = [
   {
     id: 1,
     name: 'Entrada',
-    avatar: '/images/food/entrada.png'
+    avatar: '/images/food/entrada.png',
   },
   {
     id: 2,
     name: 'Prato principal',
-    avatar: '/images/food/prato-principal.png'
+    avatar: '/images/food/prato-principal.png',
   },
   {
     id: 3,
     name: 'Sobremesa',
-    avatar: '/images/food/sobremesa.png'
+    avatar: '/images/food/sobremesa.png',
   },
   {
     id: 4,
     name: 'Bebida sem álcool',
-    avatar: '/images/food/bebida-nao-alcoolica.png'
+    avatar: '/images/food/bebida-nao-alcoolica.png',
   },
   {
     id: 5,
     name: 'Bebida alcoólica',
-    avatar: '/images/food/bebida-alcoolica.png'
-  }
+    avatar: '/images/food/bebida-alcoolica.png',
+  },
 ]
 
 function classNames(...classes) {

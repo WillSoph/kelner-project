@@ -35,7 +35,7 @@ const OrderProvider = ({ children }) => {
     handleOrder,
     removeOrder,
     clientes,
-    setClientData
+    setClientData,
   }
 
   return <OrderContext.Provider value={value}>{children}</OrderContext.Provider>

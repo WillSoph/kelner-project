@@ -4,7 +4,7 @@ import {
   CursorArrowRaysIcon,
   DevicePhoneMobileIcon,
   AdjustmentsHorizontalIcon,
-  SunIcon
+  SunIcon,
 } from '@heroicons/react/24/solid'
 
 import benefitOneImg from '../../public/images/benefit-one.png'
@@ -18,19 +18,19 @@ const benefitOne = {
     {
       title: 'Compreenda seus clientes',
       desc: 'Potencialize seu negócio compreendendo as preferências dos clientes por meio da categorização fácil de produtos e edições sem complicações.',
-      icon: <FaceSmileIcon />
+      icon: <FaceSmileIcon />,
     },
     {
       title: 'Melhore a aquisição',
       desc: 'Aumente a eficiência e o envolvimento do cliente com a geração rápida de QRCode do Kelner, garantindo uma experiência de cardápio virtual suave e atraente para seus clientes.',
-      icon: <ChartBarSquareIcon />
+      icon: <ChartBarSquareIcon />,
     },
     {
       title: 'Estimule a retenção de clientes',
       desc: 'Fomente a lealdade com atualizações pontuais e um cardápio online dinâmico, proporcionando uma experiência de refeição aprimorada e memorável para seus clientes. Kelner, onde a inovação encontra a satisfação.',
-      icon: <CursorArrowRaysIcon />
-    }
-  ]
+      icon: <CursorArrowRaysIcon />,
+    },
+  ],
 }
 
 const benefitTwo = {
@@ -41,19 +41,19 @@ const benefitTwo = {
     {
       title: 'Sistema completamente responsivo',
       desc: 'Kelner foi desenvolvido pensando na total experiencia mobile.',
-      icon: <DevicePhoneMobileIcon />
+      icon: <DevicePhoneMobileIcon />,
     },
     {
       title: 'Tecnologia atual à seu dispor',
       desc: 'Sistema desenvolvido com as mais recentes tecnologiase ferramentas.',
-      icon: <AdjustmentsHorizontalIcon />
+      icon: <AdjustmentsHorizontalIcon />,
     },
     {
       title: 'Dark e Light Mode',
       desc: 'O painel do Kelner oferece opções de light e dark mode.',
-      icon: <SunIcon />
-    }
-  ]
+      icon: <SunIcon />,
+    },
+  ],
 }
 
 export { benefitOne, benefitTwo }

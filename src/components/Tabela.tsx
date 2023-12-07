@@ -38,7 +38,7 @@ export default function Tabela(props: TabelaProps) {
   const [categoriaSelecionada, setCategoriaSelecionada] = useState('Todas')
 
   const categorias = [
-    ...new Set(props.clientes.map((cliente) => cliente.categoria))
+    ...new Set(props.clientes.map((cliente) => cliente.categoria)),
   ]
 
   const clientesFiltrados =

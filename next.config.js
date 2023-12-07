@@ -4,9 +4,9 @@ const nextConfig = {
     domains: [
       'avatars.githubusercontent.com',
       '192.168.0.13',
-      'images.unsplash.com'
-    ]
-  }
+      'images.unsplash.com',
+    ],
+  },
 }
 
 module.exports = nextConfig

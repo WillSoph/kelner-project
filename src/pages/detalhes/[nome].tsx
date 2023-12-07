@@ -86,7 +86,7 @@ const FoodDetailScreen = () => {
                         withSwal({
                           title: 'Wow!!!',
                           text: 'Your order has added to the cart',
-                          icon: 'success'
+                          icon: 'success',
                         })
                         router.push('/orders')
                         console.log(cliente)

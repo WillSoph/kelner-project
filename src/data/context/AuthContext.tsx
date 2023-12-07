@@ -23,7 +23,7 @@ async function usuarioNormalizado(
   const token = await usuarioFirebase.getIdToken()
   const usuario = await usuarioFirebase
   Cookies.set('admin-template-cod3r-auth-uid', usuario.uid, {
-    expires: 7
+    expires: 7,
   })
   return {
     uid: usuarioFirebase.uid,
@@ -32,14 +32,14 @@ async function usuarioNormalizado(
     stripe_customer_id: usuarioFirebase.stripe_customer_id,
     token,
     provedor: usuarioFirebase.providerData[0].providerId,
-    imagemUrl: usuarioFirebase.photoURL || ''
+    imagemUrl: usuarioFirebase.photoURL || '',
   }
 }
 
 async function gerenciarCookie(logado: any) {
   if (logado) {
     Cookies.set('admin-template-cod3r-auth', logado, {
-      expires: 7
+      expires: 7,
     })
   } else {
     Cookies.remove('admin-template-cod3r-auth')
@@ -76,7 +76,7 @@ export function AuthProvider(props) {
 
       await configurarSessao(resp.user)
       Cookies.set('admin-template-cod3r-auth-token', email, {
-        expires: 1
+        expires: 1,
       })
       route.push('/')
     } finally {
@@ -93,7 +93,7 @@ export function AuthProvider(props) {
 
       await configurarSessao(resp.user)
       Cookies.set('admin-template-cod3r-auth-token', email, {
-        expires: 1
+        expires: 1,
       })
       route.push('/painel')
     } finally {
@@ -116,7 +116,7 @@ export function AuthProvider(props) {
         const firestore = firebase.firestore() // Obtenha a instância do Firestore
         await firestore.collection('usuarios').doc(resp.user.uid).set({
           email: email,
-          id: resp.user.uid
+          id: resp.user.uid,
           // outras informações, se necessário
         })
 
@@ -174,7 +174,7 @@ export function AuthProvider(props) {
         cadastrar,
         loginGoogle,
         logout,
-        loginAutenticado
+        loginAutenticado,
       }}
     >
       {props.children}

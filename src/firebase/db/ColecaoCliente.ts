@@ -10,7 +10,7 @@ export default class ColecaoCliente implements ClienteRepositorio {
         descricao: cliente.descricao,
         categoria: cliente.categoria,
         imagemUrl: cliente.imagemUrl,
-        preco: cliente.preco
+        preco: cliente.preco,
       }
     },
     fromFirestore(
@@ -26,7 +26,7 @@ export default class ColecaoCliente implements ClienteRepositorio {
         dados.preco,
         snapshot.id
       )
-    }
+    },
   }
 
   async salvar(cliente: Cliente): Promise<Cliente> {

@@ -36,7 +36,7 @@ export default function Home() {
     selecionarCliente,
     excluirCliente,
     tabelaVisivel,
-    exibirTabela
+    exibirTabela,
   } = useClientes()
 
   const url = process.env.NEXT_PUBLIC_FIREBASE_PROJECT_ID
