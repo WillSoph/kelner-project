@@ -15,7 +15,7 @@ interface AuthContextProps {
   logout?: () => Promise<void>
 }
 interface UsuarioFirebase extends firebase.User {
-  stripe_customer_id?: string;
+  stripe_customer_id?: string
 }
 const AuthContext = createContext<AuthContextProps>({})
 
