@@ -14,24 +14,31 @@ interface AuthContextProps {
   loginGoogle?: () => Promise<void>
   logout?: () => Promise<void>
 }
-
+interface UsuarioFirebase extends firebase.User {
+stripe_customer_id?: string;
+}
 const AuthContext = createContext<AuthContextProps>({})
 
 async function usuarioNormalizado(
-  usuarioFirebase: firebase.User,
+  usuarioFirebase: UsuarioFirebase,
 ): Promise<Usuario> {
   const token = await usuarioFirebase.getIdToken()
   const usuario = await usuarioFirebase
   Cookies.set('admin-template-cod3r-auth-uid', usuario.uid, {
     expires: 7,
   })
+
+  const provedor =
+    usuarioFirebase.providerData && usuarioFirebase.providerData.length
+      ? usuarioFirebase.providerData[0].providerId
+      : '';
   return {
     uid: usuarioFirebase.uid,
     nome: usuarioFirebase.displayName || '',
     email: usuarioFirebase.email || '',
-    stripe_customer_id: usuarioFirebase.stripe_customer_id,
+    stripe_customer_id: usuarioFirebase.stripe_customer_id || '',
     token,
-    provedor: usuarioFirebase.providerData[0].providerId,
+    provedor,
     imagemUrl: usuarioFirebase.photoURL || '',
   }
 }
