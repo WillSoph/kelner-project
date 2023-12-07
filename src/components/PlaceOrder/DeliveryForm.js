@@ -36,7 +36,7 @@ const DeliveryForm = () => {
     swal(
       'Information Updated!',
       'Your shipping details updated successfully!',
-      'success'
+      'success',
     )
     setDisabled(false)
   }

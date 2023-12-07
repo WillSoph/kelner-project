@@ -4,7 +4,7 @@ import { stripe } from '../../../services/stripe'
 export async function saveSubscription(
   subscriptionId: string,
   customerId: string,
-  createAction = false
+  createAction = false,
 ) {
   const usersCollection = firebase.firestore().collection('usuarios')
 

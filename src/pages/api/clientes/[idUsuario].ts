@@ -3,7 +3,7 @@ import ColecaoCliente from '../../../firebase/db/ColecaoCliente'
 
 export default async function handler(
   req: NextApiRequest,
-  res: NextApiResponse
+  res: NextApiResponse,
 ) {
   const { idUsuario } = req.query
 
@@ -14,7 +14,7 @@ export default async function handler(
   try {
     const colecaoCliente = new ColecaoCliente()
     const clientes = await colecaoCliente.obterTodosDoUsuario(
-      idUsuario as string
+      idUsuario as string,
     )
 
     res.status(200).json(clientes)

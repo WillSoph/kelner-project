@@ -47,7 +47,6 @@ export default function Tabela(props: TabelaProps) {
       : props.clientes.filter(
           (cliente) => cliente.categoria === categoriaSelecionada
         )
-
   clientesFiltrados.sort((a, b) => a.nome.localeCompare(b.nome))
 
   const exibirAcoes = props.clienteExcluido || props.clienteSelecionado
