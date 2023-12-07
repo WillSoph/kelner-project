@@ -15,7 +15,6 @@ const DeliveryForm = () => {
   })
   const { setInput, setDisabled } = useDelivery()
 
-  //handle Change
   const handleChange = (e) => {
     const { value, name } = e.target
     setChange((prevValue) => {

@@ -29,7 +29,7 @@ const PopupWidget = () => {
       body: JSON.stringify(data, null, 2),
     })
       .then(async (response) => {
-        let json = await response.json()
+        const json = await response.json()
         if (json.success) {
           setIsSuccess(true)
           setMessage(json.message)
@@ -165,7 +165,7 @@ const PopupWidget = () => {
                         />
                         {errors.name && (
                           <div className="invalid-feedback mt-1 text-sm text-red-400">
-                            'Erro'
+                            '&apos;Erro&apos;'
                           </div>
                         )}
                       </div>
@@ -197,7 +197,7 @@ const PopupWidget = () => {
 
                         {errors.email && (
                           <div className="invalid-feedback mt-1 text-sm text-red-400">
-                            'Erro'
+                            '&apos;Erro&apos;'
                           </div>
                         )}
                       </div>
@@ -226,7 +226,7 @@ const PopupWidget = () => {
                         ></textarea>
                         {errors.message && (
                           <div className="invalid-feedback mt-1 text-sm text-red-400">
-                            'Erro'
+                            '&apos;Erro&apos;'
                           </div>
                         )}
                       </div>
