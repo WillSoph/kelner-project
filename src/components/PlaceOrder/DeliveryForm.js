@@ -25,7 +25,6 @@ const DeliveryForm = () => {
     })
   }
 
-  //handle Submit
   const handleSubmit = (e) => {
     e.preventDefault()
     setInput({

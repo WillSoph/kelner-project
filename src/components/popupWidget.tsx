@@ -165,7 +165,7 @@ const PopupWidget = () => {
                         />
                         {errors.name && (
                           <div className="invalid-feedback mt-1 text-sm text-red-400">
-                            '&apos;Erro&apos;'
+                            Erro
                           </div>
                         )}
                       </div>
@@ -197,7 +197,7 @@ const PopupWidget = () => {
 
                         {errors.email && (
                           <div className="invalid-feedback mt-1 text-sm text-red-400">
-                            '&apos;Erro&apos;'
+                            Erro
                           </div>
                         )}
                       </div>
@@ -226,7 +226,7 @@ const PopupWidget = () => {
                         ></textarea>
                         {errors.message && (
                           <div className="invalid-feedback mt-1 text-sm text-red-400">
-                            '&apos;Erro&apos;'
+                            Erro
                           </div>
                         )}
                       </div>
