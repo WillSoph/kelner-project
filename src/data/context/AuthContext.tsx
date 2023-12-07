@@ -19,7 +19,7 @@ const AuthContext = createContext<AuthContextProps>({})
 
 async function usuarioNormalizado(
   usuarioFirebase: firebase.User,
-  ):Promise<Usuario> {
+):Promise<Usuario> {
   const token = await usuarioFirebase.getIdToken()
   const usuario = await usuarioFirebase
   Cookies.set('admin-template-cod3r-auth-uid', usuario.uid, {
