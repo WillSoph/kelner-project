@@ -10,6 +10,6 @@ export default function useTabelaOuForm() {
     formularioVisivel: visivel === 'form',
     tabelaVisivel: visivel === 'tabela',
     exibirTabela,
-    exibirFormulario,
+    exibirFormulario
   }
 }

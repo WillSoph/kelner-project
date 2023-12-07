@@ -11,14 +11,12 @@ const OrderProvider = ({ children }) => {
   const [order, setOrder] = useState([])
   const [clientes, setClientes] = useState([])
 
-  
   const handleOrder = (food) => {
     setOrder((prevValue) => {
       return [...prevValue, food]
     })
   }
 
-  
   const removeOrder = (id) => {
     setOrder((prev) => {
       return prev.filter((item) => {
@@ -27,7 +25,6 @@ const OrderProvider = ({ children }) => {
     })
   }
 
-  
   const setClientData = (clientData) => {
     setClientes(clientData)
   }
@@ -37,8 +34,8 @@ const OrderProvider = ({ children }) => {
     order,
     handleOrder,
     removeOrder,
-    clientes, 
-    setClientData,
+    clientes,
+    setClientData
   }
 
   return <OrderContext.Provider value={value}>{children}</OrderContext.Provider>

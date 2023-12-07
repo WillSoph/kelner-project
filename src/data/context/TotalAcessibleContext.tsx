@@ -26,7 +26,7 @@ export function useTotalAcessible() {
   const context = useContext(TotalAcessibleContext)
   if (!context) {
     throw new Error(
-      'useTotalAcessible must be used within a TotalAcessibleProvider',
+      'useTotalAcessible must be used within a TotalAcessibleProvider'
     )
   }
   return context

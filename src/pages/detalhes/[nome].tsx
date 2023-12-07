@@ -31,7 +31,6 @@ const FoodDetailScreen = () => {
                 className="grid grid-cols-1 gap-10 md:grid-cols-2 lg:grid-cols-2"
                 key={cliente.createTime}
               >
-                
                 <div className="order-2 flex flex-col justify-center md:order-1 lg:order-1">
                   <h1 className="poppins select-none pb-4 text-center text-3xl font-semibold text-gray-700 md:text-left lg:text-left lg:text-4xl">
                     {cliente.fields.nome?.stringValue || 'Nome Indisponível'}
@@ -41,15 +40,14 @@ const FoodDetailScreen = () => {
                       'Descrição indisponível'}
                   </p>
 
-                  
                   <div className="flex items-center justify-center space-x-6 pt-8 md:justify-start lg:justify-start">
                     <h1 className="select-none text-3xl font-bold text-black">
                       R$
                       {(cliente.fields.preco?.stringValue * quantity).toFixed(
-                        2,
+                        2
                       )}
                     </h1>
-                    
+
                     <div className="flex items-center space-x-6 rounded-full border border-gray-200 px-4 py-2">
                       <AiOutlineMinus
                         onClick={() => {
@@ -72,7 +70,6 @@ const FoodDetailScreen = () => {
                     </div>
                   </div>
 
-                  
                   <div className="mt-8 flex items-center justify-center md:justify-start lg:justify-start">
                     <button
                       disabled={disabled}
@@ -89,7 +86,7 @@ const FoodDetailScreen = () => {
                         withSwal({
                           title: 'Wow!!!',
                           text: 'Your order has added to the cart',
-                          icon: 'success',
+                          icon: 'success'
                         })
                         router.push('/orders')
                         console.log(cliente)
@@ -102,7 +99,7 @@ const FoodDetailScreen = () => {
                     </button>
                   </div>
                 </div>
-                
+
                 <div className="order-1 md:order-2 lg:order-2">
                   <img
                     src={cliente.fields.imagemUrl?.stringValue}

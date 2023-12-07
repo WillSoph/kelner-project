@@ -16,28 +16,28 @@ const people = [
   {
     id: 1,
     name: 'Entrada',
-    avatar: '/images/food/entrada.png',
+    avatar: '/images/food/entrada.png'
   },
   {
     id: 2,
     name: 'Prato principal',
-    avatar: '/images/food/prato-principal.png',
+    avatar: '/images/food/prato-principal.png'
   },
   {
     id: 3,
     name: 'Sobremesa',
-    avatar: '/images/food/sobremesa.png',
+    avatar: '/images/food/sobremesa.png'
   },
   {
     id: 4,
     name: 'Bebida sem álcool',
-    avatar: '/images/food/bebida-nao-alcoolica.png',
+    avatar: '/images/food/bebida-nao-alcoolica.png'
   },
   {
     id: 5,
     name: 'Bebida alcoólica',
-    avatar: '/images/food/bebida-alcoolica.png',
-  },
+    avatar: '/images/food/bebida-alcoolica.png'
+  }
 ]
 
 function classNames(...classes) {
@@ -89,7 +89,7 @@ export default function SelectInput(props: SelectInputProps) {
                       className={({ active }) =>
                         classNames(
                           active ? 'bg-indigo-600 text-white' : 'text-gray-900',
-                          'relative cursor-default select-none py-2 pl-3 pr-9',
+                          'relative cursor-default select-none py-2 pl-3 pr-9'
                         )
                       }
                       value={person}
@@ -107,7 +107,7 @@ export default function SelectInput(props: SelectInputProps) {
                             <span
                               className={classNames(
                                 selected ? 'font-semibold' : 'font-normal',
-                                'ml-3 block truncate',
+                                'ml-3 block truncate'
                               )}
                             >
                               {person.name}
@@ -118,10 +118,9 @@ export default function SelectInput(props: SelectInputProps) {
                             <span
                               className={classNames(
                                 active ? 'text-white' : 'text-indigo-600',
-                                'absolute inset-y-0 right-0 flex items-center pr-4',
+                                'absolute inset-y-0 right-0 flex items-center pr-4'
                               )}
-                            >
-                            </span>
+                            ></span>
                           ) : null}
                         </>
                       )}

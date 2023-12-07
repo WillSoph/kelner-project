@@ -50,6 +50,6 @@ export default function useClientes() {
     selecionarCliente,
     obterTodos,
     tabelaVisivel,
-    exibirTabela,
+    exibirTabela
   }
 }

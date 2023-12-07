@@ -11,7 +11,7 @@ const DeliveryForm = () => {
     country: '',
     roadNo: '',
     flatno: '',
-    name: `${user.displayName}`,
+    name: `${user.displayName}`
   })
   const { setInput, setDisabled } = useDelivery()
 
@@ -20,7 +20,7 @@ const DeliveryForm = () => {
     setChange((prevValue) => {
       return {
         ...prevValue,
-        [name]: value,
+        [name]: value
       }
     })
   }
@@ -31,12 +31,12 @@ const DeliveryForm = () => {
       country: change.country,
       roadNo: change.roadNo,
       flatno: change.flatno,
-      name: change.name,
+      name: change.name
     })
     swal(
       'Information Updated!',
       'Your shipping details updated successfully!',
-      'success',
+      'success'
     )
     setDisabled(false)
   }

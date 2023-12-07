@@ -14,7 +14,6 @@ const Navbar = () => {
 
   const url = process.env.NEXT_PUBLIC_FIREBASE_PROJECT_ID
 
-  
   const onChangeHeader = () => {
     if (window.scrollY >= 50) {
       setChangeHeader(true)
@@ -23,7 +22,6 @@ const Navbar = () => {
     }
   }
 
-  
   if (typeof window !== 'undefined') {
     window.addEventListener('scroll', onChangeHeader)
   }
@@ -37,7 +35,7 @@ const Navbar = () => {
   const obterEmpresa = async () => {
     try {
       const response = await axios.get(
-        `https://firestore.googleapis.com/v1/projects/${url}/databases/(default)/documents/usuarios/${usuario?.uid}/empresa`,
+        `https://firestore.googleapis.com/v1/projects/${url}/databases/(default)/documents/usuarios/${usuario?.uid}/empresa`
       )
 
       const empresaData = response.data.documents
@@ -55,7 +53,6 @@ const Navbar = () => {
       }
     >
       <nav className="mx-auto flex max-w-screen-xl items-center px-6 py-3">
-        
         <div className="flex flex-grow items-center">
           <img
             src="/images/logo.svg"
@@ -76,7 +73,6 @@ const Navbar = () => {
             </span>
             <BsCart2 className="h-6 w-6 cursor-pointer text-gray-700" />
           </div>
-          
         </div>
       </nav>
     </header>

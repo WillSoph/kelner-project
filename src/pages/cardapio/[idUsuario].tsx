@@ -24,7 +24,7 @@ function Cardapio() {
   const obterClientes = async (userId) => {
     try {
       const response = await axios.get(
-        `https://firestore.googleapis.com/v1/projects/${url}/databases/(default)/documents/usuarios/${idUsuario}/clientes`,
+        `https://firestore.googleapis.com/v1/projects/${url}/databases/(default)/documents/usuarios/${idUsuario}/clientes`
       )
 
       const clientesData = response.data.documents

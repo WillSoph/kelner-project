@@ -25,7 +25,7 @@ const Hero = () => {
 
   const product = {
     priceId: 'price_1O0UrrIYJ05oSoaZonPhWe4G',
-    amount: 'R$ 20,00',
+    amount: 'R$ 20,00'
   }
 
   function exibirErro(msg, tempoEmSegundos = 5) {

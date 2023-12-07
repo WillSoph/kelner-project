@@ -16,14 +16,14 @@ async function buffer(readable: Readable) {
 
 export const config = {
   api: {
-    bodyParser: false,
-  },
+    bodyParser: false
+  }
 }
 
 const relevantEvents = new Set([
   'checkout.session.completed',
   'customer.subscription.updated',
-  'customer.subscription.deleted',
+  'customer.subscription.deleted'
 ])
 
 export default async (req: NextApiRequest, res: NextApiResponse) => {
@@ -39,7 +39,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
       event = stripe.webhooks.constructEvent(
         buf,
         secret,
-        process.env.STRIPE_WEBHOOK_SECRET,
+        process.env.STRIPE_WEBHOOK_SECRET
       )
       console.log('Webhook event type:', event.type)
     } catch (err) {
@@ -59,7 +59,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
             await saveSubscription(
               subscription.id,
               subscription.customer.toString(),
-              false,
+              false
             )
 
             break
@@ -70,7 +70,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
             await saveSubscription(
               checkoutSession.subscription.toString(),
               checkoutSession.customer.toString(),
-              true,
+              true
             )
 
             break

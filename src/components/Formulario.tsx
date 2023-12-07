@@ -49,7 +49,7 @@ export default function Formulario(props: FormularioProps) {
           categoria,
           urlImagem,
           preco,
-          id,
+          id
         )
       } else if (typeof imagem === 'string') {
         clienteComImagem = new Cliente(
@@ -58,7 +58,7 @@ export default function Formulario(props: FormularioProps) {
           categoria,
           imagem,
           preco,
-          id,
+          id
         )
       } else {
         // Se a imagem não for um File nem uma string, mantenha a imagem existente
@@ -68,7 +68,7 @@ export default function Formulario(props: FormularioProps) {
           categoria,
           props.cliente.imagemUrl,
           preco,
-          id,
+          id
         )
       }
 

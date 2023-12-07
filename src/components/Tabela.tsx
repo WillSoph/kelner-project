@@ -38,14 +38,14 @@ export default function Tabela(props: TabelaProps) {
   const [categoriaSelecionada, setCategoriaSelecionada] = useState('Todas')
 
   const categorias = [
-    ...new Set(props.clientes.map((cliente) => cliente.categoria)),
+    ...new Set(props.clientes.map((cliente) => cliente.categoria))
   ]
 
   const clientesFiltrados =
     categoriaSelecionada === 'Todas'
       ? props.clientes
       : props.clientes.filter(
-          (cliente) => cliente.categoria === categoriaSelecionada,
+          (cliente) => cliente.categoria === categoriaSelecionada
         )
 
   clientesFiltrados.sort((a, b) => a.nome.localeCompare(b.nome))

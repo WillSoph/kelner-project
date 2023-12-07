@@ -26,7 +26,7 @@ export default function Formulario(props: EditarEmpresaProps) {
   const isEdicao = props.empresa?.fields?.id
   const [empresa, setEmpresa] = useState([])
   const [nome, setNome] = useState(
-    props.empresa?.fields?.nome?.stringValue || '',
+    props.empresa?.fields?.nome?.stringValue || ''
   )
   const [imagem, setImagem] = useState<File | null>(null)
   const url = process.env.NEXT_PUBLIC_FIREBASE_PROJECT_ID
@@ -46,7 +46,7 @@ export default function Formulario(props: EditarEmpresaProps) {
   const obterEmpresa = async () => {
     try {
       const response = await axios.get(
-        `https://firestore.googleapis.com/v1/projects/${url}/databases/(default)/documents/usuarios/${usuario?.uid}/empresa`,
+        `https://firestore.googleapis.com/v1/projects/${url}/databases/(default)/documents/usuarios/${usuario?.uid}/empresa`
       )
 
       const empresaData = response.data.documents

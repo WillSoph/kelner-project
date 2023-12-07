@@ -12,7 +12,7 @@ export default class Cliente {
     categoria: string,
     imagemUrl: string | File,
     preco: number,
-    id: string,
+    id: string
   ) {
     this.#nome = nome
     this.#descricao = descricao

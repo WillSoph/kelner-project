@@ -7,7 +7,6 @@ export const useDelivery = () => {
   return useContext(DeliveryContext)
 }
 const DeliveryProvider = ({ children }) => {
-  
   const [input, setInput] = useState({})
   const [disabled, setDisabled] = useState(true)
 
@@ -15,7 +14,7 @@ const DeliveryProvider = ({ children }) => {
     input,
     disabled,
     setInput,
-    setDisabled,
+    setDisabled
   }
   return (
     <DeliveryContext.Provider value={value}>

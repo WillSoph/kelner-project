@@ -7,33 +7,29 @@ export default class ColecaoEmpresa implements EmpresaRepositorio {
     toFirestore(empresa: Empresa) {
       return {
         nome: empresa.nome,
-        imagemUrl: empresa.imagemUrl,
+        imagemUrl: empresa.imagemUrl
       }
     },
     fromFirestore(
       snapshot: firebase.firestore.QueryDocumentSnapshot,
-      options: firebase.firestore.SnapshotOptions,
+      options: firebase.firestore.SnapshotOptions
     ): Empresa {
       const dados = snapshot.data(options)
       return new Empresa(dados.nome, dados.imagemUrl, snapshot.id)
-    },
+    }
   }
 
   async salvar(empresa: Empresa): Promise<Empresa> {
     const idUsuario = firebase.auth().currentUser?.uid
 
     if (idUsuario) {
-      
       const querySnapshot = await this.colecao(idUsuario).get()
 
-      
       if (querySnapshot.size > 0) {
-        
         const primeiraEmpresa = querySnapshot.docs[0]
         await this.colecao(idUsuario).doc(primeiraEmpresa.id).set(empresa)
         return empresa
       } else {
-        
         const docRef = await this.colecao(idUsuario).add(empresa)
         const doc = await docRef.get()
         return doc.data()

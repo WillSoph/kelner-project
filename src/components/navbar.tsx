@@ -5,10 +5,9 @@ import { getStripeJs } from '../services/stripe-js'
 import { api } from '../services/api'
 import AuthInput from '../components/auth/AuthInput'
 import { IconeAtencao } from '../components/icons'
-import { Dialog, Transition } from '@headlessui/react'
+import { Dialog, Transition, Disclosure } from '@headlessui/react'
 
 import Link from 'next/link'
-import { Disclosure } from '@headlessui/react'
 import BotaoAssine from '../components/BotatoAssine'
 import firebase from '../firebase/config'
 import { useTotalAcessible } from '../data/context/TotalAcessibleContext'
@@ -30,7 +29,7 @@ export default function Navbar() {
 
   const product = {
     priceId: 'price_1O0UrrIYJ05oSoaZonPhWe4G',
-    amount: 'R$ 20,00',
+    amount: 'R$ 20,00'
   }
 
   async function submeter() {
@@ -59,13 +58,10 @@ export default function Navbar() {
     const querySnapshot = await usersCollection
       .where('email', '==', usuario?.email)
       .get()
-
     if (!querySnapshot.empty) {
-      
       console.log('ID do Usuario: ', querySnapshot.docs[0].id)
       return querySnapshot.docs[0].id
     }
-
     return null
   }
 
@@ -74,24 +70,18 @@ export default function Navbar() {
       const id = await getUserIdFromEmail(usuario?.email || '')
       setUsuarioId(id)
     }
-
     if (usuario?.email) {
       fetchUserId()
       renderizarBotaoAcessarPainel()
       async function renderizarBotaoAcessarPainel() {
-        
         if (usuario?.email) {
-          
           const hasActiveSubscription = await verificarAssinaturaAtiva()
-
-          
           if (!hasActiveSubscription) {
             setTotalAcessible(false)
           } else {
             setTotalAcessible(true)
           }
         }
-        
         return null
       }
     }
@@ -102,11 +92,9 @@ export default function Navbar() {
       .firestore()
       .collection('subscriptions')
     const user = firebase.auth().currentUser
-
     if (user) {
       const userId = user.uid
       const userDocRef = firebase.firestore().collection('usuarios').doc(userId)
-
       const querySnapshot = await subscriptionsCollection
         .where('userId', '==', userDocRef)
         .where('status', '==', 'active')
@@ -114,7 +102,6 @@ export default function Navbar() {
       console.log('teste 2: ', !querySnapshot.empty)
       return !querySnapshot.empty
     }
-
     return false
   }
 
@@ -123,14 +110,10 @@ export default function Navbar() {
       setOpen(true)
       return
     }
-
     try {
       const response = await api.post('/subscribe')
-
       const { sessionId } = response.data
-
       const stripe = await getStripeJs()
-
       await stripe?.redirectToCheckout({ sessionId })
     } catch (err) {
       alert(err.message)
@@ -176,7 +159,6 @@ export default function Navbar() {
                 <Dialog.Panel className="relative transform overflow-hidden rounded-lg bg-white text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-lg">
                   <div className="bg-white px-4 pb-4 pt-5 sm:p-6 sm:pb-4">
                     <div className="sm:flex sm:items-start">
-                      
                       <div className="flex items-center justify-center">
                         <div className="w-full">
                           <h1 className={`mb-5 text-3xl font-bold`}>
@@ -184,7 +166,6 @@ export default function Navbar() {
                               ? 'Entre com a Sua Conta'
                               : 'Cadastre-se na Plataforma'}
                           </h1>
-
                           {erro ? (
                             <div
                               className={`
@@ -282,7 +263,6 @@ export default function Navbar() {
       </Transition.Root>
       <div className="w-full">
         <nav className="container relative mx-auto flex flex-wrap items-center justify-between p-8 lg:justify-between xl:px-0">
-          
           <Disclosure>
             {({ open }) => (
               <>
@@ -301,7 +281,6 @@ export default function Navbar() {
                       <span>Kelner</span>
                     </span>
                   </Link>
-
                   <Disclosure.Button
                     aria-label="Toggle Menu"
                     className="dark:focus:bg-trueGray-700 ml-auto rounded-md px-2 py-1 text-gray-500 hover:text-indigo-500 focus:bg-indigo-100 focus:text-indigo-500 focus:outline-none dark:text-gray-300 lg:hidden"
@@ -373,10 +352,8 @@ export default function Navbar() {
             )}
           </Disclosure>
 
-          
           <div className="hidden text-center lg:flex lg:items-center">
             <ul className="flex-1 list-none items-center justify-end pt-6 lg:flex lg:pt-0">
-              
               <li className="nav__item mr-3">
                 <Link
                   href="#beneficios"

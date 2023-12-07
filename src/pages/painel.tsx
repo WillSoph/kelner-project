@@ -36,7 +36,7 @@ export default function Home() {
     selecionarCliente,
     excluirCliente,
     tabelaVisivel,
-    exibirTabela,
+    exibirTabela
   } = useClientes()
 
   const url = process.env.NEXT_PUBLIC_FIREBASE_PROJECT_ID
@@ -62,7 +62,7 @@ export default function Home() {
   const obterEmpresa = async () => {
     try {
       const response = await axios.get(
-        `https://firestore.googleapis.com/v1/projects/${url}/databases/(default)/documents/usuarios/${usuario?.uid}/empresa`,
+        `https://firestore.googleapis.com/v1/projects/${url}/databases/(default)/documents/usuarios/${usuario?.uid}/empresa`
       )
 
       const empresaData = response.data.documents

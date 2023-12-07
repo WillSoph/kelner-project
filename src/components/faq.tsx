@@ -38,23 +38,23 @@ const faqdata = [
   {
     question: 'Como faço para assinar o Kelner?',
     answer:
-      "É super simples! No topo dessa página clique em 'Login/Cadastrar'. Em seguida, se você ainda não possui uma conta, clique na frase 'Novo por aqui? Abra sua conta'.Após efetuar o Login, ficará disponível o botão 'Assine Agora'. Basta clicar, efetuar o pagamento da assinatura, e agora você terá disponível no topo do site a opção 'Acessar o Painel'. ",
+      "É super simples! No topo dessa página clique em 'Login/Cadastrar'. Em seguida, se você ainda não possui uma conta, clique na frase 'Novo por aqui? Abra sua conta'.Após efetuar o Login, ficará disponível o botão 'Assine Agora'. Basta clicar, efetuar o pagamento da assinatura, e agora você terá disponível no topo do site a opção 'Acessar o Painel'. "
   },
   {
     question: 'Existe limite para quantidade de produtos cadastrados?',
     answer:
-      'Não! Você poderá cadastrar quantos produtos quiser sem a necessidade de estender seu plano.',
+      'Não! Você poderá cadastrar quantos produtos quiser sem a necessidade de estender seu plano.'
   },
   {
     question: 'Quanto custa a assinatura?',
     answer:
-      'Por apenas 20 reais mensais você terá disponível toda a plataforma Kelner e suas funcionalidades.',
+      'Por apenas 20 reais mensais você terá disponível toda a plataforma Kelner e suas funcionalidades.'
   },
   {
     question: 'Meus dados estão protegidos? ',
     answer:
-      'Com certeza! Nós não armazenamos informações sensíveis em nosso banco de dados.',
-  },
+      'Com certeza! Nós não armazenamos informações sensíveis em nosso banco de dados.'
+  }
 ]
 
 export default Faq

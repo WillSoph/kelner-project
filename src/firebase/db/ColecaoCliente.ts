@@ -10,12 +10,12 @@ export default class ColecaoCliente implements ClienteRepositorio {
         descricao: cliente.descricao,
         categoria: cliente.categoria,
         imagemUrl: cliente.imagemUrl,
-        preco: cliente.preco,
+        preco: cliente.preco
       }
     },
     fromFirestore(
       snapshot: firebase.firestore.QueryDocumentSnapshot,
-      options: firebase.firestore.SnapshotOptions,
+      options: firebase.firestore.SnapshotOptions
     ): Cliente {
       const dados = snapshot.data(options)
       return new Cliente(
@@ -24,9 +24,9 @@ export default class ColecaoCliente implements ClienteRepositorio {
         dados.categoria,
         dados.imagemUrl,
         dados.preco,
-        snapshot.id,
+        snapshot.id
       )
-    },
+    }
   }
 
   async salvar(cliente: Cliente): Promise<Cliente> {
