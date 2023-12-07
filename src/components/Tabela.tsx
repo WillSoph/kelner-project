@@ -45,7 +45,7 @@ export default function Tabela(props: TabelaProps) {
     categoriaSelecionada === 'Todas'
       ? props.clientes
       : props.clientes.filter(
-          (cliente) => cliente.categoria === categoriaSelecionada
+          (cliente) => cliente.categoria === categoriaSelecionada,
         )
   clientesFiltrados.sort((a, b) => a.nome.localeCompare(b.nome))
 

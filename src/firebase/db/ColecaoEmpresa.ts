@@ -12,7 +12,7 @@ export default class ColecaoEmpresa implements EmpresaRepositorio {
     },
     fromFirestore(
       snapshot: firebase.firestore.QueryDocumentSnapshot,
-      options: firebase.firestore.SnapshotOptions): Empresa {
+      options: firebase.firestore.SnapshotOptions):Empresa{
       const dados = snapshot.data(options)
       return new Empresa(dados.nome, dados.imagemUrl, snapshot.id)
     },
