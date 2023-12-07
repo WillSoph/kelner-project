@@ -1,34 +1,34 @@
-import axios from "axios";
-import { useRouter } from "next/router";
-import Botao from "../components/Botao";
-import QRCodeModal from "../components/QRCodeModal";
-import { Dialog, Transition } from "@headlessui/react";
-import Formulario from "../components/Formulario";
-import Tabela from "../components/Tabela";
-import Layout from "../components/template/Layout";
-import LayoutConteudo from "../components/template/LayoutConteudo";
-import useAuth from "../data/hook/useAuth";
-import useClientes from "../data/hook/useClientes";
-import { useTotalAcessible } from "../data/context/TotalAcessibleContext";
-import { useState, useEffect, useRef, Fragment } from "react";
+import axios from 'axios'
+import { useRouter } from 'next/router'
+import Botao from '../components/Botao'
+import QRCodeModal from '../components/QRCodeModal'
+import { Dialog, Transition } from '@headlessui/react'
+import Formulario from '../components/Formulario'
+import Tabela from '../components/Tabela'
+import Layout from '../components/template/Layout'
+import LayoutConteudo from '../components/template/LayoutConteudo'
+import useAuth from '../data/hook/useAuth'
+import useClientes from '../data/hook/useClientes'
+import { useTotalAcessible } from '../data/context/TotalAcessibleContext'
+import { useState, useEffect, useRef, Fragment } from 'react'
 // import QRCode from 'react-qr-code';
-import QRCode from "qrcode.react";
+import QRCode from 'qrcode.react'
 
 export default function Home() {
-  const { usuario, carregando } = useAuth();
-  const { totalAcessible, setTotalAcessible } = useTotalAcessible();
-  const router = useRouter();
-  const qrCodeRef = useRef<HTMLElement | null>(null);
-  const cancelButtonRef = useRef(null);
-  const [isQRCodeLoaded, setIsQRCodeLoaded] = useState(false);
-  const [empresa, setEmpresa] = useState([]);
-  const [open, setOpen] = useState(false);
+  const { usuario, carregando } = useAuth()
+  const { totalAcessible, setTotalAcessible } = useTotalAcessible()
+  const router = useRouter()
+  const qrCodeRef = useRef<HTMLElement | null>(null)
+  const cancelButtonRef = useRef(null)
+  const [isQRCodeLoaded, setIsQRCodeLoaded] = useState(false)
+  const [empresa, setEmpresa] = useState([])
+  const [open, setOpen] = useState(false)
 
   useEffect(() => {
     if (!totalAcessible) {
-      router.push(`/`);
+      router.push(`/`)
     }
-  }, [totalAcessible]);
+  }, [totalAcessible])
 
   const {
     cliente,
@@ -39,42 +39,42 @@ export default function Home() {
     excluirCliente,
     tabelaVisivel,
     exibirTabela,
-  } = useClientes();
+  } = useClientes()
 
-  const url = process.env.NEXT_PUBLIC_FIREBASE_PROJECT_ID;
-  const clienteMudou = (cliente) => salvarCliente(cliente);
+  const url = process.env.NEXT_PUBLIC_FIREBASE_PROJECT_ID
+  const clienteMudou = (cliente) => salvarCliente(cliente)
 
   const navegarParaCardapio = () => {
     // Aqui você pode obter o ID do usuário do seu contexto de autenticação ou de onde estiver disponível
-    const idUsuario = usuario?.uid; // Substitua isso pelo código real para obter o ID do usuário
-    window.open(`/cardapio/${idUsuario}`, "_blank", "noopener,noreferrer");
-  };
+    const idUsuario = usuario?.uid // Substitua isso pelo código real para obter o ID do usuário
+    window.open(`/cardapio/${idUsuario}`, '_blank', 'noopener,noreferrer')
+  }
   const navegarParaEmpresa = () => {
     // Aqui você pode obter o ID do usuário do seu contexto de autenticação ou de onde estiver disponível
-    const idUsuario = usuario?.uid; // Substitua isso pelo código real para obter o ID do usuário
-    router.push(`/editar-empresa`);
-  };
+    const idUsuario = usuario?.uid // Substitua isso pelo código real para obter o ID do usuário
+    router.push(`/editar-empresa`)
+  }
 
   useEffect(() => {
     if (usuario) {
-      obterEmpresa();
+      obterEmpresa()
     }
-  }, [usuario]);
+  }, [usuario])
 
   const obterEmpresa = async () => {
     try {
       const response = await axios.get(
         `https://firestore.googleapis.com/v1/projects/${url}/databases/(default)/documents/usuarios/${usuario?.uid}/empresa`,
-      );
+      )
 
-      const empresaData = response.data.documents;
-      setEmpresa(empresaData[0]);
+      const empresaData = response.data.documents
+      setEmpresa(empresaData[0])
     } catch (error) {
-      console.error("Erro ao obter empresa:", error);
+      console.error('Erro ao obter empresa:', error)
     }
-  };
+  }
 
-  const cardapioQRCodeLink = `/cardapio/${usuario?.uid}`;
+  const cardapioQRCodeLink = `/cardapio/${usuario?.uid}`
 
   return (
     <>
@@ -120,7 +120,7 @@ export default function Home() {
                         ref={qrCodeRef}
                       />
                     </div>
-                    <div className="bg-gray-200 text-gray-900 px-4 py-2 rounded-md">
+                    <div className="rounded-md bg-gray-200 px-4 py-2 text-gray-900">
                       Tire um print do QRCode do seu cardápio e use onde
                       precisar.
                     </div>
@@ -137,14 +137,14 @@ export default function Home() {
       >
         <div
           className={`
-        flex justify-center items-center h-full 
-        bg-gray-200 dark:bg-gray-900 rounded-md border-1 border-gray-500
+        border-1 flex h-full items-center 
+        justify-center rounded-md border-gray-500 bg-gray-200 dark:bg-gray-900
       `}
         >
           <LayoutConteudo titulo="Cadastro simples">
             {tabelaVisivel ? (
               <>
-                <div className="flex justify-end mb-2 overflow-auto">
+                <div className="mb-2 flex justify-end overflow-auto">
                   <button
                     className="inline-flex w-full justify-center rounded-md bg-green-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-green-500 sm:ml-3 sm:w-auto"
                     onClick={navegarParaEmpresa}
@@ -188,5 +188,5 @@ export default function Home() {
         </div>
       </Layout>
     </>
-  );
+  )
 }

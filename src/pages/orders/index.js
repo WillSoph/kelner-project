@@ -1,37 +1,37 @@
-import React from "react";
-import Navbar from "../cardapio/components/Navbar";
-import { withSwal } from "react-sweetalert2";
+import React from 'react'
+import Navbar from '../cardapio/components/Navbar'
+import { withSwal } from 'react-sweetalert2'
 // import DeliveryForm from '../components/PlaceOrder/DeliveryForm';
-import OrderCard from "../../components/PlaceOrder/OrderCard";
-import OrderPrice from "../../components/PlaceOrder/OrderPrice";
-import { useDelivery } from "../../contexts/DeliveryProvider";
-import { useOrder } from "../../contexts/OrderProvider";
-import { useRouter } from "next/router";
-import Back from "../../routes/Back";
+import OrderCard from '../../components/PlaceOrder/OrderCard'
+import OrderPrice from '../../components/PlaceOrder/OrderPrice'
+import { useDelivery } from '../../contexts/DeliveryProvider'
+import { useOrder } from '../../contexts/OrderProvider'
+import { useRouter } from 'next/router'
+import Back from '../../routes/Back'
 
 const PlaceOrderScreen = () => {
-  const { order, setOrder } = useOrder();
+  const { order, setOrder } = useOrder()
   // const { input, disabled } = useDelivery();
-  const router = useRouter();
+  const router = useRouter()
 
-  console.log(order);
+  console.log(order)
 
   return (
     <>
       <Navbar />
-      <main className="h-screen banner bg-amber-50 bg-opacity-50">
-        <div className="max-w-screen-xl py-20 mx-auto px-6">
+      <main className="banner h-screen bg-amber-50 bg-opacity-50">
+        <div className="mx-auto max-w-screen-xl px-6 py-20">
           <Back />
           {order.length > 0 ? (
             <>
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-10">
+              <div className="grid grid-cols-1 gap-10 md:grid-cols-2 lg:grid-cols-2">
                 {/* left side form  */}
                 {/* <div className="col-span-1">
                                 <DeliveryForm />
                             </div> */}
                 {/* right side  */}
                 <div className="col-span-1">
-                  <div className="glass p-6 box-border rounded-lg">
+                  <div className="glass box-border rounded-lg p-6">
                     {/* order details  */}
                     {/* <div className="flex flex-col space-y-4 mb-3">
                                         <p className="poppins text-gray-700">Deliver Place :  <span className="font-semibold text-black">{input.country ? `${input.country}` : '-----'}</span></p>
@@ -42,7 +42,7 @@ const PlaceOrderScreen = () => {
                                     </div> */}
                     {/* orders  */}
 
-                    <div className=" flex flex-col space-y-3 h-full overflow-y-scroll orderContainer ">
+                    <div className=" orderContainer flex h-full flex-col space-y-3 overflow-y-scroll ">
                       {order.map((item) => (
                         <OrderCard key={item.id} {...item} />
                       ))}
@@ -68,7 +68,7 @@ const PlaceOrderScreen = () => {
             </>
           ) : (
             <div className="pt-24">
-              <h1 className="text-center text-5xl text-primary poppins">
+              <h1 className="text-primary poppins text-center text-5xl">
                 Nenhum pedido adicionado.
               </h1>
             </div>
@@ -76,7 +76,7 @@ const PlaceOrderScreen = () => {
         </div>
       </main>
     </>
-  );
-};
+  )
+}
 
-export default PlaceOrderScreen;
+export default PlaceOrderScreen

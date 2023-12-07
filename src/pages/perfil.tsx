@@ -1,4 +1,4 @@
-import Layout from "../components/template/Layout";
+import Layout from '../components/template/Layout'
 
 export default function Perfil() {
   return (
@@ -8,5 +8,5 @@ export default function Perfil() {
     >
       <h1>Perfil do Usuário</h1>
     </Layout>
-  );
+  )
 }

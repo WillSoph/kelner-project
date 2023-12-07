@@ -1,11 +1,11 @@
-import Link from "next/link";
+import Link from 'next/link'
 
 interface MenuItemProps {
-  texto: string;
-  icone: any;
-  url?: string;
-  className?: string;
-  onClick?: (evento: any) => void;
+  texto: string
+  icone: any
+  url?: string
+  className?: string
+  onClick?: (evento: any) => void
 }
 
 export default function MenuItem(props: MenuItemProps) {
@@ -14,8 +14,8 @@ export default function MenuItem(props: MenuItemProps) {
       // eslint-disable-next-line @next/next/link-passhref
       <Link
         className={`
-                    flex flex-col justify-center items-center
-                    h-20 w-20
+                    flex h-20 w-20 flex-col
+                    items-center justify-center
                     dark:text-gray-200
                     ${props.className}
                 `}
@@ -24,14 +24,14 @@ export default function MenuItem(props: MenuItemProps) {
         {props.icone}
         <span className={`text-xs font-light`}>{props.texto}</span>
       </Link>
-    );
+    )
   }
   return (
     <li
       onClick={props.onClick}
       className={`
-            hover:bg-gray-100 dark:hover:bg-gray-800
-            cursor-pointer
+            cursor-pointer hover:bg-gray-100
+            dark:hover:bg-gray-800
         `}
     >
       {props.url ? (
@@ -40,5 +40,5 @@ export default function MenuItem(props: MenuItemProps) {
         renderizarLink()
       )}
     </li>
-  );
+  )
 }

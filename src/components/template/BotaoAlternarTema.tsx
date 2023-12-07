@@ -1,33 +1,33 @@
-import { IconeLua, IconeSol } from "../icons";
+import { IconeLua, IconeSol } from '../icons'
 
 interface BotaoAlternarTemaProps {
-  tema: string;
-  alternarTema: () => void;
+  tema: string
+  alternarTema: () => void
 }
 
 export default function BotaoAlternarTema(props: BotaoAlternarTemaProps) {
-  return props.tema === "dark" ? (
+  return props.tema === 'dark' ? (
     <div
       onClick={props.alternarTema}
       className={`
-            hidden sm:flex items-center cursor-pointer
-            bg-gradient-to-r from-yellow-300 to-yellow-600
-            w-14 lg:w-24 h-8 p-1 rounded-full
+            hidden h-8 w-14 cursor-pointer
+            items-center rounded-full bg-gradient-to-r
+            from-yellow-300 to-yellow-600 p-1 sm:flex lg:w-24
         `}
     >
       <div
         className={`
-                flex items-center justify-center
-                bg-white text-yellow-600
-                w-6 h-6 rounded-full
+                flex h-6 w-6
+                items-center justify-center
+                rounded-full bg-white text-yellow-600
             `}
       >
         {IconeSol(4)}
       </div>
       <div
         className={`
-                hidden lg:flex items-center ml-4
-                text-white
+                ml-4 hidden items-center text-white
+                lg:flex
             `}
       >
         <span className="text-sm">Claro</span>
@@ -37,28 +37,28 @@ export default function BotaoAlternarTema(props: BotaoAlternarTemaProps) {
     <div
       onClick={props.alternarTema}
       className={`
-            hidden sm:flex items-center justify-end cursor-pointer
-            bg-gradient-to-r from-gray-500 to-gray-900
-            w-14 lg:w-24 h-8 p-1 rounded-full
+            hidden h-8 w-14 cursor-pointer items-center
+            justify-end rounded-full bg-gradient-to-r
+            from-gray-500 to-gray-900 p-1 sm:flex lg:w-24
         `}
     >
       <div
         className={`
-                hidden lg:flex items-center mr-2
-                text-gray-300
+                mr-2 hidden items-center text-gray-300
+                lg:flex
             `}
       >
         <span className="text-sm">Escuro</span>
       </div>
       <div
         className={`
-                flex items-center justify-center
-                bg-black text-yellow-300
-                w-6 h-6 rounded-full
+                flex h-6 w-6
+                items-center justify-center
+                rounded-full bg-black text-yellow-300
             `}
       >
         {IconeLua(4)}
       </div>
     </div>
-  );
+  )
 }

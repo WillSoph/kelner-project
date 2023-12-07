@@ -1,51 +1,51 @@
-import React, { useState } from "react";
-import swal from "sweetalert";
-import { useDelivery } from "../../contexts/DeliveryProvider";
-import useAuth from "../../hooks/useAuth";
-import TextField from "../Form/TextField";
+import React, { useState } from 'react'
+import swal from 'sweetalert'
+import { useDelivery } from '../../contexts/DeliveryProvider'
+import useAuth from '../../hooks/useAuth'
+import TextField from '../Form/TextField'
 
 const DeliveryForm = () => {
-  const { user } = useAuth();
+  const { user } = useAuth()
 
   const [change, setChange] = useState({
-    country: "",
-    roadNo: "",
-    flatno: "",
+    country: '',
+    roadNo: '',
+    flatno: '',
     name: `${user.displayName}`,
-  });
-  const { setInput, setDisabled } = useDelivery();
+  })
+  const { setInput, setDisabled } = useDelivery()
 
   //handle Change
   const handleChange = (e) => {
-    const { value, name } = e.target;
+    const { value, name } = e.target
     setChange((prevValue) => {
       return {
         ...prevValue,
         [name]: value,
-      };
-    });
-  };
+      }
+    })
+  }
 
   //handle Submit
   const handleSubmit = (e) => {
-    e.preventDefault();
+    e.preventDefault()
     setInput({
       country: change.country,
       roadNo: change.roadNo,
       flatno: change.flatno,
       name: change.name,
-    });
+    })
     swal(
-      "Information Updated!",
-      "Your shipping details updated successfully!",
-      "success",
-    );
-    setDisabled(false);
-  };
+      'Information Updated!',
+      'Your shipping details updated successfully!',
+      'success',
+    )
+    setDisabled(false)
+  }
 
   return (
-    <div className="flex flex-col mt-20">
-      <h1 className="text-2xl poppins pb-4 border-b border-gray-500 text-gray-700">
+    <div className="mt-20 flex flex-col">
+      <h1 className="poppins border-b border-gray-500 pb-4 text-2xl text-gray-700">
         Edit Delivery Details
       </h1>
       <form className="my-4" onSubmit={handleSubmit}>
@@ -82,13 +82,13 @@ const DeliveryForm = () => {
             onChange={handleChange}
             required
           />
-          <button className="w-full px-6 py-3 rounded-lg bg-primary text-white poppins ring-red-300 focus:ring-4 transition duration-500">
+          <button className="bg-primary poppins w-full rounded-lg px-6 py-3 text-white ring-red-300 transition duration-500 focus:ring-4">
             Save & Continue
           </button>
         </div>
       </form>
     </div>
-  );
-};
+  )
+}
 
-export default DeliveryForm;
+export default DeliveryForm

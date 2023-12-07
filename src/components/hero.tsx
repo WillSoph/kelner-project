@@ -1,77 +1,77 @@
-"use client";
-import { Fragment, useRef, useState } from "react";
-import { Dialog, Transition } from "@headlessui/react";
-import Image from "next/image";
-import Link from "next/link";
-import Container from "./container";
-import heroImg from "../../public/images/hero.png";
-import { IconeAtencao } from "../components/icons";
-import BotaoAssine from "../components/BotatoAssine";
-import AuthInput from "../components/auth/AuthInput";
-import useAuth from "../data/hook/useAuth";
-import { api } from "../services/api";
-import { getStripeJs } from "../services/stripe-js";
-import { useTotalAcessible } from "../data/context/TotalAcessibleContext";
+'use client'
+import { Fragment, useRef, useState } from 'react'
+import { Dialog, Transition } from '@headlessui/react'
+import Image from 'next/image'
+import Link from 'next/link'
+import Container from './container'
+import heroImg from '../../public/images/hero.png'
+import { IconeAtencao } from '../components/icons'
+import BotaoAssine from '../components/BotatoAssine'
+import AuthInput from '../components/auth/AuthInput'
+import useAuth from '../data/hook/useAuth'
+import { api } from '../services/api'
+import { getStripeJs } from '../services/stripe-js'
+import { useTotalAcessible } from '../data/context/TotalAcessibleContext'
 
 const Hero = () => {
-  const { cadastrar, login, logout, loginGoogle, usuario } = useAuth();
-  const { totalAcessible, setTotalAcessible } = useTotalAcessible();
-  const cancelButtonRef = useRef(null);
-  const [open, setOpen] = useState(false);
-  const [erro, setErro] = useState(null);
-  const [modo, setModo] = useState<"login" | "cadastro">("login");
-  const [email, setEmail] = useState("");
-  const [senha, setSenha] = useState("");
+  const { cadastrar, login, logout, loginGoogle, usuario } = useAuth()
+  const { totalAcessible, setTotalAcessible } = useTotalAcessible()
+  const cancelButtonRef = useRef(null)
+  const [open, setOpen] = useState(false)
+  const [erro, setErro] = useState(null)
+  const [modo, setModo] = useState<'login' | 'cadastro'>('login')
+  const [email, setEmail] = useState('')
+  const [senha, setSenha] = useState('')
 
   const product = {
-    priceId: "price_1O0UrrIYJ05oSoaZonPhWe4G",
-    amount: "R$ 20,00",
-  };
+    priceId: 'price_1O0UrrIYJ05oSoaZonPhWe4G',
+    amount: 'R$ 20,00',
+  }
 
   function exibirErro(msg, tempoEmSegundos = 5) {
-    setErro(msg);
-    setTimeout(() => setErro(null), tempoEmSegundos * 1000);
+    setErro(msg)
+    setTimeout(() => setErro(null), tempoEmSegundos * 1000)
   }
 
   async function submeter() {
     try {
-      if (modo === "login") {
+      if (modo === 'login') {
         if (login) {
-          await login(email, senha);
+          await login(email, senha)
         } else {
-          throw new Error("Função de login não definida");
+          throw new Error('Função de login não definida')
         }
       } else {
         if (cadastrar) {
-          await cadastrar(email, senha);
+          await cadastrar(email, senha)
         } else {
-          throw new Error("Função de cadastro não definida");
+          throw new Error('Função de cadastro não definida')
         }
       }
     } catch (error) {
-      console.error("Erro ao realizar ação:", error);
+      console.error('Erro ao realizar ação:', error)
     }
   }
 
   async function handleSubscribe() {
     if (!usuario?.email) {
-      setOpen(true);
-      return;
+      setOpen(true)
+      return
     }
 
     try {
-      const response = await api.post("/subscribe");
+      const response = await api.post('/subscribe')
 
-      const { sessionId } = response.data;
+      const { sessionId } = response.data
 
-      const stripe = await getStripeJs();
+      const stripe = await getStripeJs()
 
-      await stripe?.redirectToCheckout({ sessionId });
+      await stripe?.redirectToCheckout({ sessionId })
     } catch (err) {
-      alert(err.message);
+      alert(err.message)
     }
   }
-  console.log("total acessivel?", totalAcessible);
+  console.log('total acessivel?', totalAcessible)
   return (
     <>
       <Transition.Root show={open} as={Fragment}>
@@ -112,18 +112,18 @@ const Hero = () => {
                     </div> */}
                       <div className="flex items-center justify-center">
                         <div className="w-full">
-                          <h1 className={`text-3xl font-bold mb-5`}>
-                            {modo === "login"
-                              ? "Entre com a Sua Conta"
-                              : "Cadastre-se na Plataforma"}
+                          <h1 className={`mb-5 text-3xl font-bold`}>
+                            {modo === 'login'
+                              ? 'Entre com a Sua Conta'
+                              : 'Cadastre-se na Plataforma'}
                           </h1>
 
                           {erro ? (
                             <div
                               className={`
-                                    flex items-center
-                                    bg-red-400 text-white py-3 px-5 my-2
-                                    border border-red-700 rounded-lg
+                                    my-2 flex
+                                    items-center rounded-lg border border-red-700 bg-red-400
+                                    px-5 py-3 text-white
                                 `}
                             >
                               {IconeAtencao()}
@@ -151,36 +151,36 @@ const Hero = () => {
                           <button
                             onClick={submeter}
                             className={`
-                                w-full bg-indigo-500 hover:bg-indigo-400
-                                text-white rounded-lg px-4 py-3 mt-6
+                                mt-6 w-full rounded-lg
+                                bg-indigo-500 px-4 py-3 text-white hover:bg-indigo-400
                             `}
                           >
-                            {modo === "login" ? "Entrar" : "Cadastrar"}
+                            {modo === 'login' ? 'Entrar' : 'Cadastrar'}
                           </button>
 
-                          <hr className="my-6 border-gray-300 w-full" />
+                          <hr className="my-6 w-full border-gray-300" />
 
                           <button
                             onClick={loginGoogle}
                             className={`
-                                w-full bg-red-500 hover:bg-red-400
-                                text-white rounded-lg px-4 py-3
+                                w-full rounded-lg bg-red-500
+                                px-4 py-3 text-white hover:bg-red-400
                             `}
                           >
                             Entrar com Google
                           </button>
 
-                          {modo === "login" ? (
+                          {modo === 'login' ? (
                             <p className="mt-8">
                               Novo por aqui?
                               <a
-                                onClick={() => setModo("cadastro")}
+                                onClick={() => setModo('cadastro')}
                                 className={`
-                                        text-blue-500 hover:text-blue-700 font-semibold
-                                        cursor-pointer
+                                        cursor-pointer font-semibold text-blue-500
+                                        hover:text-blue-700
                                     `}
                               >
-                                {" "}
+                                {' '}
                                 Assine por {product.amount} mensais.
                               </a>
                               <BotaoAssine priceId={product.priceId}>
@@ -192,13 +192,13 @@ const Hero = () => {
                               Já faz parte da nossa comunidade?
                               <Link
                                 href="#"
-                                onClick={() => setModo("login")}
+                                onClick={() => setModo('login')}
                                 className={`
-                                        text-blue-500 hover:text-blue-700 font-semibold
-                                        cursor-pointer
+                                        cursor-pointer font-semibold text-blue-500
+                                        hover:text-blue-700
                                     `}
                               >
-                                {" "}
+                                {' '}
                                 Entre com as suas Credenciais
                               </Link>
                             </p>
@@ -232,24 +232,24 @@ const Hero = () => {
       </Transition.Root>
 
       <Container className="flex flex-wrap ">
-        <div className="flex items-center w-full lg:w-1/2">
-          <div className="max-w-2xl mb-8">
-            <h1 className="text-4xl font-bold leading-snug tracking-tight text-gray-800 lg:text-4xl lg:leading-tight xl:text-6xl xl:leading-tight dark:text-white">
+        <div className="flex w-full items-center lg:w-1/2">
+          <div className="mb-8 max-w-2xl">
+            <h1 className="text-4xl font-bold leading-snug tracking-tight text-gray-800 dark:text-white lg:text-4xl lg:leading-tight xl:text-6xl xl:leading-tight">
               Sistema de cardápio virtual para restaurantes e lenchonetes
             </h1>
-            <p className="py-5 text-xl leading-normal text-gray-500 lg:text-xl xl:text-2xl dark:text-gray-300">
+            <p className="py-5 text-xl leading-normal text-gray-500 dark:text-gray-300 lg:text-xl xl:text-2xl">
               Desenvolvido para atender às necessidades únicas do setor
               gastronômico, o Kelner é a solução que simplifica a gestão de seu
               cardápio virtual de maneira rápida e prática.
             </p>
 
-            <div className="flex flex-col items-start space-y-3 sm:space-x-4 sm:space-y-0 sm:items-center sm:flex-row">
+            <div className="flex flex-col items-start space-y-3 sm:flex-row sm:items-center sm:space-x-4 sm:space-y-0">
               {!totalAcessible && usuario?.email ? (
                 <a
                   onClick={handleSubscribe}
                   target="_blank"
                   rel="noreferrer"
-                  className="px-8 py-4 cursor-pointer text-lg font-medium text-center text-white bg-yellow-500 rounded-md"
+                  className="cursor-pointer rounded-md bg-yellow-500 px-8 py-4 text-center text-lg font-medium text-white"
                 >
                   Assine Agora
                 </a>
@@ -257,7 +257,7 @@ const Hero = () => {
                 <div></div>
               ) : (
                 <Link href="/login">
-                  <div className="px-8 py-4 cursor-pointer text-lg font-medium text-center text-white bg-yellow-500 rounded-md">
+                  <div className="cursor-pointer rounded-md bg-yellow-500 px-8 py-4 text-center text-lg font-medium text-white">
                     Abra sua conta
                   </div>
                 </Link>
@@ -265,13 +265,13 @@ const Hero = () => {
             </div>
           </div>
         </div>
-        <div className="flex items-center justify-center w-full lg:w-1/2">
+        <div className="flex w-full items-center justify-center lg:w-1/2">
           <div className="">
             <Image
               src={heroImg}
               width="616"
               height="617"
-              className={"object-cover"}
+              className={'object-cover'}
               alt="Hero Illustration"
               loading="eager"
               placeholder="blur"
@@ -306,8 +306,8 @@ const Hero = () => {
         </div>
       </Container> */}
     </>
-  );
-};
+  )
+}
 
 function AmazonLogo() {
   return (
@@ -337,7 +337,7 @@ function AmazonLogo() {
         </clipPath>
       </defs>
     </svg>
-  );
+  )
 }
 
 function MicrosoftLogo() {
@@ -360,7 +360,7 @@ function MicrosoftLogo() {
         clipRule="evenodd"
       ></path>
     </svg>
-  );
+  )
 }
 
 function NetflixLogo() {
@@ -379,7 +379,7 @@ function NetflixLogo() {
         ></path>
       </g>
     </svg>
-  );
+  )
 }
 
 function SonyLogo() {
@@ -397,7 +397,7 @@ function SonyLogo() {
         </g>
       </g>
     </svg>
-  );
+  )
 }
 
 function VerizonLogo() {
@@ -422,7 +422,7 @@ function VerizonLogo() {
         </g>
       </g>
     </svg>
-  );
+  )
 }
 
-export default Hero;
+export default Hero

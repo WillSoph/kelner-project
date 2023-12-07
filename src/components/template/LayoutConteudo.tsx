@@ -1,20 +1,20 @@
-import TituloConteudo from "./TituloConteudo";
+import TituloConteudo from './TituloConteudo'
 
 interface LayoutConteudoProps {
-  titulo: string;
-  children: any;
+  titulo: string
+  children: any
 }
 
 export default function LayoutConteudo(props: LayoutConteudoProps) {
   return (
     <div
       className={`
-            flex flex-col w-full h-full
-            bg-white dark:bg-gray-800 text-gray-800 dark:text-white rounded-md
+            flex h-full w-full flex-col
+            rounded-md bg-white text-gray-800 dark:bg-gray-800 dark:text-white
         `}
     >
       <TituloConteudo>{props.titulo}</TituloConteudo>
       <div className="p-6">{props.children}</div>
     </div>
-  );
+  )
 }

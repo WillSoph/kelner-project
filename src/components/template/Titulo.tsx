@@ -1,6 +1,6 @@
 interface TituloProps {
-  titulo: string;
-  subtitulo: string;
+  titulo: string
+  subtitulo: string
 }
 
 export default function Titulo(props: TituloProps) {
@@ -8,7 +8,7 @@ export default function Titulo(props: TituloProps) {
     <div>
       <h1
         className={`
-                font-black text-3xl
+                text-3xl font-black
                 text-gray-900 dark:text-gray-100
             `}
       >
@@ -16,12 +16,12 @@ export default function Titulo(props: TituloProps) {
       </h1>
       <h2
         className={`
-                font-light text-sm
+                text-sm font-light
                 dark:text-gray-300
             `}
       >
         {props.subtitulo}
       </h2>
     </div>
-  );
+  )
 }

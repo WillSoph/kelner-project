@@ -10,5 +10,5 @@ export default function TituloConteudo(props) {
       </h1>
       <hr className="border-2 border-purple-500" />
     </div>
-  );
+  )
 }

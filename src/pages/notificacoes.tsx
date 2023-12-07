@@ -1,4 +1,4 @@
-import Layout from "../components/template/Layout";
+import Layout from '../components/template/Layout'
 
 export default function Notificacoes() {
   return (
@@ -8,5 +8,5 @@ export default function Notificacoes() {
     >
       <h1>Notificações</h1>
     </Layout>
-  );
+  )
 }

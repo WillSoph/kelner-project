@@ -1,44 +1,44 @@
-import { useEffect, useState } from "react";
-import Cliente from "../../core/Cliente";
-import ClienteRepositorio from "../../core/ClienteRepositorio";
-import ColecaoCliente from "../../firebase/db/ColecaoCliente";
-import useTabelaOuForm from "./useTabelaOuForm";
+import { useEffect, useState } from 'react'
+import Cliente from '../../core/Cliente'
+import ClienteRepositorio from '../../core/ClienteRepositorio'
+import ColecaoCliente from '../../firebase/db/ColecaoCliente'
+import useTabelaOuForm from './useTabelaOuForm'
 
 export default function useClientes() {
-  const repo: ClienteRepositorio = new ColecaoCliente();
+  const repo: ClienteRepositorio = new ColecaoCliente()
 
-  const { tabelaVisivel, exibirTabela, exibirFormulario } = useTabelaOuForm();
+  const { tabelaVisivel, exibirTabela, exibirFormulario } = useTabelaOuForm()
 
-  const [cliente, setCliente] = useState<Cliente>(Cliente.vazio());
-  const [clientes, setClientes] = useState<Cliente[]>([]);
+  const [cliente, setCliente] = useState<Cliente>(Cliente.vazio())
+  const [clientes, setClientes] = useState<Cliente[]>([])
 
-  useEffect(obterTodos, []);
+  useEffect(obterTodos, [])
 
   function obterTodos() {
     repo.obterTodos().then((clientes) => {
-      setClientes(clientes);
-      exibirTabela();
-    });
+      setClientes(clientes)
+      exibirTabela()
+    })
   }
 
   function selecionarCliente(cliente: Cliente) {
-    setCliente(cliente);
-    exibirFormulario();
+    setCliente(cliente)
+    exibirFormulario()
   }
 
   async function excluirCliente(cliente: Cliente) {
-    await repo.excluir(cliente);
-    obterTodos();
+    await repo.excluir(cliente)
+    obterTodos()
   }
 
   function novoCliente() {
-    setCliente(Cliente.vazio());
-    exibirFormulario();
+    setCliente(Cliente.vazio())
+    exibirFormulario()
   }
   async function salvarCliente(cliente: Cliente) {
-    await repo.salvar(cliente);
-    obterTodos();
-    console.log(cliente);
+    await repo.salvar(cliente)
+    obterTodos()
+    console.log(cliente)
   }
 
   return {
@@ -51,5 +51,5 @@ export default function useClientes() {
     obterTodos,
     tabelaVisivel,
     exibirTabela,
-  };
+  }
 }

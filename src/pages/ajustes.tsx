@@ -1,4 +1,4 @@
-import Layout from "../components/template/Layout";
+import Layout from '../components/template/Layout'
 
 export default function Ajustes() {
   return (
@@ -8,5 +8,5 @@ export default function Ajustes() {
     >
       <h3>Conteúdo!!!!</h3>
     </Layout>
-  );
+  )
 }

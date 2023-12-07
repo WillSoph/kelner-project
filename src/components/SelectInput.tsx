@@ -1,54 +1,54 @@
-import { Fragment, useState } from "react";
-import { Listbox, Transition } from "@headlessui/react";
-import { IconeCheck, IconeSetasCimaBaixo } from "./icons";
-import Image from "next/image";
+import { Fragment, useState } from 'react'
+import { Listbox, Transition } from '@headlessui/react'
+import { IconeCheck, IconeSetasCimaBaixo } from './icons'
+import Image from 'next/image'
 
 interface SelectInputProps {
-  tipo?: "select";
-  texto: string;
-  valor: any;
-  somenteLeitura?: boolean;
-  className?: any;
-  valorMudou?: (valor: any) => void;
+  tipo?: 'select'
+  texto: string
+  valor: any
+  somenteLeitura?: boolean
+  className?: any
+  valorMudou?: (valor: any) => void
 }
 
 const people = [
   {
     id: 1,
-    name: "Entrada",
-    avatar: "/images/food/entrada.png",
+    name: 'Entrada',
+    avatar: '/images/food/entrada.png',
   },
   {
     id: 2,
-    name: "Prato principal",
-    avatar: "/images/food/prato-principal.png",
+    name: 'Prato principal',
+    avatar: '/images/food/prato-principal.png',
   },
   {
     id: 3,
-    name: "Sobremesa",
-    avatar: "/images/food/sobremesa.png",
+    name: 'Sobremesa',
+    avatar: '/images/food/sobremesa.png',
   },
   {
     id: 4,
-    name: "Bebida sem álcool",
-    avatar: "/images/food/bebida-nao-alcoolica.png",
+    name: 'Bebida sem álcool',
+    avatar: '/images/food/bebida-nao-alcoolica.png',
   },
   {
     id: 5,
-    name: "Bebida alcoólica",
-    avatar: "/images/food/bebida-alcoolica.png",
+    name: 'Bebida alcoólica',
+    avatar: '/images/food/bebida-alcoolica.png',
   },
-];
+]
 
 function classNames(...classes) {
-  return classes.filter(Boolean).join(" ");
+  return classes.filter(Boolean).join(' ')
 }
 
 export default function SelectInput(props: SelectInputProps) {
-  const [selected, setSelected] = useState(people[0]);
+  const [selected, setSelected] = useState(people[0])
   function handleListboxChange(selectedPerson) {
-    setSelected(selectedPerson);
-    props.valorMudou?.(selectedPerson.name);
+    setSelected(selectedPerson)
+    props.valorMudou?.(selectedPerson.name)
   }
   return (
     <div className={`flex flex-col ${props.className}`}>
@@ -91,8 +91,8 @@ export default function SelectInput(props: SelectInputProps) {
                       key={person.id}
                       className={({ active }) =>
                         classNames(
-                          active ? "bg-indigo-600 text-white" : "text-gray-900",
-                          "relative cursor-default select-none py-2 pl-3 pr-9",
+                          active ? 'bg-indigo-600 text-white' : 'text-gray-900',
+                          'relative cursor-default select-none py-2 pl-3 pr-9',
                         )
                       }
                       value={person}
@@ -109,8 +109,8 @@ export default function SelectInput(props: SelectInputProps) {
                             />
                             <span
                               className={classNames(
-                                selected ? "font-semibold" : "font-normal",
-                                "ml-3 block truncate",
+                                selected ? 'font-semibold' : 'font-normal',
+                                'ml-3 block truncate',
                               )}
                             >
                               {person.name}
@@ -120,8 +120,8 @@ export default function SelectInput(props: SelectInputProps) {
                           {selected ? (
                             <span
                               className={classNames(
-                                active ? "text-white" : "text-indigo-600",
-                                "absolute inset-y-0 right-0 flex items-center pr-4",
+                                active ? 'text-white' : 'text-indigo-600',
+                                'absolute inset-y-0 right-0 flex items-center pr-4',
                               )}
                             >
                               {/* <IconeCheck className="h-5 w-5" aria-hidden="true" /> */}
@@ -138,5 +138,5 @@ export default function SelectInput(props: SelectInputProps) {
         )}
       </Listbox>
     </div>
-  );
+  )
 }

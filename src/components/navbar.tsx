@@ -1,162 +1,159 @@
-"use client";
-import { GetStaticProps } from "next";
-import { Fragment, useEffect, useRef, useState } from "react";
-import useAuth from "../data/hook/useAuth";
-import { stripe } from "../services/stripe";
-import { getStripeJs } from "../services/stripe-js";
-import { api } from "../services/api";
-import AuthInput from "../components/auth/AuthInput";
-import { IconeAtencao } from "../components/icons";
-import { Dialog, Transition } from "@headlessui/react";
-import { ExclamationTriangleIcon } from "@heroicons/react/24/outline";
+'use client'
+import { GetStaticProps } from 'next'
+import { Fragment, useEffect, useRef, useState } from 'react'
+import useAuth from '../data/hook/useAuth'
+import { stripe } from '../services/stripe'
+import { getStripeJs } from '../services/stripe-js'
+import { api } from '../services/api'
+import AuthInput from '../components/auth/AuthInput'
+import { IconeAtencao } from '../components/icons'
+import { Dialog, Transition } from '@headlessui/react'
+import { ExclamationTriangleIcon } from '@heroicons/react/24/outline'
 
-import Link from "next/link";
-import ThemeChanger from "./DarkSwitch";
-import Image from "next/image";
-import { Disclosure } from "@headlessui/react";
-import BotaoAssine from "../components/BotatoAssine";
-import firebase from "../firebase/config";
-import { useTotalAcessible } from "../data/context/TotalAcessibleContext";
-import { useRouter } from "next/router";
+import Link from 'next/link'
+import ThemeChanger from './DarkSwitch'
+import Image from 'next/image'
+import { Disclosure } from '@headlessui/react'
+import BotaoAssine from '../components/BotatoAssine'
+import firebase from '../firebase/config'
+import { useTotalAcessible } from '../data/context/TotalAcessibleContext'
+import { useRouter } from 'next/router'
 
 export default function Navbar() {
-  const [open, setOpen] = useState(false);
-  const cancelButtonRef = useRef(null);
-  const router = useRouter();
+  const [open, setOpen] = useState(false)
+  const cancelButtonRef = useRef(null)
+  const router = useRouter()
 
-  const { cadastrar, login, logout, loginGoogle, usuario } = useAuth();
-  const [usuarioId, setUsuarioId] = useState<string | null>(null);
+  const { cadastrar, login, logout, loginGoogle, usuario } = useAuth()
+  const [usuarioId, setUsuarioId] = useState<string | null>(null)
   // const [totalAcessible, setTotalAcessible] = useState(false);
-  const { totalAcessible, setTotalAcessible } = useTotalAcessible();
+  const { totalAcessible, setTotalAcessible } = useTotalAcessible()
 
-  const [erro, setErro] = useState(null);
-  const [modo, setModo] = useState<"login" | "cadastro">("login");
-  const [email, setEmail] = useState("");
-  const [senha, setSenha] = useState("");
+  const [erro, setErro] = useState(null)
+  const [modo, setModo] = useState<'login' | 'cadastro'>('login')
+  const [email, setEmail] = useState('')
+  const [senha, setSenha] = useState('')
 
   const product = {
-    priceId: "price_1O0UrrIYJ05oSoaZonPhWe4G",
-    amount: "R$ 20,00",
-  };
+    priceId: 'price_1O0UrrIYJ05oSoaZonPhWe4G',
+    amount: 'R$ 20,00',
+  }
 
   function exibirErro(msg, tempoEmSegundos = 5) {
-    setErro(msg);
-    setTimeout(() => setErro(null), tempoEmSegundos * 1000);
+    setErro(msg)
+    setTimeout(() => setErro(null), tempoEmSegundos * 1000)
   }
 
   async function submeter() {
     try {
-      if (modo === "login") {
+      if (modo === 'login') {
         if (login) {
-          await login(email, senha);
+          await login(email, senha)
         } else {
-          throw new Error("Função de login não definida");
+          throw new Error('Função de login não definida')
         }
       } else {
         if (cadastrar) {
-          await cadastrar(email, senha);
+          await cadastrar(email, senha)
         } else {
-          throw new Error("Função de cadastro não definida");
+          throw new Error('Função de cadastro não definida')
         }
       }
     } catch (error) {
-      console.error("Erro ao realizar ação:", error);
+      console.error('Erro ao realizar ação:', error)
     }
-    setOpen(false);
+    setOpen(false)
   }
 
-  const navigation = ["Produto", "Preços", "Como funciona?", usuario?.nome];
+  const navigation = ['Produto', 'Preços', 'Como funciona?', usuario?.nome]
 
   async function getUserIdFromEmail(email: string): Promise<string | null> {
-    const usersCollection = firebase.firestore().collection("usuarios");
+    const usersCollection = firebase.firestore().collection('usuarios')
     const querySnapshot = await usersCollection
-      .where("email", "==", usuario?.email)
-      .get();
+      .where('email', '==', usuario?.email)
+      .get()
 
     if (!querySnapshot.empty) {
       // Retorna o ID do usuário encontrado
-      console.log("ID do Usuario: ", querySnapshot.docs[0].id);
-      return querySnapshot.docs[0].id;
+      console.log('ID do Usuario: ', querySnapshot.docs[0].id)
+      return querySnapshot.docs[0].id
     }
 
     // Se nenhum usuário for encontrado, retorna null
-    return null;
+    return null
   }
 
   useEffect(() => {
     const fetchUserId = async () => {
-      const id = await getUserIdFromEmail(usuario?.email || "");
-      setUsuarioId(id);
-    };
+      const id = await getUserIdFromEmail(usuario?.email || '')
+      setUsuarioId(id)
+    }
 
     if (usuario?.email) {
-      fetchUserId();
-      renderizarBotaoAcessarPainel();
+      fetchUserId()
+      renderizarBotaoAcessarPainel()
       async function renderizarBotaoAcessarPainel() {
         // Verifica se o usuário está logado
         if (usuario?.email) {
           // Verifica se o usuário tem uma assinatura ativa
-          const hasActiveSubscription = await verificarAssinaturaAtiva();
+          const hasActiveSubscription = await verificarAssinaturaAtiva()
 
           // Se o usuário tem uma assinatura ativa, renderiza o botão
           if (!hasActiveSubscription) {
-            setTotalAcessible(false);
+            setTotalAcessible(false)
           } else {
-            setTotalAcessible(true);
+            setTotalAcessible(true)
           }
         }
 
         // Se não atender aos critérios, retorna null (não renderiza o botão)
-        return null;
+        return null
       }
     }
-  }, [usuario]);
+  }, [usuario])
 
   async function verificarAssinaturaAtiva(): Promise<boolean> {
     const subscriptionsCollection = firebase
       .firestore()
-      .collection("subscriptions");
-    const user = firebase.auth().currentUser;
+      .collection('subscriptions')
+    const user = firebase.auth().currentUser
 
     if (user) {
-      const userId = user.uid;
-      const userDocRef = firebase
-        .firestore()
-        .collection("usuarios")
-        .doc(userId);
+      const userId = user.uid
+      const userDocRef = firebase.firestore().collection('usuarios').doc(userId)
 
       const querySnapshot = await subscriptionsCollection
-        .where("userId", "==", userDocRef)
-        .where("status", "==", "active")
-        .get();
-      console.log("teste 2: ", !querySnapshot.empty);
-      return !querySnapshot.empty;
+        .where('userId', '==', userDocRef)
+        .where('status', '==', 'active')
+        .get()
+      console.log('teste 2: ', !querySnapshot.empty)
+      return !querySnapshot.empty
     }
 
-    return false;
+    return false
   }
 
   async function handleSubscribe() {
     if (!usuario?.email) {
-      setOpen(true);
-      return;
+      setOpen(true)
+      return
     }
 
     try {
-      const response = await api.post("/subscribe");
+      const response = await api.post('/subscribe')
 
-      const { sessionId } = response.data;
+      const { sessionId } = response.data
 
-      const stripe = await getStripeJs();
+      const stripe = await getStripeJs()
 
-      await stripe?.redirectToCheckout({ sessionId });
+      await stripe?.redirectToCheckout({ sessionId })
     } catch (err) {
-      alert(err.message);
+      alert(err.message)
     }
   }
 
   function handlePainelRedirect() {
-    router.push("/painel");
+    router.push('/painel')
   }
 
   return (
@@ -199,18 +196,18 @@ export default function Navbar() {
                     </div> */}
                       <div className="flex items-center justify-center">
                         <div className="w-full">
-                          <h1 className={`text-3xl font-bold mb-5`}>
-                            {modo === "login"
-                              ? "Entre com a Sua Conta"
-                              : "Cadastre-se na Plataforma"}
+                          <h1 className={`mb-5 text-3xl font-bold`}>
+                            {modo === 'login'
+                              ? 'Entre com a Sua Conta'
+                              : 'Cadastre-se na Plataforma'}
                           </h1>
 
                           {erro ? (
                             <div
                               className={`
-                                    flex items-center
-                                    bg-red-400 text-white py-3 px-5 my-2
-                                    border border-red-700 rounded-lg
+                                    my-2 flex
+                                    items-center rounded-lg border border-red-700 bg-red-400
+                                    px-5 py-3 text-white
                                 `}
                             >
                               {IconeAtencao()}
@@ -238,36 +235,36 @@ export default function Navbar() {
                           <button
                             onClick={submeter}
                             className={`
-                                w-full bg-indigo-500 hover:bg-indigo-400
-                                text-white rounded-lg px-4 py-3 mt-6
+                                mt-6 w-full rounded-lg
+                                bg-indigo-500 px-4 py-3 text-white hover:bg-indigo-400
                             `}
                           >
-                            {modo === "login" ? "Entrar" : "Cadastrar"}
+                            {modo === 'login' ? 'Entrar' : 'Cadastrar'}
                           </button>
 
-                          <hr className="my-6 border-gray-300 w-full" />
+                          <hr className="my-6 w-full border-gray-300" />
 
                           <button
                             onClick={loginGoogle}
                             className={`
-                                w-full bg-red-500 hover:bg-red-400
-                                text-white rounded-lg px-4 py-3
+                                w-full rounded-lg bg-red-500
+                                px-4 py-3 text-white hover:bg-red-400
                             `}
                           >
                             Entrar com Google
                           </button>
 
-                          {modo === "login" ? (
+                          {modo === 'login' ? (
                             <p className="mt-8">
                               Novo por aqui?
                               <a
-                                onClick={() => setModo("cadastro")}
+                                onClick={() => setModo('cadastro')}
                                 className={`
-                                        text-blue-500 hover:text-blue-700 font-semibold
-                                        cursor-pointer
+                                        cursor-pointer font-semibold text-blue-500
+                                        hover:text-blue-700
                                     `}
                               >
-                                {" "}
+                                {' '}
                                 Assine por {product.amount} mensais.
                               </a>
                               <BotaoAssine priceId={product.priceId}>
@@ -279,13 +276,13 @@ export default function Navbar() {
                               Já faz parte da nossa comunidade?
                               <Link
                                 href="#"
-                                onClick={() => setModo("login")}
+                                onClick={() => setModo('login')}
                                 className={`
-                                        text-blue-500 hover:text-blue-700 font-semibold
-                                        cursor-pointer
+                                        cursor-pointer font-semibold text-blue-500
+                                        hover:text-blue-700
                                     `}
                               >
-                                {" "}
+                                {' '}
                                 Entre com as suas Credenciais
                               </Link>
                             </p>
@@ -318,12 +315,12 @@ export default function Navbar() {
         </Dialog>
       </Transition.Root>
       <div className="w-full">
-        <nav className="container relative flex flex-wrap items-center justify-between p-8 mx-auto lg:justify-between xl:px-0">
+        <nav className="container relative mx-auto flex flex-wrap items-center justify-between p-8 lg:justify-between xl:px-0">
           {/* Logo  */}
           <Disclosure>
             {({ open }) => (
               <>
-                <div className="flex flex-wrap items-center justify-between w-full lg:w-auto">
+                <div className="flex w-full flex-wrap items-center justify-between lg:w-auto">
                   <Link href="/">
                     <span className="flex items-center space-x-2 text-2xl font-medium text-yellow-500 dark:text-gray-100">
                       <span>
@@ -341,10 +338,10 @@ export default function Navbar() {
 
                   <Disclosure.Button
                     aria-label="Toggle Menu"
-                    className="px-2 py-1 ml-auto text-gray-500 rounded-md lg:hidden hover:text-indigo-500 focus:text-indigo-500 focus:bg-indigo-100 focus:outline-none dark:text-gray-300 dark:focus:bg-trueGray-700"
+                    className="dark:focus:bg-trueGray-700 ml-auto rounded-md px-2 py-1 text-gray-500 hover:text-indigo-500 focus:bg-indigo-100 focus:text-indigo-500 focus:outline-none dark:text-gray-300 lg:hidden"
                   >
                     <svg
-                      className="w-6 h-6 fill-current"
+                      className="h-6 w-6 fill-current"
                       xmlns="http://www.w3.org/2000/svg"
                       viewBox="0 0 24 24"
                     >
@@ -364,7 +361,7 @@ export default function Navbar() {
                     </svg>
                   </Disclosure.Button>
 
-                  <Disclosure.Panel className="flex flex-wrap w-full my-5 lg:hidden">
+                  <Disclosure.Panel className="my-5 flex w-full flex-wrap lg:hidden">
                     <>
                       {/* {navigation.map((item, index) => (
                       <Link key={index} href="/" className="w-full px-4 py-2 -ml-4 text-gray-500 rounded-md dark:text-gray-300 hover:text-indigo-500 focus:text-indigo-500 focus:bg-indigo-100 dark:focus:bg-gray-800 focus:outline-none">
@@ -373,14 +370,14 @@ export default function Navbar() {
                     ))} */}
                       <Link
                         href="#beneficios"
-                        className="w-full px-4 py-2 -ml-4 text-gray-500 rounded-md dark:text-gray-300 hover:text-indigo-500 focus:text-indigo-500 focus:bg-indigo-100 dark:focus:bg-gray-800 focus:outline-none"
+                        className="-ml-4 w-full rounded-md px-4 py-2 text-gray-500 hover:text-indigo-500 focus:bg-indigo-100 focus:text-indigo-500 focus:outline-none dark:text-gray-300 dark:focus:bg-gray-800"
                       >
                         Benefícios
                       </Link>
                       {usuario?.email && (
                         <a
                           onClick={logout}
-                          className="w-full px-6 py-2 mt-3 text-center text-white bg-indigo-600 rounded-md lg:ml-5"
+                          className="mt-3 w-full rounded-md bg-indigo-600 px-6 py-2 text-center text-white lg:ml-5"
                         >
                           Deslogar
                         </a>
@@ -388,7 +385,7 @@ export default function Navbar() {
                       {usuario?.email && totalAcessible && (
                         <a
                           onClick={handlePainelRedirect}
-                          className="w-full px-6 py-2 mt-3 text-center text-white bg-indigo-600 rounded-md lg:ml-5"
+                          className="mt-3 w-full rounded-md bg-indigo-600 px-6 py-2 text-center text-white lg:ml-5"
                         >
                           Acessar painel
                         </a>
@@ -396,14 +393,14 @@ export default function Navbar() {
                       {usuario?.email && !totalAcessible ? (
                         <a
                           onClick={handleSubscribe}
-                          className="w-full px-6 py-2 mt-3 text-center text-white bg-indigo-600 rounded-md lg:ml-5"
+                          className="mt-3 w-full rounded-md bg-indigo-600 px-6 py-2 text-center text-white lg:ml-5"
                         >
                           Assine Agora
                         </a>
                       ) : (
                         <a
                           onClick={() => setOpen(true)}
-                          className="w-full px-6 py-2 mt-3 text-center text-white bg-indigo-600 rounded-md lg:ml-5"
+                          className="mt-3 w-full rounded-md bg-indigo-600 px-6 py-2 text-center text-white lg:ml-5"
                         >
                           Login / Cadastrar
                         </a>
@@ -418,7 +415,7 @@ export default function Navbar() {
 
           {/* menu  */}
           <div className="hidden text-center lg:flex lg:items-center">
-            <ul className="items-center justify-end flex-1 pt-6 list-none lg:pt-0 lg:flex">
+            <ul className="flex-1 list-none items-center justify-end pt-6 lg:flex lg:pt-0">
               {/* {navigation.map((menu, index) => (
               <li className="mr-3 nav__item" key={index}>
                 <Link href="/" className="inline-block px-4 py-2 text-lg font-normal text-gray-800 no-underline rounded-md dark:text-gray-200 hover:text-indigo-500 focus:text-indigo-500 focus:bg-indigo-100 focus:outline-none dark:focus:bg-gray-800">
@@ -426,34 +423,34 @@ export default function Navbar() {
                 </Link>
               </li>
             ))} */}
-              <li className="mr-3 nav__item">
+              <li className="nav__item mr-3">
                 <Link
                   href="#beneficios"
-                  className="inline-block px-4 py-2 text-lg font-normal text-gray-800 no-underline rounded-md dark:text-gray-200 hover:text-indigo-500 focus:text-indigo-500 focus:bg-indigo-100 focus:outline-none dark:focus:bg-gray-800"
+                  className="inline-block rounded-md px-4 py-2 text-lg font-normal text-gray-800 no-underline hover:text-indigo-500 focus:bg-indigo-100 focus:text-indigo-500 focus:outline-none dark:text-gray-200 dark:focus:bg-gray-800"
                 >
                   Produto
                 </Link>
               </li>
-              <li className="mr-3 nav__item">
+              <li className="nav__item mr-3">
                 <Link
                   href="#beneficios"
-                  className="inline-block px-4 py-2 text-lg font-normal text-gray-800 no-underline rounded-md dark:text-gray-200 hover:text-indigo-500 focus:text-indigo-500 focus:bg-indigo-100 focus:outline-none dark:focus:bg-gray-800"
+                  className="inline-block rounded-md px-4 py-2 text-lg font-normal text-gray-800 no-underline hover:text-indigo-500 focus:bg-indigo-100 focus:text-indigo-500 focus:outline-none dark:text-gray-200 dark:focus:bg-gray-800"
                 >
                   Benefícios
                 </Link>
               </li>
-              <li className="mr-3 nav__item">
+              <li className="nav__item mr-3">
                 <Link
                   href="#beneficios"
-                  className="inline-block px-4 py-2 text-lg font-normal text-gray-800 no-underline rounded-md dark:text-gray-200 hover:text-indigo-500 focus:text-indigo-500 focus:bg-indigo-100 focus:outline-none dark:focus:bg-gray-800"
+                  className="inline-block rounded-md px-4 py-2 text-lg font-normal text-gray-800 no-underline hover:text-indigo-500 focus:bg-indigo-100 focus:text-indigo-500 focus:outline-none dark:text-gray-200 dark:focus:bg-gray-800"
                 >
                   Preço
                 </Link>
               </li>
-              <li className="mr-3 nav__item">
+              <li className="nav__item mr-3">
                 <Link
                   href="#beneficios"
-                  className="inline-block px-4 py-2 text-lg font-normal text-gray-800 no-underline rounded-md dark:text-gray-200 hover:text-indigo-500 focus:text-indigo-500 focus:bg-indigo-100 focus:outline-none dark:focus:bg-gray-800"
+                  className="inline-block rounded-md px-4 py-2 text-lg font-normal text-gray-800 no-underline hover:text-indigo-500 focus:bg-indigo-100 focus:text-indigo-500 focus:outline-none dark:text-gray-200 dark:focus:bg-gray-800"
                 >
                   Como funciona?
                 </Link>
@@ -461,18 +458,18 @@ export default function Navbar() {
             </ul>
           </div>
 
-          <div className="hidden mr-3 space-x-4 lg:flex nav__item">
+          <div className="nav__item mr-3 hidden space-x-4 lg:flex">
             {usuario?.email && (
               <>
                 <a
                   onClick={logout}
-                  className="px-6 py-2 text-gray-800 bg-gray-100 rounded-md md:ml-5"
+                  className="rounded-md bg-gray-100 px-6 py-2 text-gray-800 md:ml-5"
                 >
                   Olá {usuario?.nome}
                 </a>
                 <a
                   onClick={logout}
-                  className="px-6 py-2 cursor-pointer border-2 border-yellow-500 text-yellow-500 rounded-md md:ml-5"
+                  className="cursor-pointer rounded-md border-2 border-yellow-500 px-6 py-2 text-yellow-500 md:ml-5"
                 >
                   Deslogar
                 </a>
@@ -480,25 +477,25 @@ export default function Navbar() {
             )}
           </div>
 
-          <div className="hidden mr-3 space-x-4 lg:flex nav__item">
+          <div className="nav__item mr-3 hidden space-x-4 lg:flex">
             {usuario?.email && totalAcessible ? (
               <a
                 onClick={handlePainelRedirect}
-                className="px-6 py-2 cursor-pointer text-white bg-indigo-600 rounded-md md:ml-5"
+                className="cursor-pointer rounded-md bg-indigo-600 px-6 py-2 text-white md:ml-5"
               >
                 Acessar painel
               </a>
             ) : usuario?.email && !totalAcessible ? (
               <a
                 onClick={handleSubscribe}
-                className="px-6 py-2 cursor-pointer text-white bg-indigo-600 rounded-md md:ml-5"
+                className="cursor-pointer rounded-md bg-indigo-600 px-6 py-2 text-white md:ml-5"
               >
                 Assine Agora
               </a>
             ) : (
               <a
                 onClick={() => setOpen(true)}
-                className="px-6 py-2 cursor-pointer text-white bg-indigo-600 rounded-md md:ml-5"
+                className="cursor-pointer rounded-md bg-indigo-600 px-6 py-2 text-white md:ml-5"
               >
                 Login / Cadastrar
               </a>
@@ -508,5 +505,5 @@ export default function Navbar() {
         </nav>
       </div>
     </>
-  );
+  )
 }

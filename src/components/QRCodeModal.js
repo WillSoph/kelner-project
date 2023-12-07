@@ -1,6 +1,6 @@
-"use client";
-import { useModal } from "react-modal-hook";
-import QRCode from "qrcode.react";
+'use client'
+import { useModal } from 'react-modal-hook'
+import QRCode from 'qrcode.react'
 
 export default function QRCodeModal({ cardapioLink }) {
   const [showModal, hideModal] = useModal(() => (
@@ -12,11 +12,11 @@ export default function QRCodeModal({ cardapioLink }) {
         <button onClick={() => window.print()}>Imprimir QRCode</button>
       </div>
     </div>
-  ));
+  ))
 
   return (
     <div>
       <button onClick={showModal}>QRCode</button>
     </div>
-  );
+  )
 }
