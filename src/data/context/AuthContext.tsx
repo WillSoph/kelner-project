@@ -18,7 +18,7 @@ interface AuthContextProps {
 const AuthContext = createContext<AuthContextProps>({})
 
 async function usuarioNormalizado(
-  usuarioFirebase: firebase.User):
+  usuarioFirebase: firebase.User,):
   Promise<Usuario> {
   const token = await usuarioFirebase.getIdToken()
   const usuario = await usuarioFirebase
