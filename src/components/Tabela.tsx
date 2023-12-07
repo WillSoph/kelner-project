@@ -55,7 +55,6 @@ export default function Tabela(props: TabelaProps) {
   function renderizarCabecalho() {
     return (
       <tr>
-        {/* <th className="text-left p-4">Código</th> */}
         <th className="p-4 text-left">Nome</th>
         <th className="p-4 text-left">Categoria</th>
         <th className="p-4 text-left">Descrição</th>
@@ -76,7 +75,6 @@ export default function Tabela(props: TabelaProps) {
           key={cliente.id}
           className={`${i % 2 === 0 ? 'bg-gray-100' : 'bg-gray-200'}`}
         >
-          {/* <td className="text-left p-4">{cliente.id}</td> */}
           <td className="p-4 text-left text-stone-800">{cliente.nome}</td>
           <td className="p-4 text-left text-stone-800">{cliente.categoria}</td>
           <td className="p-4 text-left text-stone-800">

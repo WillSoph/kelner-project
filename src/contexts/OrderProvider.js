@@ -9,16 +9,16 @@ export const useOrder = () => {
 
 const OrderProvider = ({ children }) => {
   const [order, setOrder] = useState([])
-  const [clientes, setClientes] = useState([]) // Adicionei o estado para os clientes
+  const [clientes, setClientes] = useState([])
 
-  // add order function
+  
   const handleOrder = (food) => {
     setOrder((prevValue) => {
       return [...prevValue, food]
     })
   }
 
-  // remove order from cart
+  
   const removeOrder = (id) => {
     setOrder((prev) => {
       return prev.filter((item) => {
@@ -27,7 +27,7 @@ const OrderProvider = ({ children }) => {
     })
   }
 
-  // Adicionei uma função para setar os clientes no contexto
+  
   const setClientData = (clientData) => {
     setClientes(clientData)
   }
@@ -37,8 +37,8 @@ const OrderProvider = ({ children }) => {
     order,
     handleOrder,
     removeOrder,
-    clientes, // Adicionei os clientes ao contexto
-    setClientData, // Adicionei a função para setar os clientes
+    clientes, 
+    setClientData,
   }
 
   return <OrderContext.Provider value={value}>{children}</OrderContext.Provider>

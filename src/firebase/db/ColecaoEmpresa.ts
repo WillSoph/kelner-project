@@ -19,34 +19,21 @@ export default class ColecaoEmpresa implements EmpresaRepositorio {
     },
   }
 
-  //   async salvar(empresa: Empresa): Promise<Empresa> {
-  //     const idUsuario = firebase.auth().currentUser?.uid;
-
-  //     if (empresa?.id && idUsuario) {
-  //       await this.colecao(idUsuario).doc(empresa.id).set(empresa);
-  //       return empresa;
-  //     } else {
-  //       const docRef = await this.colecao(idUsuario).add(empresa);
-  //       const doc = await docRef.get();
-  //       return doc.data();
-  //     }
-  //   }
-
   async salvar(empresa: Empresa): Promise<Empresa> {
     const idUsuario = firebase.auth().currentUser?.uid
 
     if (idUsuario) {
-      // Obtém todas as empresas associadas ao usuário
+      
       const querySnapshot = await this.colecao(idUsuario).get()
 
-      // Verifica se há alguma empresa associada ao usuário
+      
       if (querySnapshot.size > 0) {
-        // Se houver, atualiza a primeira empresa encontrada
+        
         const primeiraEmpresa = querySnapshot.docs[0]
         await this.colecao(idUsuario).doc(primeiraEmpresa.id).set(empresa)
         return empresa
       } else {
-        // Se não houver empresas associadas, adiciona uma nova
+        
         const docRef = await this.colecao(idUsuario).add(empresa)
         const doc = await docRef.get()
         return doc.data()

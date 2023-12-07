@@ -1,7 +1,5 @@
 import axios from 'axios'
 import { useRouter } from 'next/router'
-import Botao from '../components/Botao'
-import QRCodeModal from '../components/QRCodeModal'
 import { Dialog, Transition } from '@headlessui/react'
 import Formulario from '../components/Formulario'
 import Tabela from '../components/Tabela'

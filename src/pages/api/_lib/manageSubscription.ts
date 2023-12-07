@@ -17,13 +17,11 @@ export async function saveSubscription(
     return
   }
 
-  const userData = userDoc.docs[0].data()
-
   const subscription = await stripe.subscriptions.retrieve(subscriptionId)
 
   const subscriptionData = {
     id: subscription.id,
-    userId: userDoc.docs[0].ref, // Use the Firestore reference directly
+    userId: userDoc.docs[0].ref,
     status: subscription.status,
     price_id: subscription.items.data[0].price.id,
   }

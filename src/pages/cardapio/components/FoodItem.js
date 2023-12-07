@@ -1,6 +1,5 @@
 import React from 'react'
 import { useRouter } from 'next/router'
-import Image from 'next/image'
 
 const FoodItem = ({ imagemUrl, nome, descricao, preco, categoria }) => {
   const router = useRouter()

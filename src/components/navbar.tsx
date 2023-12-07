@@ -1,18 +1,13 @@
 'use client'
-import { GetStaticProps } from 'next'
 import { Fragment, useEffect, useRef, useState } from 'react'
 import useAuth from '../data/hook/useAuth'
-import { stripe } from '../services/stripe'
 import { getStripeJs } from '../services/stripe-js'
 import { api } from '../services/api'
 import AuthInput from '../components/auth/AuthInput'
 import { IconeAtencao } from '../components/icons'
 import { Dialog, Transition } from '@headlessui/react'
-import { ExclamationTriangleIcon } from '@heroicons/react/24/outline'
 
 import Link from 'next/link'
-import ThemeChanger from './DarkSwitch'
-import Image from 'next/image'
 import { Disclosure } from '@headlessui/react'
 import BotaoAssine from '../components/BotatoAssine'
 import firebase from '../firebase/config'
@@ -26,7 +21,6 @@ export default function Navbar() {
 
   const { cadastrar, login, logout, loginGoogle, usuario } = useAuth()
   const [usuarioId, setUsuarioId] = useState<string | null>(null)
-  // const [totalAcessible, setTotalAcessible] = useState(false);
   const { totalAcessible, setTotalAcessible } = useTotalAcessible()
 
   const [erro, setErro] = useState(null)
@@ -37,11 +31,6 @@ export default function Navbar() {
   const product = {
     priceId: 'price_1O0UrrIYJ05oSoaZonPhWe4G',
     amount: 'R$ 20,00',
-  }
-
-  function exibirErro(msg, tempoEmSegundos = 5) {
-    setErro(msg)
-    setTimeout(() => setErro(null), tempoEmSegundos * 1000)
   }
 
   async function submeter() {
@@ -65,8 +54,6 @@ export default function Navbar() {
     setOpen(false)
   }
 
-  const navigation = ['Produto', 'Preços', 'Como funciona?', usuario?.nome]
-
   async function getUserIdFromEmail(email: string): Promise<string | null> {
     const usersCollection = firebase.firestore().collection('usuarios')
     const querySnapshot = await usersCollection
@@ -74,12 +61,11 @@ export default function Navbar() {
       .get()
 
     if (!querySnapshot.empty) {
-      // Retorna o ID do usuário encontrado
+      
       console.log('ID do Usuario: ', querySnapshot.docs[0].id)
       return querySnapshot.docs[0].id
     }
 
-    // Se nenhum usuário for encontrado, retorna null
     return null
   }
 
@@ -93,20 +79,19 @@ export default function Navbar() {
       fetchUserId()
       renderizarBotaoAcessarPainel()
       async function renderizarBotaoAcessarPainel() {
-        // Verifica se o usuário está logado
+        
         if (usuario?.email) {
-          // Verifica se o usuário tem uma assinatura ativa
+          
           const hasActiveSubscription = await verificarAssinaturaAtiva()
 
-          // Se o usuário tem uma assinatura ativa, renderiza o botão
+          
           if (!hasActiveSubscription) {
             setTotalAcessible(false)
           } else {
             setTotalAcessible(true)
           }
         }
-
-        // Se não atender aos critérios, retorna null (não renderiza o botão)
+        
         return null
       }
     }
@@ -191,9 +176,7 @@ export default function Navbar() {
                 <Dialog.Panel className="relative transform overflow-hidden rounded-lg bg-white text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-lg">
                   <div className="bg-white px-4 pb-4 pt-5 sm:p-6 sm:pb-4">
                     <div className="sm:flex sm:items-start">
-                      {/* <div className="mx-auto flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-full bg-red-100 sm:mx-0 sm:h-10 sm:w-10">
-                      <ExclamationTriangleIcon className="h-6 w-6 text-red-600" aria-hidden="true" />
-                    </div> */}
+                      
                       <div className="flex items-center justify-center">
                         <div className="w-full">
                           <h1 className={`mb-5 text-3xl font-bold`}>
@@ -291,23 +274,6 @@ export default function Navbar() {
                       </div>
                     </div>
                   </div>
-                  {/* <div className="bg-gray-50 px-4 py-3 sm:flex sm:flex-row-reverse sm:px-6">
-                  <button
-                    type="button"
-                    className="inline-flex w-full justify-center rounded-md bg-red-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-red-500 sm:ml-3 sm:w-auto"
-                    onClick={() => setOpen(false)}
-                  >
-                    Deactivate
-                  </button>
-                  <button
-                    type="button"
-                    className="mt-3 inline-flex w-full justify-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 sm:mt-0 sm:w-auto"
-                    onClick={() => setOpen(false)}
-                    ref={cancelButtonRef}
-                  >
-                    Cancel
-                  </button>
-                </div> */}
                 </Dialog.Panel>
               </Transition.Child>
             </div>
@@ -316,7 +282,7 @@ export default function Navbar() {
       </Transition.Root>
       <div className="w-full">
         <nav className="container relative mx-auto flex flex-wrap items-center justify-between p-8 lg:justify-between xl:px-0">
-          {/* Logo  */}
+          
           <Disclosure>
             {({ open }) => (
               <>
@@ -363,11 +329,6 @@ export default function Navbar() {
 
                   <Disclosure.Panel className="my-5 flex w-full flex-wrap lg:hidden">
                     <>
-                      {/* {navigation.map((item, index) => (
-                      <Link key={index} href="/" className="w-full px-4 py-2 -ml-4 text-gray-500 rounded-md dark:text-gray-300 hover:text-indigo-500 focus:text-indigo-500 focus:bg-indigo-100 dark:focus:bg-gray-800 focus:outline-none">
-                          {item}
-                      </Link>
-                    ))} */}
                       <Link
                         href="#beneficios"
                         className="-ml-4 w-full rounded-md px-4 py-2 text-gray-500 hover:text-indigo-500 focus:bg-indigo-100 focus:text-indigo-500 focus:outline-none dark:text-gray-300 dark:focus:bg-gray-800"
@@ -405,7 +366,6 @@ export default function Navbar() {
                           Login / Cadastrar
                         </a>
                       )}
-                      {/* {renderizarBotaoAcessarPainel()} */}
                     </>
                   </Disclosure.Panel>
                 </div>
@@ -413,16 +373,10 @@ export default function Navbar() {
             )}
           </Disclosure>
 
-          {/* menu  */}
+          
           <div className="hidden text-center lg:flex lg:items-center">
             <ul className="flex-1 list-none items-center justify-end pt-6 lg:flex lg:pt-0">
-              {/* {navigation.map((menu, index) => (
-              <li className="mr-3 nav__item" key={index}>
-                <Link href="/" className="inline-block px-4 py-2 text-lg font-normal text-gray-800 no-underline rounded-md dark:text-gray-200 hover:text-indigo-500 focus:text-indigo-500 focus:bg-indigo-100 focus:outline-none dark:focus:bg-gray-800">
-                    {menu}
-                </Link>
-              </li>
-            ))} */}
+              
               <li className="nav__item mr-3">
                 <Link
                   href="#beneficios"
@@ -500,7 +454,6 @@ export default function Navbar() {
                 Login / Cadastrar
               </a>
             )}
-            {/* <ThemeChanger /> */}
           </div>
         </nav>
       </div>

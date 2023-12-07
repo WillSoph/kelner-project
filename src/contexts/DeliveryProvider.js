@@ -7,7 +7,7 @@ export const useDelivery = () => {
   return useContext(DeliveryContext)
 }
 const DeliveryProvider = ({ children }) => {
-  // const [quantity, setQuantity] = useState(1)
+  
   const [input, setInput] = useState({})
   const [disabled, setDisabled] = useState(true)
 

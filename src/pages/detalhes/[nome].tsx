@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react'
-// import axios from 'axios'
 import { AiOutlineMinus, AiOutlinePlus } from 'react-icons/ai'
 import { BsCart2 } from 'react-icons/bs'
 import { useRouter } from 'next/router'
@@ -7,7 +6,6 @@ import { withSwal } from 'react-sweetalert2'
 import { useOrder } from '../../contexts/OrderProvider'
 import Back from '../../routes/Back'
 import Navbar from '../cardapio/components/Navbar'
-import Image from 'next/image'
 
 const FoodDetailScreen = () => {
   const [quantity, setQuantity] = useState(1)
@@ -33,7 +31,7 @@ const FoodDetailScreen = () => {
                 className="grid grid-cols-1 gap-10 md:grid-cols-2 lg:grid-cols-2"
                 key={cliente.createTime}
               >
-                {/* left side  */}
+                
                 <div className="order-2 flex flex-col justify-center md:order-1 lg:order-1">
                   <h1 className="poppins select-none pb-4 text-center text-3xl font-semibold text-gray-700 md:text-left lg:text-left lg:text-4xl">
                     {cliente.fields.nome?.stringValue || 'Nome Indisponível'}
@@ -43,7 +41,7 @@ const FoodDetailScreen = () => {
                       'Descrição indisponível'}
                   </p>
 
-                  {/* price and quantity  */}
+                  
                   <div className="flex items-center justify-center space-x-6 pt-8 md:justify-start lg:justify-start">
                     <h1 className="select-none text-3xl font-bold text-black">
                       R$
@@ -51,7 +49,7 @@ const FoodDetailScreen = () => {
                         2,
                       )}
                     </h1>
-                    {/* quantity  */}
+                    
                     <div className="flex items-center space-x-6 rounded-full border border-gray-200 px-4 py-2">
                       <AiOutlineMinus
                         onClick={() => {
@@ -74,7 +72,7 @@ const FoodDetailScreen = () => {
                     </div>
                   </div>
 
-                  {/* add button  */}
+                  
                   <div className="mt-8 flex items-center justify-center md:justify-start lg:justify-start">
                     <button
                       disabled={disabled}
@@ -104,7 +102,7 @@ const FoodDetailScreen = () => {
                     </button>
                   </div>
                 </div>
-                {/* right side  */}
+                
                 <div className="order-1 md:order-2 lg:order-2">
                   <img
                     src={cliente.fields.imagemUrl?.stringValue}

@@ -1,8 +1,6 @@
 'use client'
 import { createContext, useEffect, useState } from 'react'
 
-// type Tema = 'dark' | ''
-
 interface AppContextProps {
   tema?: string
   alternarTema?: () => void

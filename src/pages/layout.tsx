@@ -4,7 +4,7 @@ import { AppProvider } from '../data/context/AppContext'
 import { AuthProvider } from '../data/context/AuthContext'
 import { TotalAcessibleProvider } from '../data/context/TotalAcessibleContext'
 import OrderProvider from '../contexts/OrderProvider'
-// import { ModalProvider } from 'react-modal-hook';
+import { ModalProvider } from 'react-modal-hook';
 import '../styles/globals.css'
 
 export const metadata: Metadata = {
@@ -17,7 +17,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
     <TotalAcessibleProvider>
       <AuthProvider>
         <OrderProvider>
-          {/* <ModalProvider> */}
+          <ModalProvider>
           <AppProvider>
             <html lang="en">
               <body>
@@ -29,7 +29,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
               </body>
             </html>
           </AppProvider>
-          {/* </ModalProvider> */}
+          </ModalProvider>
         </OrderProvider>
       </AuthProvider>
     </TotalAcessibleProvider>
