@@ -15,7 +15,7 @@ interface AuthContextProps {
   logout?: () => Promise<void>
 }
 interface UsuarioFirebase extends firebase.User {
-stripe_customer_id?: string;
+  stripe_customer_id?: string;
 }
 const AuthContext = createContext<AuthContextProps>({})
 
@@ -31,7 +31,7 @@ async function usuarioNormalizado(
   const provedor =
     usuarioFirebase.providerData && usuarioFirebase.providerData.length
       ? usuarioFirebase.providerData[0].providerId
-      : '';
+      : ''
   return {
     uid: usuarioFirebase.uid,
     nome: usuarioFirebase.displayName || '',
