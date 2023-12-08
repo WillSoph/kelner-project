@@ -68,18 +68,18 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
 
             break
             case 'checkout.session.completed':
-              console.log('Handling checkout session completed event.');
-              const checkoutSession = event.data.object as Stripe.Checkout.Session;
-            
-              if (checkoutSession.subscription) {
-                await saveSubscription(
-                  checkoutSession.subscription.toString(),
-                  checkoutSession.customer.toString(),
-                  true
-                );
-              } else {
-                console.error('Subscription is null in checkout session completed event.');
-              }
+            console.log('Handling checkout session completed event.');
+            const checkoutSession = event.data.object as Stripe.Checkout.Session;
+
+            if (checkoutSession.subscription && checkoutSession.customer) {
+              await saveSubscription(
+                checkoutSession.subscription.toString(),
+                checkoutSession.customer.toString(),
+                true
+              );
+            } else {
+              console.error('Subscription or customer is null in checkout session completed event.');
+            }
             
               break;
           default:
