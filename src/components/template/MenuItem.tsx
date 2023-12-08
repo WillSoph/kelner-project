@@ -11,7 +11,6 @@ interface MenuItemProps {
 export default function MenuItem(props: MenuItemProps) {
   function renderizarLink() {
     return (
-      // eslint-disable-next-line @next/next/link-passhref
       <Link
         className={`
                     flex h-20 w-20 flex-col
