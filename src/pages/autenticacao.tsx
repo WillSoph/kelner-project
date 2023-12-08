@@ -31,13 +31,15 @@ export default function Autenticacao({ product }: HomeProps) {
 
   async function submeter() {
     try {
-      if (modo === 'login') {
-        await loginAutenticado(email, senha)
+      if (modo === 'login' && loginAutenticado) {
+        await loginAutenticado(email, senha);
+      } else if (modo === 'cadastro' && cadastrar) {
+        await cadastrar(email, senha);
       } else {
-        await cadastrar(nome, email, senha)
+        throw new Error('Função de autenticação não encontrada.');
       }
     } catch (e) {
-      exibirErro(e?.message ?? 'Erro desconhecido!')
+      exibirErro(e?.message ?? 'Erro desconhecido!');
     }
   }
 
