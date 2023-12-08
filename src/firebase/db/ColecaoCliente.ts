@@ -31,7 +31,7 @@ export default class ColecaoCliente implements ClienteRepositorio {
 
   async salvar(cliente: Cliente): Promise<Cliente> {
     const idUsuario = firebase.auth().currentUser?.uid
-
+    // eslint-disable-next-line
     if (cliente?.id && idUsuario) {
       await this.colecao(idUsuario).doc(cliente.id).set(cliente)
       return cliente
