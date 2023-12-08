@@ -41,7 +41,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
 
     try {
       event = stripe.webhooks.constructEvent(
-        buf,
+        Buffer.from(buf),
         secret,
         process.env.STRIPE_WEBHOOK_SECRET
       )
