@@ -33,7 +33,7 @@ export default class ColecaoEmpresa implements EmpresaRepositorio {
       } else {
         const docRef = await this.colecao(idUsuario).add(empresa)
         const doc = await docRef.get()
-        return doc.data()
+        return doc.data() as Empresa;
       }
     } else {
       throw new Error('Usuário não autenticado.')
