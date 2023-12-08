@@ -41,16 +41,16 @@ function Cardapio() {
     setMenuTab(type)
   }
 
-  const filteredClientes = clientes.filter((cliente) => {
-    const categoria = cliente.fields.categoria?.stringValue
+  // const filteredClientes = clientes.filter((cliente) => {
+  //   const categoria = cliente.fields.categoria?.stringValue
 
-    // Se a categoria do cliente for igual à categoria selecionada, inclua-o no resultado filtrado
-    if (menuTab === 'Menu completo') {
-      return clientes
-    } else {
-      return categoria === menuTab
-    }
-  })
+    
+  //   if (menuTab === 'Menu completo') {
+  //     return clientes
+  //   } else {
+  //     return categoria === menuTab
+  //   }
+  // })
 
   const filteredAndSortedClientes = clientes
     .filter((cliente) => {
