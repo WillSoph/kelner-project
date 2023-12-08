@@ -169,11 +169,11 @@ function Cardapio() {
           {filteredAndSortedClientes.map((cliente) => (
             <FoodItem
               key={cliente.createTime}
-              nome={cliente.fields.nome?.stringValue}
-              imagemUrl={cliente.fields.imagemUrl?.stringValue}
-              descricao={cliente.fields.descricao?.stringValue}
-              preco={cliente.fields.preco?.stringValue}
-              categoria={cliente.fields.categoria?.stringValue}
+              nome={cliente.fields.nome?.stringValue ? cliente.fields.nome?.stringValue : ''}
+              imagemUrl={cliente.fields.imagemUrl?.stringValue ? cliente.fields.imagemUrl?.stringValue : ''}
+              descricao={cliente.fields.descricao?.stringValue ? cliente.fields.descricao?.stringValue : ''}
+              preco={cliente.fields.preco?.stringValue ? cliente.fields.preco?.stringValue : ''}
+              categoria={cliente.fields.categoria?.stringValue ? cliente.fields.categoria?.stringValue : ''}
             />
           ))}
         </div>
