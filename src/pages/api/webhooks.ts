@@ -67,17 +67,21 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
             )
 
             break
-          case 'checkout.session.completed':
-            console.log('Handling checkout session completed event.')
-            const checkoutSession = event.data.object as Stripe.Checkout.Session
-
-            await saveSubscription(
-              checkoutSession.subscription.toString(),
-              checkoutSession.customer.toString(),
-              true
-            )
-
-            break
+            case 'checkout.session.completed':
+              console.log('Handling checkout session completed event.');
+              const checkoutSession = event.data.object as Stripe.Checkout.Session;
+            
+              if (checkoutSession.subscription) {
+                await saveSubscription(
+                  checkoutSession.subscription.toString(),
+                  checkoutSession.customer.toString(),
+                  true
+                );
+              } else {
+                console.error('Subscription is null in checkout session completed event.');
+              }
+            
+              break;
           default:
             console.error('Unhandled event type:', type)
             throw new Error('Unhandled event.')
