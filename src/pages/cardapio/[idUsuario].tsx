@@ -9,9 +9,30 @@ import { useOrder } from '../../contexts/OrderProvider'
 function Cardapio() {
   const router = useRouter()
   const { idUsuario } = router.query
-  const [clientes, setClientes] = useState([])
+  const [clientes, setClientes] = useState<Cliente[]>([]);
   const [menuTab, setMenuTab] = useState('Menu completo')
   const { setClientData } = useOrder()
+
+  type Cliente = {
+    createTime: string;
+    fields?: {
+      nome?: {
+        stringValue?: string;
+      };
+      imagemUrl?: {
+        stringValue?: string;
+      };
+      descricao?: {
+        stringValue?: string;
+      };
+      preco?: {
+        stringValue?: string;
+      };
+      categoria?: {
+        stringValue?: string;
+      };
+    };
+  };
 
   useEffect(() => {
     if (idUsuario) {
@@ -51,17 +72,18 @@ function Cardapio() {
   //     return categoria === menuTab
   //   }
   // })
+  
 
   const filteredAndSortedClientes = clientes
-    .filter((cliente) => {
-      const categoria = cliente.fields.categoria?.stringValue
-      return menuTab === 'Menu completo' || categoria === menuTab
-    })
-    .sort((a, b) => {
-      const categoriaA = a.fields.categoria?.stringValue || ''
-      const categoriaB = b.fields.categoria?.stringValue || ''
-      return categoriaA.localeCompare(categoriaB)
-    })
+  .filter((cliente) => {
+    const categoria = cliente.fields?.categoria?.stringValue;
+    return menuTab === 'Menu completo' || categoria === menuTab;
+  })
+  .sort((a, b) => {
+    const categoriaA = a.fields?.categoria?.stringValue || '';
+    const categoriaB = b.fields?.categoria?.stringValue || '';
+    return categoriaA.localeCompare(categoriaB);
+  });
 
   return (
     <div>
