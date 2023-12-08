@@ -30,7 +30,7 @@ async function usuarioNormalizado(
 
   const provedor =
     usuarioFirebase.providerData && usuarioFirebase.providerData.length
-      ? usuarioFirebase.providerData[0].providerId
+      ? usuarioFirebase.providerData[0].providerId || ''
       : ''
   return {
     uid: usuarioFirebase.uid,
