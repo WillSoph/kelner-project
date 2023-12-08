@@ -10,6 +10,25 @@ import { useTotalAcessible } from '../data/context/TotalAcessibleContext'
 import Layout from '../components/template/Layout'
 import LayoutConteudo from '../components/template/LayoutConteudo'
 
+interface EmpresaFields {
+  id?: {
+    stringValue?: string;
+  };
+  nome?: {
+    stringValue?: string;
+  };
+  imagemUrl?: {
+    stringValue?: string;
+  };
+  // Adicione outras propriedades conforme necessário
+}
+
+interface Empresa {
+  id?: string;
+  fields?: EmpresaFields;
+  // Adicione outras propriedades conforme necessário
+}
+
 interface EditarEmpresaProps {
   empresa: Empresa
   empresaMudou?: (empresa: Empresa) => void
