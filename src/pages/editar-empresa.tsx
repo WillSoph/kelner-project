@@ -10,21 +10,11 @@ import { useTotalAcessible } from '../data/context/TotalAcessibleContext'
 import Layout from '../components/template/Layout'
 import LayoutConteudo from '../components/template/LayoutConteudo'
 
-interface EmpresaFields {
-  id?: { stringValue?: string };
-  nome?: { stringValue?: string };
-  imagemUrl?: { stringValue?: string };
-}
 
-interface EmpresaData {
-  id?: string;
-  fields?: EmpresaFields;
-  // Adicione outras propriedades conforme necessário
-}
 
 interface EditarEmpresaProps {
-  empresa: EmpresaData
-  empresaMudou?: (empresa: EmpresaData) => void
+  empresa: Empresa
+  empresaMudou?: (empresa: Empresa) => void
   cancelado?: () => void
 }
 
@@ -35,8 +25,8 @@ export default function Formulario(props: EditarEmpresaProps) {
   const router = useRouter()
   const id = props.empresa?.id
 
-  const isEdicao = props.empresa?.id !== undefined;
-  const [empresa, setEmpresa] = useState<Empresa | null>(null) // Ajuste aqui
+  const isEdicao = props.empresa?.fields?.id
+  const [empresa, setEmpresa] = useState([])
   const [nome, setNome] = useState(
     props.empresa?.fields?.nome?.stringValue || ''
   )
@@ -62,39 +52,39 @@ export default function Formulario(props: EditarEmpresaProps) {
       )
 
       const empresaData = response.data.documents
-      setEmpresa(empresaData[0]?.fields || null) // Ajuste aqui
-      setNome(empresaData[0]?.fields?.nome?.stringValue || '')
+      setEmpresa(empresaData[0])
+      setNome(empresaData[0].fields.nome?.stringValue)
     } catch (error) {
       console.error('Erro ao obter empresa:', error)
     }
   }
 
   const handleSalvar = async () => {
-    let empresaComImagem: Empresa;
-  
+    let empresaComImagem: Empresa
+
     if (imagem instanceof File) {
-      const urlImagem = await uploadImagem(imagem);
-      empresaComImagem = new Empresa({ id: id ?? '', nome, imagemUrl: urlImagem });
+      const urlImagem = await uploadImagem(imagem)
+      empresaComImagem = new Empresa(nome, urlImagem, id) // Passa o ID existente para a nova instância
     } else {
-      const imagemUrl = empresa?.fields?.imagemUrl?.stringValue || '';
-      empresaComImagem = new Empresa({ id: id ?? '', nome, imagemUrl });
+      const imagemUrl = empresa?.fields?.imagemUrl?.stringValue || ''
+      empresaComImagem = new Empresa(nome, imagemUrl, id) // Passa o ID existente para a nova instância
     }
-  
-    salvarEmpresa(empresaComImagem);
-  };
+
+    salvarEmpresa(empresaComImagem)
+  }
 
   const handleCancelar = () => {
     router.push('/painel')
   }
 
   return (
-    <Layout titulo={empresa?.nome?.stringValue} subtitulo="">
+    <Layout titulo={empresa.fields?.nome.stringValue} subtitulo="">
       <div
         className={`
-          border-1 flex h-full items-center 
-          justify-center rounded-md border-gray-500 bg-gray-200 text-white
-          dark:bg-gray-900
-        `}
+                border-1 flex h-full items-center 
+                justify-center rounded-md border-gray-500 bg-gray-200 text-white
+                dark:bg-gray-900
+            `}
       >
         <LayoutConteudo titulo="Cadastro simples">
           {id ? (
@@ -123,9 +113,9 @@ export default function Formulario(props: EditarEmpresaProps) {
               onChange={(e) => setImagem(e.target.files?.[0] || null)}
             />
           </div>
-          {empresa?.imagemUrl?.stringValue && (
+          {empresa?.fields?.imagemUrl?.stringValue && (
             <img
-              src={empresa?.imagemUrl?.stringValue}
+              src={empresa?.fields?.imagemUrl?.stringValue}
               alt="Imagem do Cliente"
               className="mb-5 h-32 w-32 object-cover"
             />
