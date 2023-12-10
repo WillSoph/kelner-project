@@ -25,8 +25,18 @@ interface EmpresaFields {
 
 interface EmpresaProps {
   id?: string;
-  fields?: EmpresaFields;
-  // Adicione outras propriedades conforme necessário
+  fields?: {
+    id?: {
+      stringValue?: string;
+    };
+    nome?: {
+      stringValue?: string;
+    };
+    imagemUrl?: {
+      stringValue?: string;
+    };
+    // Adicione outras propriedades conforme necessário
+  };
 }
 
 interface EditarEmpresaProps {
