@@ -55,7 +55,7 @@ export default function Formulario(props: EditarEmpresaProps) {
       const empresaData = response.data.documents
       setEmpresa(empresaData[0])
       setNome(empresaData[0].fields.nome?.stringValue)
-      setImagem(empresaData[0].fields.imagemUrl?.stringValue)
+      setImagemEmpresa(empresaData[0].fields.imagemUrl?.stringValue)
     } catch (error) {
       console.error('Erro ao obter empresa:', error)
     }

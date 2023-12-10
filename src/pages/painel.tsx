@@ -20,6 +20,8 @@ export default function Home() {
   const cancelButtonRef = useRef(null)
   const [isQRCodeLoaded, setIsQRCodeLoaded] = useState(false)
   const [empresa, setEmpresa] = useState([])
+  const [imagemEmpresa, setImagemEmpresa] = useState()
+  const [nome, setNome] = useState()
   const [open, setOpen] = useState(false)
 
   useEffect(() => {
@@ -67,6 +69,8 @@ export default function Home() {
 
       const empresaData = response.data.documents
       setEmpresa(empresaData[0])
+      setNome(empresaData[0].fields.nome?.stringValue)
+      setImagemEmpresa(empresaData[0].fields.imagemUrl?.stringValue)
     } catch (error) {
       console.error('Erro ao obter empresa:', error)
     }
@@ -130,7 +134,7 @@ export default function Home() {
         </Dialog>
       </Transition.Root>
       <Layout
-        titulo={empresa.fields?.nome.stringValue}
+        titulo={nome ? nome : ''}
         subtitulo={usuario?.stripe_customer_id}
       >
         <div
