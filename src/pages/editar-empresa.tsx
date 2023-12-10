@@ -11,16 +11,9 @@ import Layout from '../components/template/Layout'
 import LayoutConteudo from '../components/template/LayoutConteudo'
 
 interface EmpresaFields {
-  id?: {
-    stringValue?: string;
-  };
-  nome?: {
-    stringValue?: string;
-  };
-  imagemUrl?: {
-    stringValue?: string;
-  };
-  // Adicione outras propriedades conforme necessário
+  id?: { stringValue?: string };
+  nome?: { stringValue?: string };
+  imagemUrl?: { stringValue?: string };
 }
 
 interface EmpresaData {
@@ -77,18 +70,18 @@ export default function Formulario(props: EditarEmpresaProps) {
   }
 
   const handleSalvar = async () => {
-    let empresaComImagem: Empresa
-
+    let empresaComImagem: Empresa;
+  
     if (imagem instanceof File) {
-      const urlImagem = await uploadImagem(imagem)
-      empresaComImagem = new Empresa(nome, urlImagem, id ?? '');
+      const urlImagem = await uploadImagem(imagem);
+      empresaComImagem = new Empresa({ id: id ?? '', nome, imagemUrl: urlImagem });
     } else {
-      const imagemUrl = empresa?.imagemUrl?.stringValue || '' // Ajuste aqui
-      empresaComImagem = new Empresa(nome, imagemUrl, id ?? '');
+      const imagemUrl = empresa?.fields?.imagemUrl?.stringValue || '';
+      empresaComImagem = new Empresa({ id: id ?? '', nome, imagemUrl });
     }
-
-    salvarEmpresa(empresaComImagem)
-  }
+  
+    salvarEmpresa(empresaComImagem);
+  };
 
   const handleCancelar = () => {
     router.push('/painel')
