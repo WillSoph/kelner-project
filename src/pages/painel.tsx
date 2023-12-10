@@ -135,7 +135,7 @@ export default function Home() {
       </Transition.Root>
       <Layout
         titulo={nome ? nome : ''}
-        subtitulo={usuario?.stripe_customer_id}
+        subtitulo={usuario?.stripe_customer_id ? usuario?.stripe_customer_id : ''}
       >
         <div
           className={`
