@@ -16,7 +16,11 @@ interface HomeProps {
 }
 
 export default function Autenticacao({ product }: HomeProps) {
-  const { cadastrar, login, loginGoogle, loginAutenticado } = useAuth()
+  const { 
+    cadastrar, 
+    login,
+    loginAutenticado 
+  } = useAuth()
 
   const [erro, setErro] = useState(null)
   const [modo, setModo] = useState<'login' | 'cadastro'>('login')
@@ -112,16 +116,6 @@ export default function Autenticacao({ product }: HomeProps) {
 
         <hr className="my-6 w-full border-gray-300" />
 
-        <button
-          onClick={loginGoogle}
-          className={`
-                    w-full rounded-lg bg-red-500
-                    px-4 py-3 text-white hover:bg-red-400
-                `}
-        >
-          Entrar com Google
-        </button>
-
         {modo === 'login' ? (
           <p className="mt-8">
             Novo por aqui?
@@ -167,7 +161,7 @@ export const getStaticProps: GetStaticProps = async () => {
     // Lida com a situação em que price ou price.unit_amount é nulo
     throw new Error('Não foi possível obter o preço ou o valor do preço é nulo.');
   }
-  
+
   const product = {
     priceId: price.id,
     amount: new Intl.NumberFormat('pt-BR', {

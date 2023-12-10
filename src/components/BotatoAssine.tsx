@@ -15,7 +15,6 @@ export default function BotaoAssine(props: BotaoAssineProps) {
   const { 
     cadastrar, 
     login, 
-    // loginGoogle 
   } = useAuth()
 
   async function handleSubscribe() {

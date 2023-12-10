@@ -18,7 +18,6 @@ const Hero = () => {
     cadastrar, 
     login, 
     logout, 
-    // loginGoogle, 
     usuario 
   } = useAuth()
   const { totalAcessible, setTotalAcessible } = useTotalAcessible()
@@ -165,16 +164,6 @@ const Hero = () => {
                           </button>
 
                           <hr className="my-6 w-full border-gray-300" />
-
-                          {/* <button
-                            onClick={loginGoogle}
-                            className={`
-                                w-full rounded-lg bg-red-500
-                                px-4 py-3 text-white hover:bg-red-400
-                            `}
-                          >
-                            Entrar com Google
-                          </button> */}
 
                           {modo === 'login' ? (
                             <p className="mt-8">
