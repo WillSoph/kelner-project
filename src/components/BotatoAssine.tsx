@@ -12,11 +12,15 @@ interface BotaoAssineProps {
 }
 
 export default function BotaoAssine(props: BotaoAssineProps) {
-  const { cadastrar, login, loginGoogle } = useAuth()
+  const { 
+    cadastrar, 
+    login, 
+    // loginGoogle 
+  } = useAuth()
 
   async function handleSubscribe() {
     if (!Cookies.get('admin-template-cod3r-auth')) {
-      loginGoogle
+      login
       return
     }
 

@@ -18,7 +18,13 @@ export default function Navbar() {
   const cancelButtonRef = useRef(null)
   const router = useRouter()
 
-  const { cadastrar, login, logout, loginGoogle, usuario } = useAuth()
+  const { 
+    cadastrar, 
+    login, 
+    logout, 
+    // loginGoogle, 
+    usuario 
+  } = useAuth()
   const [usuarioId, setUsuarioId] = useState<string | null>(null)
   const { totalAcessible, setTotalAcessible } = useTotalAcessible()
 
@@ -208,7 +214,7 @@ export default function Navbar() {
 
                           <hr className="my-6 w-full border-gray-300" />
 
-                          <button
+                          {/* <button
                             onClick={loginGoogle}
                             className={`
                                 w-full rounded-lg bg-red-500
@@ -216,7 +222,7 @@ export default function Navbar() {
                             `}
                           >
                             Entrar com Google
-                          </button>
+                          </button> */}
 
                           {modo === 'login' ? (
                             <p className="mt-8">

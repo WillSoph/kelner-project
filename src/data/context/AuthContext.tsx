@@ -11,7 +11,7 @@ interface AuthContextProps {
   cadastrar?: (email: string, senha: string) => Promise<void>
   login?: (email: string, senha: string) => Promise<void>
   loginAutenticado?: (email: string, senha: string) => Promise<void>
-  loginGoogle?: () => Promise<void>
+//   loginGoogle?: () => Promise<void>
   logout?: () => Promise<void>
 }
 interface UsuarioFirebase extends firebase.User {
@@ -139,19 +139,19 @@ export function AuthProvider(props) {
     }
   }
 
-  async function loginGoogle() {
-    try {
-      setCarregando(true)
-      const resp = await firebase
-        .auth()
-        .signInWithPopup(new firebase.auth.GoogleAuthProvider())
+//   async function loginGoogle() {
+//     try {
+//       setCarregando(true)
+//       const resp = await firebase
+//         .auth()
+//         .signInWithPopup(new firebase.auth.GoogleAuthProvider())
 
-      await configurarSessao(resp.user)
-      route.push('/')
-    } finally {
-      setCarregando(false)
-    }
-  }
+//       await configurarSessao(resp.user)
+//       route.push('/')
+//     } finally {
+//       setCarregando(false)
+//     }
+//   }
 
   async function logout() {
     try {
@@ -179,7 +179,7 @@ export function AuthProvider(props) {
         carregando,
         login,
         cadastrar,
-        loginGoogle,
+        // loginGoogle,
         logout,
         loginAutenticado,
       }}

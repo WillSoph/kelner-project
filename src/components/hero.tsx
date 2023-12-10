@@ -14,7 +14,13 @@ import { getStripeJs } from '../services/stripe-js'
 import { useTotalAcessible } from '../data/context/TotalAcessibleContext'
 
 const Hero = () => {
-  const { cadastrar, login, logout, loginGoogle, usuario } = useAuth()
+  const { 
+    cadastrar, 
+    login, 
+    logout, 
+    // loginGoogle, 
+    usuario 
+  } = useAuth()
   const { totalAcessible, setTotalAcessible } = useTotalAcessible()
   const cancelButtonRef = useRef(null)
   const [open, setOpen] = useState(false)
@@ -160,7 +166,7 @@ const Hero = () => {
 
                           <hr className="my-6 w-full border-gray-300" />
 
-                          <button
+                          {/* <button
                             onClick={loginGoogle}
                             className={`
                                 w-full rounded-lg bg-red-500
@@ -168,7 +174,7 @@ const Hero = () => {
                             `}
                           >
                             Entrar com Google
-                          </button>
+                          </button> */}
 
                           {modo === 'login' ? (
                             <p className="mt-8">
