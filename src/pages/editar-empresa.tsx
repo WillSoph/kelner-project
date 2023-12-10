@@ -81,10 +81,10 @@ export default function Formulario(props: EditarEmpresaProps) {
 
     if (imagem instanceof File) {
       const urlImagem = await uploadImagem(imagem)
-      empresaComImagem = new Empresa(nome, urlImagem, id)
+      empresaComImagem = new Empresa(nome, urlImagem, id ?? '');
     } else {
       const imagemUrl = empresa?.imagemUrl?.stringValue || '' // Ajuste aqui
-      empresaComImagem = new Empresa(nome, imagemUrl, id)
+      empresaComImagem = new Empresa(nome, imagemUrl, id ?? '');
     }
 
     salvarEmpresa(empresaComImagem)
