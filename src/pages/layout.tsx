@@ -5,7 +5,7 @@ import { AuthProvider } from '../data/context/AuthContext'
 import { TotalAcessibleProvider } from '../data/context/TotalAcessibleContext'
 import OrderProvider from '../contexts/OrderProvider'
 import { ModalProvider } from 'react-modal-hook'
-import '../styles/globals.css'
+// import '../styles/globals.css'
 
 // export const metadata = {
 //   title: 'Create Next App',
