@@ -25,10 +25,10 @@ export default function Formulario(props: EditarEmpresaProps) {
   const router = useRouter()
   const id = props.empresa?.id
 
-  const isEdicao = props.empresa?.fields?.id ? props.empresa?.fields?.id : ''
+  const isEdicao = props.empresa?.id
   const [empresa, setEmpresa] = useState([])
   const [nome, setNome] = useState(
-    props.empresa?.fields?.nome?.stringValue || ''
+    props.empresa?.nome || ''
   )
   const [imagem, setImagem] = useState<File | null>(null)
   const url = process.env.NEXT_PUBLIC_FIREBASE_PROJECT_ID
