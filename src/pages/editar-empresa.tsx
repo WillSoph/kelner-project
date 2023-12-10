@@ -115,9 +115,9 @@ export default function Formulario(props: EditarEmpresaProps) {
               onChange={(e) => setImagem(e.target.files?.[0] || null)}
             />
           </div>
-          {empresa?.fields?.imagemUrl?.stringValue && (
+          {imagemEmpresa && (
             <img
-              src={empresa?.fields?.imagemUrl?.stringValue}
+              src={imagemEmpresa}
               alt="Imagem do Cliente"
               className="mb-5 h-32 w-32 object-cover"
             />
