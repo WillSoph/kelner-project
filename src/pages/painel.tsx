@@ -16,7 +16,7 @@ export default function Home() {
   const { usuario, carregando } = useAuth()
   const { totalAcessible, setTotalAcessible } = useTotalAcessible()
   const router = useRouter()
-  const qrCodeRef = useRef<HTMLElement | null>(null)
+  const qrCodeRef = useRef<SVGSVGElement  | null>(null)
   const cancelButtonRef = useRef(null)
   const [isQRCodeLoaded, setIsQRCodeLoaded] = useState(false)
   const [empresa, setEmpresa] = useState([])
