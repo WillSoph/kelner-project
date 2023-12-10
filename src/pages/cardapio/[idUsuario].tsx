@@ -156,16 +156,7 @@ function Cardapio() {
           </p>
         </div>
         <div className="mt-12 grid grid-cols-1 gap-10 md:grid-cols-2 lg:grid-cols-3">
-          {/* {filteredClientes.map((cliente) => (
-            <FoodItem 
-              key={cliente.createTime} 
-              nome={cliente.fields.nome?.stringValue} 
-              imagemUrl={cliente.fields.imagemUrl?.stringValue} 
-              descricao='Este é um texto de exemplo enquanto não tem a descrição'
-              preco={cliente.fields.preco?.stringValue}
-              categoria={cliente.fields.categoria?.stringValue}
-            />
-          ))} */}
+          
           {filteredAndSortedClientes.map((cliente) => (
             <FoodItem
             key={cliente.createTime}
