@@ -30,7 +30,7 @@ interface EmpresaData {
 }
 
 interface EditarEmpresaProps {
-  empresa: Empresa
+  empresa: EmpresaData
   empresaMudou?: (empresa: EmpresaData) => void
   cancelado?: () => void
 }
@@ -42,7 +42,7 @@ export default function Formulario(props: EditarEmpresaProps) {
   const router = useRouter()
   const id = props.empresa?.id
 
-  const isEdicao = props.empresa?.fields?.id
+  const isEdicao = props.empresa?.id !== undefined;
   const [empresa, setEmpresa] = useState<Empresa | null>(null) // Ajuste aqui
   const [nome, setNome] = useState(
     props.empresa?.fields?.nome?.stringValue || ''
