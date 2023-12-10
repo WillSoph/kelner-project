@@ -23,7 +23,7 @@ interface EmpresaFields {
   // Adicione outras propriedades conforme necessário
 }
 
-interface Empresa {
+interface EmpresaProps {
   id?: string;
   fields?: EmpresaFields;
   // Adicione outras propriedades conforme necessário
@@ -31,7 +31,7 @@ interface Empresa {
 
 interface EditarEmpresaProps {
   empresa: Empresa
-  empresaMudou?: (empresa: Empresa) => void
+  empresaMudou?: (empresa: EmpresaProps) => void
   cancelado?: () => void
 }
 
