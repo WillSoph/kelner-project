@@ -27,6 +27,7 @@ export default function Formulario(props: EditarEmpresaProps) {
 
   const isEdicao = props.empresa?.id
   const [empresa, setEmpresa] = useState([])
+  const [imagemEmpresa, setImagemEmpresa] = useState()
   const [nome, setNome] = useState(
     props.empresa?.nome || ''
   )
@@ -54,6 +55,7 @@ export default function Formulario(props: EditarEmpresaProps) {
       const empresaData = response.data.documents
       setEmpresa(empresaData[0])
       setNome(empresaData[0].fields.nome?.stringValue)
+      setImagem(empresaData[0].fields.imagemUrl?.stringValue)
     } catch (error) {
       console.error('Erro ao obter empresa:', error)
     }
@@ -66,7 +68,7 @@ export default function Formulario(props: EditarEmpresaProps) {
       const urlImagem = await uploadImagem(imagem)
       empresaComImagem = new Empresa(nome, urlImagem, id) // Passa o ID existente para a nova instância
     } else {
-      const imagemUrl = empresa?.fields?.imagemUrl?.stringValue || ''
+      const imagemUrl = imagemEmpresa || ''
       empresaComImagem = new Empresa(nome, imagemUrl, id) // Passa o ID existente para a nova instância
     }
 
@@ -78,7 +80,7 @@ export default function Formulario(props: EditarEmpresaProps) {
   }
 
   return (
-    <Layout titulo={empresa.fields?.nome.stringValue} subtitulo="">
+    <Layout titulo={nome} subtitulo="">
       <div
         className={`
                 border-1 flex h-full items-center 
