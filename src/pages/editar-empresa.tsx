@@ -25,7 +25,7 @@ export default function Formulario(props: EditarEmpresaProps) {
   const router = useRouter()
   const id = props.empresa?.id
 
-  const isEdicao = props.empresa?.fields?.id
+  const isEdicao = props.empresa?.fields?.id ? props.empresa?.fields?.id : ''
   const [empresa, setEmpresa] = useState([])
   const [nome, setNome] = useState(
     props.empresa?.fields?.nome?.stringValue || ''
