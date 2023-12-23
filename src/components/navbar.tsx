@@ -12,6 +12,12 @@ import BotaoAssine from '../components/BotatoAssine'
 import firebase from '../firebase/config'
 import { useTotalAcessible } from '../data/context/TotalAcessibleContext'
 import { useRouter } from 'next/router'
+import {
+  WindowIcon,
+  RocketLaunchIcon,
+  KeyIcon,
+  XCircleIcon,
+} from '@heroicons/react/24/solid'
 
 export default function Navbar() {
   const [open, setOpen] = useState(false)
@@ -27,7 +33,7 @@ export default function Navbar() {
   const [usuarioId, setUsuarioId] = useState<string | null>(null)
   const { totalAcessible, setTotalAcessible } = useTotalAcessible()
 
-  const [erro, setErro] = useState(null)
+  const [erro, setErro] = useState(false)
   const [modo, setModo] = useState<'login' | 'cadastro'>('login')
   const [email, setEmail] = useState('')
   const [senha, setSenha] = useState('')
@@ -37,25 +43,34 @@ export default function Navbar() {
     amount: 'R$ 20,00',
   }
 
+  function abrirModal() {
+    if (erro == true) {
+      setErro(false)
+    }  
+    setOpen(true)
+  }
+
   async function submeter() {
     try {
       if (modo === 'login') {
         if (login) {
           await login(email, senha)
+          setOpen(false)
         } else {
           throw new Error('Função de login não definida')
         }
       } else {
         if (cadastrar) {
           await cadastrar(email, senha)
+          setOpen(false)
         } else {
           throw new Error('Função de cadastro não definida')
         }
       }
     } catch (error) {
+      setErro(true)
       console.error('Erro ao realizar ação:', error)
     }
-    setOpen(false)
   }
 
   async function getUserIdFromEmail(email: string): Promise<string | null> {
@@ -171,7 +186,7 @@ export default function Navbar() {
                               ? 'Entre com a Sua Conta'
                               : 'Cadastre-se na Plataforma'}
                           </h1>
-                          {erro ? (
+                          {erro && (
                             <div
                               className={`
                                     my-2 flex
@@ -180,10 +195,8 @@ export default function Navbar() {
                                 `}
                             >
                               {IconeAtencao()}
-                              <span className="ml-3">{erro}</span>
+                              <span className="ml-3">Você inseriu dados inválidos. Tente novamente.</span>
                             </div>
-                          ) : (
-                            false
                           )}
 
                           <AuthInput
@@ -266,7 +279,7 @@ export default function Navbar() {
                     <span className="flex items-center space-x-2 text-2xl font-medium text-yellow-500 dark:text-gray-100">
                       <span>
                         <img
-                          src="/images/logo.svg"
+                          src="/images/logo-cardapio.png"
                           alt="N"
                           width="32"
                           height="32"
@@ -303,12 +316,6 @@ export default function Navbar() {
 
                   <Disclosure.Panel className="my-5 flex w-full flex-wrap lg:hidden">
                     <>
-                      <Link
-                        href="#beneficios"
-                        className="-ml-4 w-full rounded-md px-4 py-2 text-gray-500 hover:text-indigo-500 focus:bg-indigo-100 focus:text-indigo-500 focus:outline-none dark:text-gray-300 dark:focus:bg-gray-800"
-                      >
-                        Benefícios
-                      </Link>
                       {usuario?.email && (
                         <a
                           onClick={logout}
@@ -317,15 +324,14 @@ export default function Navbar() {
                           Deslogar
                         </a>
                       )}
-                      {usuario?.email && totalAcessible && (
+                      {usuario?.email && totalAcessible ? (
                         <a
                           onClick={handlePainelRedirect}
-                          className="mt-3 w-full rounded-md bg-indigo-600 px-6 py-2 text-center text-white lg:ml-5"
+                          className="mt-3 w-full items-center gap-1 rounded-md bg-indigo-600 px-6 py-2 text-center text-white lg:ml-5"
                         >
                           Acessar painel
                         </a>
-                      )}
-                      {usuario?.email && !totalAcessible ? (
+                      ) : usuario?.email && !totalAcessible ? (
                         <a
                           onClick={handleSubscribe}
                           className="mt-3 w-full rounded-md bg-indigo-600 px-6 py-2 text-center text-white lg:ml-5"
@@ -334,7 +340,7 @@ export default function Navbar() {
                         </a>
                       ) : (
                         <a
-                          onClick={() => setOpen(true)}
+                          onClick={abrirModal}
                           className="mt-3 w-full rounded-md bg-indigo-600 px-6 py-2 text-center text-white lg:ml-5"
                         >
                           Login / Cadastrar
@@ -349,17 +355,17 @@ export default function Navbar() {
 
           <div className="hidden text-center lg:flex lg:items-center">
             <ul className="flex-1 list-none items-center justify-end pt-6 lg:flex lg:pt-0">
-              <li className="nav__item mr-3">
+              {/* <li className="nav__item mr-3">
                 <Link
-                  href="#beneficios"
+                  href="./produto"
                   className="inline-block rounded-md px-4 py-2 text-lg font-normal text-gray-800 no-underline hover:text-indigo-500 focus:bg-indigo-100 focus:text-indigo-500 focus:outline-none dark:text-gray-200 dark:focus:bg-gray-800"
                 >
                   Produto
                 </Link>
-              </li>
+              </li> */}
               <li className="nav__item mr-3">
                 <Link
-                  href="#beneficios"
+                  href="./beneficios"
                   className="inline-block rounded-md px-4 py-2 text-lg font-normal text-gray-800 no-underline hover:text-indigo-500 focus:bg-indigo-100 focus:text-indigo-500 focus:outline-none dark:text-gray-200 dark:focus:bg-gray-800"
                 >
                   Benefícios
@@ -367,7 +373,7 @@ export default function Navbar() {
               </li>
               <li className="nav__item mr-3">
                 <Link
-                  href="#beneficios"
+                  href="./preco"
                   className="inline-block rounded-md px-4 py-2 text-lg font-normal text-gray-800 no-underline hover:text-indigo-500 focus:bg-indigo-100 focus:text-indigo-500 focus:outline-none dark:text-gray-200 dark:focus:bg-gray-800"
                 >
                   Preço
@@ -375,7 +381,7 @@ export default function Navbar() {
               </li>
               <li className="nav__item mr-3">
                 <Link
-                  href="#beneficios"
+                  href="./como-funciona"
                   className="inline-block rounded-md px-4 py-2 text-lg font-normal text-gray-800 no-underline hover:text-indigo-500 focus:bg-indigo-100 focus:text-indigo-500 focus:outline-none dark:text-gray-200 dark:focus:bg-gray-800"
                 >
                   Como funciona?
@@ -395,8 +401,9 @@ export default function Navbar() {
                 </a>
                 <a
                   onClick={logout}
-                  className="cursor-pointer rounded-md border-2 border-yellow-500 px-6 py-2 text-yellow-500 md:ml-5"
+                  className="inline-flex items-center gap-1 cursor-pointer rounded-md border-2 border-yellow-500 px-6 py-2 text-yellow-500 md:ml-5"
                 >
+                  <XCircleIcon style={{height:'16px'}} />
                   Deslogar
                 </a>
               </>
@@ -407,22 +414,25 @@ export default function Navbar() {
             {usuario?.email && totalAcessible ? (
               <a
                 onClick={handlePainelRedirect}
-                className="cursor-pointer rounded-md bg-indigo-600 px-6 py-2 text-white md:ml-5"
+                className="inline-flex cursor-pointer items-center gap-1 rounded-md bg-indigo-600 px-6 py-2 text-white md:ml-5"
               >
+                <WindowIcon style={{height:'16px'}} />
                 Acessar painel
               </a>
             ) : usuario?.email && !totalAcessible ? (
               <a
                 onClick={handleSubscribe}
-                className="cursor-pointer rounded-md bg-indigo-600 px-6 py-2 text-white md:ml-5"
+                className="inline-flex items-center gap-1 cursor-pointer rounded-md bg-indigo-600 px-6 py-2 text-white md:ml-5"
               >
+                <RocketLaunchIcon style={{height:'16px'}} />
                 Assine Agora
               </a>
             ) : (
               <a
-                onClick={() => setOpen(true)}
-                className="cursor-pointer rounded-md bg-indigo-600 px-6 py-2 text-white md:ml-5"
+                onClick={abrirModal}
+                className="inline-flex items-center gap-1 cursor-pointer rounded-md bg-indigo-600 px-6 py-2 text-white md:ml-5"
               >
+                <KeyIcon style={{height:'16px'}} />
                 Login / Cadastrar
               </a>
             )}

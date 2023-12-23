@@ -5,7 +5,7 @@ import Container from './container'
 
 export default function Footer() {
   const navigation = ['Product', 'Features', 'Preços', 'Company', 'Blog']
-  const legal = ['Terms', 'Privacy', 'Legal']
+  const legal = ['Termos', 'Privacidade']
   return (
     <div className="relative">
       <Container>
@@ -15,10 +15,10 @@ export default function Footer() {
               {' '}
               <Link
                 href="/"
-                className="flex items-center space-x-2 text-2xl font-medium text-indigo-500 dark:text-gray-100"
+                className="flex items-center space-x-2 text-2xl font-medium text-yellow-500 dark:text-gray-100"
               >
                 <Image
-                  src="/images/logo.svg"
+                  src="/images/logo-cardapio.png"
                   alt="N"
                   width="32"
                   height="32"
@@ -37,20 +37,31 @@ export default function Footer() {
 
           <div>
             <div className="-ml-3 -mt-2 flex w-full flex-wrap lg:ml-0">
-              {navigation.map((item, index) => (
+              
                 <Link
-                  key={index}
-                  href="/"
+                  href="./beneficios"
                   className="dark:focus:bg-trueGray-700 w-full rounded-md px-4 py-2 text-gray-500 hover:text-indigo-500 focus:bg-indigo-100 focus:text-indigo-500 focus:outline-none dark:text-gray-300"
                 >
-                  {item}
+                  Benefícios
                 </Link>
-              ))}
+                <Link
+                  href="./preco"
+                  className="dark:focus:bg-trueGray-700 w-full rounded-md px-4 py-2 text-gray-500 hover:text-indigo-500 focus:bg-indigo-100 focus:text-indigo-500 focus:outline-none dark:text-gray-300"
+                >
+                  Preco
+                </Link>
+                <Link
+                  href="./como-funciona"
+                  className="dark:focus:bg-trueGray-700 w-full rounded-md px-4 py-2 text-gray-500 hover:text-indigo-500 focus:bg-indigo-100 focus:text-indigo-500 focus:outline-none dark:text-gray-300"
+                >
+                  Como funciona?
+                </Link>
+              
             </div>
           </div>
           <div>
             <div className="-ml-3 -mt-2 flex w-full flex-wrap lg:ml-0">
-              {legal.map((item, index) => (
+              {/* {legal.map((item, index) => (
                 <Link
                   key={index}
                   href="/"
@@ -58,7 +69,19 @@ export default function Footer() {
                 >
                   {item}
                 </Link>
-              ))}
+              ))} */}
+              <Link
+                href="/termos"
+                className="dark:focus:bg-trueGray-700 w-full rounded-md px-4 py-2 text-gray-500 hover:text-indigo-500 focus:bg-indigo-100 focus:text-indigo-500 focus:outline-none dark:text-gray-300"
+              >
+                Termos
+              </Link>
+              <Link
+                href="/privacidade"
+                className="dark:focus:bg-trueGray-700 w-full rounded-md px-4 py-2 text-gray-500 hover:text-indigo-500 focus:bg-indigo-100 focus:text-indigo-500 focus:outline-none dark:text-gray-300"
+              >
+                Privacidade
+              </Link>
             </div>
           </div>
           <div className="">

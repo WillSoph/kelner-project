@@ -14,7 +14,7 @@ export default function MenuItem(props: MenuItemProps) {
       <Link
         className={`
                     flex h-20 w-20 flex-col
-                    items-center justify-center
+                    items-center justify-center text-center 
                     dark:text-gray-200
                     ${props.className}
                 `}

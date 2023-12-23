@@ -6,9 +6,10 @@ import { useOrder } from '../../../contexts/OrderProvider'
 import useAuth from '../../../data/hook/useAuth'
 
 const Navbar = () => {
-  const { usuario } = useAuth()
-  const [changeHeader, setChangeHeader] = useState(false)
   const router = useRouter()
+  const { usuario } = useAuth()
+  const { idUsuario } = router.query
+  const [changeHeader, setChangeHeader] = useState(false)
   const { order } = useOrder()
   const [empresa, setEmpresa] = useState([])
 
@@ -26,16 +27,22 @@ const Navbar = () => {
     window.addEventListener('scroll', onChangeHeader)
   }
 
+  // useEffect(() => {
+  //   if (usuario) {
+  //     obterEmpresa()
+  //   }
+  // }, [usuario])
   useEffect(() => {
-    if (usuario) {
+    if (idUsuario) {
       obterEmpresa()
     }
-  }, [usuario])
+  }, [idUsuario])
 
   const obterEmpresa = async () => {
     try {
       const response = await axios.get(
-        `https://firestore.googleapis.com/v1/projects/${url}/databases/(default)/documents/usuarios/${usuario?.uid}/empresa`
+        // `https://firestore.googleapis.com/v1/projects/${url}/databases/(default)/documents/usuarios/${usuario?.uid}/empresa`
+        `https://firestore.googleapis.com/v1/projects/${url}/databases/(default)/documents/usuarios/${idUsuario}/empresa`
       )
 
       const empresaData = response.data.documents
@@ -55,7 +62,7 @@ const Navbar = () => {
       <nav className="mx-auto flex max-w-screen-xl items-center px-6 py-3">
         <div className="flex flex-grow items-center">
           <img
-            src="/images/logo.svg"
+            src="/images/logo-cardapio.png"
             alt="N"
             width="32"
             height="32"

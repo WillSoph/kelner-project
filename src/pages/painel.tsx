@@ -11,6 +11,12 @@ import { useTotalAcessible } from '../data/context/TotalAcessibleContext'
 import { useState, useEffect, useRef, Fragment } from 'react'
 // import QRCode from 'react-qr-code';
 import QRCode from 'qrcode.react'
+import {
+  PencilIcon,
+  PlusIcon,
+  ListBulletIcon,
+  QrCodeIcon,
+} from '@heroicons/react/24/solid'
 
 export default function Home() {
   const { usuario, carregando } = useAuth()
@@ -23,6 +29,7 @@ export default function Home() {
   const [imagemEmpresa, setImagemEmpresa] = useState()
   const [nome, setNome] = useState()
   const [open, setOpen] = useState(false)
+  const [isImpressao, setIsImpressao] = useState(false)
 
   useEffect(() => {
     if (!totalAcessible) {
@@ -54,6 +61,9 @@ export default function Home() {
     const idUsuario = usuario?.uid // Substitua isso pelo código real para obter o ID do usuário
     router.push(`/editar-empresa`)
   }
+  const imprimirCardapio = () => {
+    setIsImpressao(true)
+  }
 
   useEffect(() => {
     if (usuario) {
@@ -80,6 +90,7 @@ export default function Home() {
 
   return (
     <>
+    {isImpressao ? (
       <Transition.Root show={open} as={Fragment}>
         <Dialog
           as="div"
@@ -133,6 +144,61 @@ export default function Home() {
           </div>
         </Dialog>
       </Transition.Root>
+    ) : (
+      <Transition.Root show={open} as={Fragment}>
+        <Dialog
+          as="div"
+          className="relative z-10"
+          initialFocus={cancelButtonRef}
+          onClose={setOpen}
+        >
+          <Transition.Child
+            as={Fragment}
+            enter="ease-out duration-300"
+            enterFrom="opacity-0"
+            enterTo="opacity-100"
+            leave="ease-in duration-200"
+            leaveFrom="opacity-100"
+            leaveTo="opacity-0"
+          >
+            <div className="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity" />
+          </Transition.Child>
+
+          <div className="fixed inset-0 z-10 w-screen overflow-y-auto">
+            <div className="flex min-h-full items-end justify-center p-4 text-center sm:items-center sm:p-0">
+              <Transition.Child
+                as={Fragment}
+                enter="ease-out duration-300"
+                enterFrom="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
+                enterTo="opacity-100 translate-y-0 sm:scale-100"
+                leave="ease-in duration-200"
+                leaveFrom="opacity-100 translate-y-0 sm:scale-100"
+                leaveTo="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
+              >
+                <Dialog.Panel className="relative transform overflow-hidden rounded-lg bg-white text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-lg">
+                  <div
+                    id="modalContent"
+                    className="flex flex-col items-center bg-white px-4 pb-4 pt-5 sm:p-6 sm:pb-4"
+                  >
+                    <div className="mb-4">
+                      <QRCode
+                        value={cardapioQRCodeLink}
+                        size={256}
+                        ref={qrCodeRef}
+                      />
+                    </div>
+                    <div className="rounded-md bg-gray-200 px-4 py-2 text-gray-900">
+                      Tire um print do QRCode do seu cardápio e use onde
+                      precisar.
+                    </div>
+                  </div>
+                </Dialog.Panel>
+              </Transition.Child>
+            </div>
+          </div>
+        </Dialog>
+      </Transition.Root>
+    )}
       <Layout
         titulo={nome ? nome : ''}
         subtitulo={usuario?.stripe_customer_id ? usuario?.stripe_customer_id : ''}
@@ -148,27 +214,38 @@ export default function Home() {
               <>
                 <div className="mb-2 flex justify-end overflow-auto">
                   <button
-                    className="inline-flex w-full justify-center rounded-md bg-green-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-green-500 sm:ml-3 sm:w-auto"
+                    className="inline-flex w-full gap-1 items-center justify-center rounded-md bg-green-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-green-500 sm:ml-3 sm:w-auto"
                     onClick={navegarParaEmpresa}
                   >
+                    <PencilIcon style={{height:'16px'}} />
                     Editar empresa
                   </button>
                   <button
-                    className="inline-flex w-full justify-center rounded-md bg-green-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-green-500 sm:ml-3 sm:w-auto"
+                    className="inline-flex w-full items-center gap-1 justify-center rounded-md bg-green-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-green-500 sm:ml-3 sm:w-auto"
                     onClick={() => setOpen(true)}
                   >
+                    <QrCodeIcon style={{height:'16px'}} />
                     Ver QRCode
                   </button>
                   <button
-                    className="inline-flex w-full justify-center rounded-md bg-green-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-green-500 sm:ml-3 sm:w-auto"
-                    onClick={navegarParaCardapio}
+                    className="inline-flex w-full items-center gap-1 justify-center rounded-md bg-green-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-green-500 sm:ml-3 sm:w-auto"
+                    onClick={imprimirCardapio}
                   >
-                    Cardápio
+                    <ListBulletIcon style={{height:'16px'}} />
+                    Imprimir cardápio
                   </button>
                   <button
-                    className="inline-flex w-full justify-center rounded-md bg-green-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-green-500 sm:ml-3 sm:w-auto"
+                    className="inline-flex w-full items-center gap-1 justify-center rounded-md bg-green-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-green-500 sm:ml-3 sm:w-auto"
+                    onClick={navegarParaCardapio}
+                  >
+                    <ListBulletIcon style={{height:'16px'}} />
+                    Cardápio virtual
+                  </button>
+                  <button
+                    className="inline-flex w-full items-center gap-1 justify-center rounded-md bg-green-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-green-500 sm:ml-3 sm:w-auto"
                     onClick={novoCliente}
                   >
+                    <PlusIcon style={{height:'16px'}} />
                     Novo produto
                   </button>
                 </div>

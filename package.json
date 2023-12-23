@@ -43,7 +43,7 @@
     "react-number-format": "^5.3.1",
     "react-qr-code": "^2.0.12",
     "react-sweetalert2": "^0.6.0",
-    "stripe": "^14.1.0",
+    "stripe": "8.139.0",
     "tailwind-merge": "^1.14.0"
   },
   "devDependencies": {

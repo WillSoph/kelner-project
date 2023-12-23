@@ -93,7 +93,7 @@ function Cardapio() {
           <p
             className={
               menuTab === 'Menu completo'
-                ? 'active_menu_tab poppins bg-primary'
+                ? 'active_menu_tab poppins bg-orange-400 text-gray-50 pl-2 pr-2 rounded-full'
                 : 'menu_tab poppins'
             }
             onClick={() => handleMenuTabs('Menu completo')}
@@ -104,7 +104,7 @@ function Cardapio() {
           <p
             className={
               menuTab === 'Entrada'
-                ? 'active_menu_tab poppins bg-primary'
+                ? 'active_menu_tab poppins bg-orange-400 text-gray-50 pl-2 pr-2 rounded-full'
                 : 'menu_tab poppins'
             }
             onClick={() => handleMenuTabs('Entrada')}
@@ -114,7 +114,7 @@ function Cardapio() {
           <p
             className={
               menuTab === 'Prato principal'
-                ? 'active_menu_tab poppins bg-primary'
+                ? 'active_menu_tab poppins bg-orange-400 text-gray-50 pl-2 pr-2 rounded-full'
                 : 'menu_tab poppins'
             }
             onClick={() => handleMenuTabs('Prato principal')}
@@ -125,7 +125,7 @@ function Cardapio() {
           <p
             className={
               menuTab === 'Sobremesa'
-                ? 'active_menu_tab poppins bg-primary'
+                ? 'active_menu_tab poppins bg-orange-400 text-gray-50 pl-2 pr-2 rounded-full'
                 : 'menu_tab poppins'
             }
             onClick={() => handleMenuTabs('Sobremesa')}
@@ -135,7 +135,7 @@ function Cardapio() {
           <p
             className={
               menuTab === 'Bebida sem álcool'
-                ? 'active_menu_tab poppins bg-primary'
+                ? 'active_menu_tab poppins bg-orange-400 text-gray-50 pl-2 pr-2 rounded-full'
                 : 'menu_tab poppins'
             }
             onClick={() => handleMenuTabs('Bebida sem álcool')}
@@ -146,7 +146,7 @@ function Cardapio() {
           <p
             className={
               menuTab === 'Bebida alcoólica'
-                ? 'active_menu_tab poppins bg-primary'
+                ? 'active_menu_tab poppins bg-orange-400 text-gray-50 pl-2 pr-2 rounded-full'
                 : 'menu_tab poppins'
             }
             onClick={() => handleMenuTabs('Bebida alcoólica')}
