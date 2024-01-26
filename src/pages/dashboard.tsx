@@ -39,9 +39,10 @@ export default function Dashboard() {
   const [listaDeCompras, setListaDeCompras] = useState([]);
   const [quantidadeSeteDias, setQuantidadeSeteDias] = useState(0);
   const [valorSeteDias, setValorSeteDias] = useState(0);
-  const [arrayUltimos7Dias, setArrayUltimos7Dias] = useState([{}]);
+  const [arrayUltimos7Dias, setArrayUltimos7Dias] = useState<number[]>([]);
   const [arrayDataUltimos7Dias, setArrayDataUltimos7Dias] = useState([{}]);
-  const [arrayValorUltimosMeses, setArrayValorUltimosMeses] = useState([{}]);
+  // const [arrayValorUltimosMeses, setArrayValorUltimosMeses] = useState([{}]);
+  const [arrayValorUltimosMeses, setArrayValorUltimosMeses] = useState<number[]>([]);
   const [arrayDataUltimosMeses, setArrayDataUltimosMeses] = useState([{}]);
   const [quantidadeDia, setQuantidadeDia] = useState(0);
   const [valorDia, setValorDia] = useState(0);
