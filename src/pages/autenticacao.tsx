@@ -80,7 +80,7 @@ export default function Autenticacao({ product }: HomeProps) {
           false
         )}
 
-        {modo === 'cadastro' && (
+        {/* {modo === 'cadastro' && (
           <AuthInput
             label="Nome"
             tipo="text"
@@ -88,7 +88,7 @@ export default function Autenticacao({ product }: HomeProps) {
             valorMudou={setNome}
             obrigatorio
           />
-        )}
+        )} */}
         <AuthInput
           label="Email"
           tipo="email"

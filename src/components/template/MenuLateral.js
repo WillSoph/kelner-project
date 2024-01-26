@@ -20,7 +20,10 @@ import {
   RocketLaunchIcon,
   KeyIcon,
   XCircleIcon,
+  CalculatorIcon,
+  ListBulletIcon
 } from '@heroicons/react/24/solid'
+import Link from 'next/link'
 
 export default function MenuLateral() {
   const [open, setOpen] = useState(false)
@@ -159,7 +162,42 @@ export default function MenuLateral() {
           />
       </div>
       <ul className="flex-grow">
-        <MenuItem url="/" texto="Início" icone={<HomeIcon style={{height:'24px'}} />} />
+        <Link
+          className={`
+                      flex h-20 w-20 flex-col
+                      items-center justify-center text-center 
+                      dark:text-gray-200 cursor-pointer hover:bg-gray-100
+                      dark:hover:bg-gray-800
+                  `}
+          href="/dashboard" texto="Início"
+        >
+          <HomeIcon style={{height:'24px'}} />
+          <span className={`text-xs font-light`}>Início</span>
+        </Link>
+        <Link
+          className={`
+                      flex h-20 w-20 flex-col
+                      items-center justify-center text-center 
+                      dark:text-gray-200 cursor-pointer hover:bg-gray-100
+                      dark:hover:bg-gray-800
+                  `}
+          href="/vendaPedido" texto="Venda" icone={<CalculatorIcon style={{height:'24px'}} />}
+        >
+          <CalculatorIcon style={{height:'24px'}} />
+          <span className={`text-xs font-light`}>Venda</span>
+        </Link>
+        <Link
+          className={`
+                      flex h-20 w-20 flex-col
+                      items-center justify-center text-center 
+                      dark:text-gray-200 cursor-pointer hover:bg-gray-100
+                      dark:hover:bg-gray-800
+                  `}
+          href="/painel"
+        >
+          <ListBulletIcon style={{height:'24px'}} />
+          <span className={`text-xs font-light`}>Produtos</span>
+        </Link>
         {/* <MenuItem url="/ajustes" texto="Ajustes" icone={IconeAjustes} />
                 <MenuItem url="/notificacoes" texto="Notificações" icone={IconeSino} /> */}
       </ul>
