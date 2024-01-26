@@ -12,28 +12,34 @@ import useAuth from '@/data/hook/useAuth'
 import axios from 'axios'
 import useVendas from '@/data/hook/useVendas'
 
+interface Produto {
+  nome?: string;
+  descricao?: string;
+  preco?: string;
+  quantidade?: number;
+}
+
+interface Cliente {
+  nome?: string;
+}
+
 interface VendaPedidoProps {
-  vendas: Vendas
-  clienteMudou?: (vendas: Vendas) => void
-  cancelado?: () => void
+  cliente: Cliente;
+  vendas: Vendas;
+  clienteMudou?: (vendas: Vendas) => void;
+  cancelado?: () => void;
 }
 
 export default function VendaPedido(props: VendaPedidoProps) {
   const { usuario, carregando } = useAuth()
-  const [produtos, setProdutos] = useState([])
+  const [produtos, setProdutos] = useState<Array<any>>([]); // Você deve ajustar o tipo do array conforme a estrutura real dos dados
   const [salvando, setSalvando] = useState(false)
-  const id = props.cliente?.id
-  const [categoria, setCategoria] = useState(props.cliente?.categoria ?? '')
   const [nome, setNome] = useState(props.cliente?.nome ?? '')
-  const [descricao, setDescricao] = useState(props.cliente?.descricao ?? '')
-  const [preco, setPreco] = useState(props.cliente?.preco ?? 0)
-  const [imagem, setImagem] = useState<File | null>(null)
 
-  const [produtoSelecionado, setProdutoSelecionado] = useState('');
-  const [precoSelecionado, setPrecoSelecionado] = useState('');
-  const [quantidade, setQuantidade] = useState(1);
-  const [listaDeCompras, setListaDeCompras] = useState([]);
-  const [precoProdutoSelecionado, setPrecoProdutoSelecionado] = useState(0);
+  const [produtoSelecionado, setProdutoSelecionado] = useState<string>('');
+  const [precoSelecionado, setPrecoSelecionado] = useState<string>('');
+  const [quantidade, setQuantidade] = useState<number>(1);
+  const [listaDeCompras, setListaDeCompras] = useState<Array<Produto>>([]);
 
   const {
     vendas,
@@ -83,10 +89,10 @@ export default function VendaPedido(props: VendaPedidoProps) {
       console.error('Erro ao obter empresa:', error)
     }
   };
-  const produtosPorCategoria = {};
+  const produtosPorCategoria: Record<string, Produto[]> = {};
 
   if (produtos) {
-    produtos.forEach((produto) => {
+    produtos.forEach((produto: any) => {
       const categoria = produto.fields.categoria?.stringValue;
   
       if (categoria) {
@@ -114,8 +120,8 @@ export default function VendaPedido(props: VendaPedidoProps) {
         ...listaDeCompras,
         {
           nome: produtoSelecionado,
-          quantidade: parseInt(quantidade),
-          preco: (precoNumerico * parseInt(quantidade)).toFixed(2),
+          quantidade: parseInt(quantidade.toString()),
+          preco: (precoNumerico * parseInt(quantidade.toString())).toFixed(2),
         },
       ]);
   
