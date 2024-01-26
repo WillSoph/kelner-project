@@ -21,6 +21,17 @@ import {
   PrinterIcon
 } from '@heroicons/react/24/solid'
 
+interface Produto {
+  fields: {
+    nome: { stringValue: string };
+    descricao: { stringValue: string };
+    preco: { stringValue: string };
+    categoria: { stringValue: string };
+    // outras propriedades...
+  };
+  // outras propriedades...
+}
+
 export default function Home() {
   const { usuario, carregando } = useAuth()
   const { totalAcessible, setTotalAcessible } = useTotalAcessible()
@@ -29,7 +40,7 @@ export default function Home() {
   const cancelButtonRef = useRef(null)
   const [isQRCodeLoaded, setIsQRCodeLoaded] = useState(false)
   const [empresa, setEmpresa] = useState([])
-  const [produtos, setProdutos] = useState([])
+  const [produtos, setProdutos] = useState<Produto[]>([]);
   const [imagemEmpresa, setImagemEmpresa] = useState()
   const [nome, setNome] = useState()
   const [categorias, setCategorias] = useState()
@@ -294,7 +305,6 @@ export default function Home() {
             ) : (
               <Formulario
                 cliente={cliente}
-                // clienteMudou={salvarCliente}
                 clienteMudou={clienteMudou}
                 cancelado={exibirTabela}
               />
