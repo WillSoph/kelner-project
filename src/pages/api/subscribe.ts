@@ -25,6 +25,16 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
 
             // Restante do seu código...
 
+            const successUrl = process.env.STRIPE_SUCCESS_URL;
+            if (!successUrl) {
+            throw new Error("STRIPE_SUCCESS_URL não está definido");
+            }
+
+            const cancelUrl = process.env.STRIPE_CANCEL_URL;
+            if (!cancelUrl) {
+            throw new Error("STRIPE_CANCEL_URL não está definido");
+            }
+
             const stripeCheckoutSession = await stripe.checkout.sessions.create({
                 customer: stripeCustomerId,
                 payment_method_types: ['card'],
@@ -34,8 +44,8 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
                 ],
                 mode: 'subscription',
                 allow_promotion_codes: true,
-                success_url: process.env.STRIPE_SUCCESS_URL,
-                cancel_url: process.env.STRIPE_CANCEL_URL
+                success_url: successUrl,
+                cancel_url: cancelUrl
             });
 
             return res.status(200).json({ sessionId: stripeCheckoutSession.id });
