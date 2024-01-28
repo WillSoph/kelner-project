@@ -1,11 +1,6 @@
 import { useState, useEffect } from 'react'
 import Vendas from '../core/Vendas'
-import Botao from '../components/Botao'
-import Entrada from '../components/Entrada'
-import SelectInput from '../components/SelectInput'
-import { uploadImagem } from '../core/UploadImagem'
 import { FaSpinner } from 'react-icons/fa'
-import Image from 'next/image'
 import Layout from '@/components/template/Layout'
 import LayoutConteudo from '@/components/template/LayoutConteudo'
 import useAuth from '@/data/hook/useAuth'
@@ -13,10 +8,10 @@ import axios from 'axios'
 import useVendas from '@/data/hook/useVendas'
 
 interface Produto {
-  nome?: string;
+  nome: string;
   descricao?: string;
-  preco?: string;
-  quantidade?: number;
+  preco: string;
+  quantidade: number;
 }
 
 interface Cliente {
@@ -42,14 +37,7 @@ export default function VendaPedido(props: VendaPedidoProps) {
   const [listaDeCompras, setListaDeCompras] = useState<Array<Produto>>([]);
 
   const {
-    vendas,
-    vendass,
-    novoVendas,
     salvarVendas,
-    selecionarVendas,
-    excluirVendas,
-    tabelaVisivel,
-    exibirTabela,
   } = useVendas()
 
 
@@ -64,7 +52,6 @@ export default function VendaPedido(props: VendaPedidoProps) {
         listaDeCompras,
         dataHoraEnvio
       )
-      console.log('foi? ', enviarVenda)
       await new Promise((resolve) => setTimeout(resolve, 1000))
 
       salvarVendas(enviarVenda)
@@ -104,6 +91,7 @@ export default function VendaPedido(props: VendaPedidoProps) {
           nome: produto.fields.nome?.stringValue,
           descricao: produto.fields.descricao?.stringValue,
           preco: produto.fields.preco?.stringValue,
+          quantidade: produto.fields.quantidade?.stringValue,
         });
       }
     });
@@ -120,7 +108,7 @@ export default function VendaPedido(props: VendaPedidoProps) {
         ...listaDeCompras,
         {
           nome: produtoSelecionado,
-          quantidade: parseInt(quantidade.toString()),
+          quantidade: quantidade,
           preco: (precoNumerico * parseInt(quantidade.toString())).toFixed(2),
         },
       ]);
@@ -131,16 +119,6 @@ export default function VendaPedido(props: VendaPedidoProps) {
       setQuantidade(1);
     }
   };
-
-  // const confirmarCompra = () => {
-  //   const dataHoraEnvio = new Date();
-
-  //   const dadosDaCompra = JSON.stringify({
-  //     listaDeCompras,
-  //     dataHoraEnvio: dataHoraEnvio.toISOString(),
-  //   });
-  //   console.log(dadosDaCompra);
-  // };
 
   return (
     <Layout

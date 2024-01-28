@@ -1,16 +1,16 @@
 import firebase from "firebase";
 
 export default class Vendas {
-  #id: string;
+  #id?: string;
   #dataHoraEnvio: firebase.firestore.Timestamp;
   #listaDeCompras: {
-    nome: string;
+    nome?: string;
     quantidade: number;
     preco: string;
   }[];
   #total: number;
 
-  constructor(listaDeCompras: { nome: string; quantidade: number; preco: string }[], dataHoraEnvio: Date, id: string) {
+  constructor(listaDeCompras: { nome: string; quantidade: number; preco: string }[], dataHoraEnvio: Date, id?: string) {
     this.#listaDeCompras = listaDeCompras;
     this.#dataHoraEnvio = firebase.firestore.Timestamp.fromDate(dataHoraEnvio);
     this.#id = id;
