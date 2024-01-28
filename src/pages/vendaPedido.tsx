@@ -33,7 +33,7 @@ export default function VendaPedido(props: VendaPedidoProps) {
 
   const [produtoSelecionado, setProdutoSelecionado] = useState<string>('');
   const [precoSelecionado, setPrecoSelecionado] = useState<string>('');
-  const [quantidade, setQuantidade] = useState<number>(1);
+  const [quantidade, setQuantidade] = useState(1);
   const [listaDeCompras, setListaDeCompras] = useState<Array<Produto>>([]);
 
   const {
@@ -138,7 +138,7 @@ export default function VendaPedido(props: VendaPedidoProps) {
         onChange={(e) => {
           const precoDoProduto = e.target.options[e.target.selectedIndex].getAttribute('data-preco');
           setProdutoSelecionado(e.target.value) 
-          setPrecoSelecionado(precoDoProduto) 
+          setPrecoSelecionado(precoDoProduto || '') 
         }}
         className="block w-full mt-1 p-2 border border-gray-300 rounded-md"
       >
@@ -163,7 +163,7 @@ export default function VendaPedido(props: VendaPedidoProps) {
           <input
             type="number"
             value={quantidade}
-            onChange={(e) => setQuantidade(e.target.value)}
+            onChange={(e) => setQuantidade(parseInt(e.target.value))}
             className="w-16 p-2 border border-gray-300 rounded-md"
           />
           <button
