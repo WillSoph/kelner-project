@@ -155,7 +155,11 @@ export default function Autenticacao({ product }: HomeProps) {
 }
 
 export const getStaticProps: GetStaticProps = async () => {
-  const price = await stripe.prices.retrieve('price_1O0UrrIYJ05oSoaZonPhWe4G')
+  //teste
+  // const price = await stripe.prices.retrieve('price_1O0UrrIYJ05oSoaZonPhWe4G')
+
+  //prod
+  const price = await stripe.prices.retrieve('price_1Oo2DfIYJ05oSoaZfYGQULt1')
 
   if (!price || price.unit_amount === null) {
     // Lida com a situação em que price ou price.unit_amount é nulo
