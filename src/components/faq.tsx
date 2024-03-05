@@ -48,7 +48,7 @@ const faqdata = [
   {
     question: 'Quanto custa a assinatura?',
     answer:
-      'Por apenas 20 reais mensais você terá disponível toda a plataforma Menu Simples e suas funcionalidades.',
+      'Por apenas 25 reais mensais você terá disponível toda a plataforma Menu Simples e suas funcionalidades.',
   },
   {
     question: 'Meus dados estão protegidos? ',

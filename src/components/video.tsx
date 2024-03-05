@@ -3,7 +3,7 @@ import { useState } from 'react'
 import Container from './container'
 
 const Video = () => {
-  const [playVideo, setPlayVideo] = useState(false)
+  const [playVideo, setPlayVideo] = useState(true)
   return (
     <Container>
       <div className="mx-auto w-full max-w-4xl overflow-hidden rounded-2xl lg:mb-20 ">
@@ -29,13 +29,16 @@ const Video = () => {
             </button>
           )}
           {playVideo && (
-            <iframe
-              src="https://www.youtube-nocookie.com/embed/aOq49euWnIo?controls=0&autoplay=1"
-              title="YouTube video player"
-              frameBorder="0"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-              allowFullScreen
-            ></iframe>
+              <iframe
+                src="https://www.youtube.com/embed/KC-Iz4Wh5C0"
+                title="YouTube Menu Simples"
+                frameBorder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowFullScreen
+                className="sm:h-220 md:h-96 w-full"
+                // width="100%"
+                // height="400px"
+              ></iframe>
           )}
         </div>
       </div>
