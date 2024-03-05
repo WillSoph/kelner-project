@@ -154,7 +154,7 @@ export default function MenuLateral() {
       >
         {/* <Logo /> */}
           <img
-            src="/images/logo-cardapio.png"
+            src="/images/logo-site.png"
             alt="N"
             width="42"
             height="42"

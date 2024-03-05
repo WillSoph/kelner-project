@@ -134,7 +134,9 @@ export default function Home() {
     });
   });
 
-  const cardapioQRCodeLink = `/cardapio/${usuario?.uid}`
+  const dominio = process.env.NEXT_PUBLIC_VERCEL_URL || process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000';
+
+  const cardapioQRCodeLink = `${dominio}/cardapio/${usuario?.uid}`
 
   return (
     <>

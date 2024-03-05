@@ -26,7 +26,7 @@ export default function Preco() {
         pretitle="Quanto custa para usar o Menu Simples"
         title="Quanto custa para usar o Menu Simples?"
       >        
-        O plano atual da Menu Simples tem uma mensalidade de apenas 30 reais. 
+        O plano atual da Menu Simples tem uma mensalidade de apenas 25 reais. 
         Com ele, os usuários têm acesso ao painel administrativo, 
         onde podem cadastrar, alterar e excluir produtos no 
         cardápio virtual. Além disso, oferece a funcionalidade 

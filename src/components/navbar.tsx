@@ -279,7 +279,7 @@ export default function Navbar() {
                     <span className="flex items-center space-x-2 text-2xl font-medium text-yellow-500 dark:text-gray-100">
                       <span>
                         <img
-                          src="/images/logo-cardapio.png"
+                          src="/images/logo-site.png"
                           alt="N"
                           width="32"
                           height="32"

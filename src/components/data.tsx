@@ -44,13 +44,13 @@ const benefitTwo = {
       icon: <DevicePhoneMobileIcon />,
     },
     {
-      title: 'Tecnologia atual à seu dispor',
-      desc: 'Sistema desenvolvido com as mais recentes tecnologiase ferramentas.',
+      title: 'Tecnologia à seu dispor',
+      desc: 'Sistema desenvolvido com as mais recentes tecnologias e ferramentas.',
       icon: <AdjustmentsHorizontalIcon />,
     },
     {
-      title: 'Dark e Light Mode',
-      desc: 'O painel do Menu Simples oferece opções de light e dark mode.',
+      title: 'Muito fácil de usar',
+      desc: 'O painel administrativo do Menu Simples é super fácil de usar e prático',
       icon: <SunIcon />,
     },
   ],

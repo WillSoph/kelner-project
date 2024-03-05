@@ -62,7 +62,7 @@ const Navbar = () => {
       <nav className="mx-auto flex max-w-screen-xl items-center px-6 py-3">
         <div className="flex flex-grow items-center">
           <img
-            src="/images/logo-cardapio.png"
+            src="/images/logo-site.png"
             alt="N"
             width="32"
             height="32"
