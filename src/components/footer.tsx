@@ -24,13 +24,13 @@ export default function Footer() {
                   height="32"
                   className="w-8"
                 />
-                <span>Kelner</span>
+                <span>Menu Simples</span>
               </Link>
             </div>
 
             <div className="mt-4 max-w-md text-gray-500 dark:text-gray-400">
               Desenvolvido para atender às necessidades únicas do setor
-              gastronômico, o Kelner é a solução que simplifica a gestão de seu
+              gastronômico, o Menu Simples é a solução que simplifica a gestão de seu
               cardápio virtual de maneira rápida e prática.
             </div>
           </div>

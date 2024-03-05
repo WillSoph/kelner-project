@@ -12,7 +12,7 @@ export default function Preco() {
   return (
     <>
       <Head>
-        <title>Kelner - Sistema para cardápio virtual</title>
+        <title>Menu Simples - Sistema para cardápio virtual</title>
         <meta
           name="description"
           content="Desenvolvido para atender às necessidades únicas do setor gastronômico"
@@ -23,10 +23,10 @@ export default function Preco() {
       <Navbar />
       <SectionTitle
         id="preco"
-        pretitle="Quanto custa para usar o Kelner"
-        title="Quanto custa para usar o Kelner?"
+        pretitle="Quanto custa para usar o Menu Simples"
+        title="Quanto custa para usar o Menu Simples?"
       >        
-        O plano atual da Kelner tem uma mensalidade de apenas 30 reais. 
+        O plano atual da Menu Simples tem uma mensalidade de apenas 30 reais. 
         Com ele, os usuários têm acesso ao painel administrativo, 
         onde podem cadastrar, alterar e excluir produtos no 
         cardápio virtual. Além disso, oferece a funcionalidade 
@@ -36,9 +36,9 @@ export default function Preco() {
       </SectionTitle>
       <SectionTitle
         pretitle="Assista o vídeo"
-        title="Veja como é fácil assinar e usar o Kelner"
+        title="Veja como é fácil assinar e usar o Menu Simples"
       >
-        Veja como é simples assinar e utilizar o Kelner para revolucionar a
+        Veja como é simples assinar e utilizar o Menu Simples para revolucionar a
         gestão do seu cardápio. Assista ao vídeo e transforme seu negócio hoje
         mesmo!
       </SectionTitle>

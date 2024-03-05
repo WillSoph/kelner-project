@@ -286,7 +286,7 @@ export default function Navbar() {
                           className="w-8"
                         />
                       </span>
-                      <span>Kelner</span>
+                      <span>Menu Simples</span>
                     </span>
                   </Link>
                   <Disclosure.Button
