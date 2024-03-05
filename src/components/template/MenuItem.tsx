@@ -18,7 +18,7 @@ export default function MenuItem(props: MenuItemProps) {
                     dark:text-gray-200
                     ${props.className}
                 `}
-        href="#"
+        href=""
       >
         {props.icone}
         <span className={`text-xs font-light`}>{props.texto}</span>
