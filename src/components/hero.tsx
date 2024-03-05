@@ -234,7 +234,7 @@ const Hero = () => {
             </h1>
             <p className="py-5 text-xl leading-normal text-gray-500 dark:text-gray-300 lg:text-xl xl:text-2xl">
               Desenvolvido para atender às necessidades únicas do setor
-              gastronômico, o Kelner é a solução que simplifica a gestão de seu
+              gastronômico, o Menu Simples é a solução que simplifica a gestão de seu
               cardápio virtual de maneira rápida e prática.
             </p>
 

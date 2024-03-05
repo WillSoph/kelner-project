@@ -13,7 +13,7 @@ const Testimonials = () => {
         <div className="lg:col-span-2 xl:col-auto">
           <div className="dark:bg-trueGray-800 flex h-full w-full flex-col justify-between rounded-2xl bg-gray-100 px-14 py-14">
             <p className="text-2xl leading-normal ">
-              Kelner revolucionou nosso cardápio! <Mark>Fácil</Mark> e
+              Menu Simples revolucionou nosso cardápio! <Mark>Fácil</Mark> e
               eficiente.
             </p>
 
@@ -28,7 +28,7 @@ const Testimonials = () => {
           <div className="dark:bg-trueGray-800 flex h-full w-full flex-col justify-between rounded-2xl bg-gray-100 px-14 py-14">
             <p className="text-2xl leading-normal ">
               A geração de QRCode instantânea é <Mark>incrível</Mark>. Amamos o
-              Kelner!
+              Menu Simples!
             </p>
 
             <Avatar
@@ -41,7 +41,7 @@ const Testimonials = () => {
         <div className="">
           <div className="dark:bg-trueGray-800 flex h-full w-full flex-col justify-between rounded-2xl bg-gray-100 px-14 py-14">
             <p className="text-2xl leading-normal ">
-              Com o Kelner, atualizar o cardápio é um piscar de olhos.{' '}
+              Com o Menu Simples, atualizar o cardápio é um piscar de olhos.{' '}
               <Mark>Top</Mark>!
             </p>
 

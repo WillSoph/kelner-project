@@ -15,7 +15,7 @@ export default function Home() {
   return (
     <>
       <Head>
-        <title>Kelner - Sistema para cardápio virtual</title>
+        <title>Menu Simples - Sistema para cardápio virtual</title>
         <meta
           name="description"
           content="Desenvolvido para atender às necessidades únicas do setor gastronômico"
@@ -27,34 +27,34 @@ export default function Home() {
       {/* <Hero /> */}
       <SectionTitle
         id="beneficios"
-        pretitle="Benefícios do Kelner"
-        title=" Por que você deveria usar o Kelner?"
+        pretitle="Benefícios do Menu Simples"
+        title=" Por que você deveria usar o Menu Simples?"
       >
-        O Kelner simplifica a gestão do seu cardápio, permitindo fácil cadastro
+        O Menu Simples simplifica a gestão do seu cardápio, permitindo fácil cadastro
         e atualização de produtos. Com a geração instantânea de QRCode, seus
         clientes acessam um cardápio virtual personalizado, proporcionando
         praticidade e modernidade. Imprima ou compartilhe seu menu em segundos.
-        Kelner, a escolha inteligente para restaurantes inovadores.
+        Menu Simples, a escolha inteligente para restaurantes inovadores.
       </SectionTitle>
       <Benefits data={benefitOne} />
       <Benefits imgPos="right" data={benefitTwo} />
       <SectionTitle
         pretitle="Assista o vídeo"
-        title="Veja como é fácil assinar e usar o Kelner"
+        title="Veja como é fácil assinar e usar o Menu Simples"
       >
-        Veja como é simples assinar e utilizar o Kelner para revolucionar a
+        Veja como é simples assinar e utilizar o Menu Simples para revolucionar a
         gestão do seu cardápio. Assista ao vídeo e transforme seu negócio hoje
         mesmo!
       </SectionTitle>
       <Video />
       {/* <SectionTitle pretitle="Depoimentos" title="O que nossos clientes dizem">
-        Confira o depoimento de quem já usa o Kelner para impulsionar a
+        Confira o depoimento de quem já usa o Menu Simples para impulsionar a
         experiência de seus clientes.
       </SectionTitle>
       <Testimonials />
       <SectionTitle pretitle="FAQ" title="Perguntas Frequentes">
         Destacamos aqui algumas das perguntas mais frequentes em relação ao
-        Kelner e nossa resposta para cada uma delas. Veja se a sua dúvida está
+        Menu Simples e nossa resposta para cada uma delas. Veja se a sua dúvida está
         entre elas.
       </SectionTitle>
       <Faq /> */}

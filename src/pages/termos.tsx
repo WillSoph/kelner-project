@@ -8,7 +8,7 @@ export default function Termos() {
   return (
     <>
       <Head>
-        <title>Kelner - Sistema para cardápio virtual</title>
+        <title>Menu Simples - Sistema para cardápio virtual</title>
         <meta
           name="description"
           content="Desenvolvido para atender às necessidades únicas do setor gastronômico"
@@ -24,11 +24,11 @@ export default function Termos() {
         
       </SectionTitle>
       <div className="pl-5 pr-5 md:pl-20 md:pr-20">
-      TERMO DE LICENÇA DE USO DO SISTEMA KELNER
+      TERMO DE LICENÇA DE USO DO SISTEMA Menu Simples
 
-Por este TERMO DE LICENÇA DE USO firmado entre o USUÁRIO DO SISTEMA, de agora em diante denominado LICENCIADO e KELNER, estabelecida na Rua Cajueiro, 74 apto 43 - Cidade das Flores, Osasco - SP, 06184-130, CNPJ 33.370.079/0001-00, de agora em diante denominada LICENCIADOR, ficam estipuladas e aceitas as seguintes condições:
+Por este TERMO DE LICENÇA DE USO firmado entre o USUÁRIO DO SISTEMA, de agora em diante denominado LICENCIADO e Menu Simples, estabelecida na Rua Cajueiro, 74 apto 43 - Cidade das Flores, Osasco - SP, 06184-130, CNPJ 33.370.079/0001-00, de agora em diante denominada LICENCIADOR, ficam estipuladas e aceitas as seguintes condições:
 
-Abrindo uma conta na Kelner você estará concordando com os termos de licença de uso deste produto. Não assine ou use o sistema antes de ler cuidadosamente este termo de uso. Assinando ou utilizando o Kelner, você estará concordando com todos os termos de utilização.
+Abrindo uma conta na Menu Simples você estará concordando com os termos de licença de uso deste produto. Não assine ou use o sistema antes de ler cuidadosamente este termo de uso. Assinando ou utilizando o Menu Simples, você estará concordando com todos os termos de utilização.
 
  
 
